@@ -1,0 +1,5 @@
+.aider*
+.frugaast*
+.env.local
+.react-router
+node_modules

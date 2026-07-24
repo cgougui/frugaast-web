@@ -1,0 +1,44 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "React webapp",
+      "type": "node",
+      "request": "attach",
+      "port": 9230, // <-- npm parent process starts on 9229, so we use 9230
+      "address": "localhost",
+      "localRoot": "${workspaceFolder}",
+      "remoteRoot": "/app",
+      "trace": false, // <-- show trace in DEBUG CONSOLE
+      "restart": true
+    },
+    {
+      // --- NEW: Configuration for Debugging Client-Side Code ---
+      "name": "Launch Browser against localhost",
+      "type": "chrome", // Or "msedge" if you prefer Edge
+      "request": "launch",
+      // URL must point to where your app is accessible *from your host machine*
+      // Use the host port mapped in docker-compose (3004 in your case)
+      "url": "http://localhost:3006",
+      // webRoot tells the debugger where your source files are located on your host machine
+      // This should be the root of your project
+      "webRoot": "${workspaceFolder}"
+    },
+    {
+        "name": "Python HC-utils",
+        "type": "python",
+        "request": "attach",
+        "connect": {
+            "port": 5696,
+            "host": "localhost"
+        },
+        "pathMappings": [
+            {
+                "localRoot": "${workspaceFolder}/utils",
+                "remoteRoot": "/workspace/"
+            }
+        ],
+        "logToFile": true
+    }
+  ]
+}

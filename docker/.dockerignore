@@ -1,0 +1,34 @@
+# This file tells Docker which files and directories not to send to the Docker daemon during the build
+
+
+# Docker specific
+.dockerignore
+Dockerfile
+docker-compose.yml
+docker-compose.prod.yml
+
+# Git
+.git
+.gitignore
+
+# Node
+node_modules
+npm-debug.log
+.npm
+
+# Build artifacts
+build
+.react-router
+dist
+
+# Environment files (should be managed by secrets or env vars in prod)
+.env
+.env.local
+.env.*.local
+
+# IDE / OS specific
+.idea
+.vscode
+*.suo
+*.user
+*.DS_Store

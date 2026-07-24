@@ -1,0 +1,33 @@
+# ---- Base Stage ----
+# Use an LTS version of Node.js on a 'slim' Debian base.
+# This offers a great balance of size and compatibility.
+FROM node:20-slim AS base
+WORKDIR /app
+# No need to install bash, it's already included.
+
+# ---- Dependencies Stage ----
+# Only copy package files to leverage Docker cache.
+FROM base AS deps
+COPY package.json package-lock.json ./
+# Install ALL dependencies needed for the build step
+RUN npm ci
+
+# ---- Build Stage ----
+# Build the application using the installed dependencies.
+FROM deps AS build-env
+# Copy the rest of the source code
+COPY . .
+RUN npm run build
+
+# ---- Production Stage ----
+# This is the final, small image that will be deployed.
+FROM base AS final_image
+COPY package.json package-lock.json ./
+RUN npm ci --omit=dev
+
+# Copy the built application artifacts from the 'build-env' stage.
+COPY --from=build-env /app/build ./build
+
+EXPOSE 3000
+
+CMD ["npm", "run", "start"]

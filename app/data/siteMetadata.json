@@ -1,0 +1,48 @@
+{
+  "title": "SlyBot - Undetectable Instagram Growth via Android Automation",
+  "description": "Scale your Instagram reach safely using your own hardware. SlyBot automates interactions with your competitors' followers via ADB—mimicking real human behavior. Download for free, no account required.",
+  "copyright": "© {year} slybot.io. All rights reserved.",
+  "siteUrl": "https://www.slybot.io",
+  "author": "SlyBot",
+  "language": "en",
+  "email": "contact@slybot.io",
+  "social": {
+    "instagram": "https://www.instagram.com/slybot_app/"
+  },
+  "headerLinks": [
+    { "link": "/how-it-works", "label": "How it Works" },
+    { "link": "/setup-guide", "label": "Setup Guide" },
+    { "link": "/pricing", "label": "Pricing" },
+    { "link": "/download", "label": "Download SlyBot Free", "isCTA": true }
+  ],
+  "footerLinks": [
+    {
+      "title": "Product",
+      "links": [
+        { "label": "Download Free Version", "link": "/download" },
+        { "label": "Upgrade to Pro", "link": "/pro" },
+        { "label": "Development Roadmap", "link": "/roadmap" },
+        { "label": "Affiliate Program", "link": "/affiliates" }
+      ]
+    },
+    {
+      "title": "Resources",
+      "links": [
+        { "label": "ADB Setup Wizard", "link": "/adb-setup" },
+        { "label": "Safety Best Practices", "link": "/safety-tips" },
+        { "label": "Questions & Answers", "link": "/faq" },
+        { "label": "SlyBot vs Meta Ads", "link": "/vs-meta-ads" },
+        { "label": "SlyBot vs Cloud Bots", "link": "/vs-cloud-bots" }
+      ]
+    },
+    {
+      "title": "Legal & Support",
+      "links": [
+        { "label": "Contact Support", "link": "/contact" },
+        { "label": "Terms of Service", "link": "/terms" },
+        { "label": "Privacy Policy", "link": "/privacy" },
+        { "label": "Refund Policy", "link": "/refunds" }
+      ]
+    }
+  ]
+}

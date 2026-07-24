@@ -1,0 +1,53 @@
+.footer {
+  padding-top: 80px;
+  padding-bottom: 40px;
+  background-color: var(--mantine-color-gray-0);
+  border-top: 1px solid var(--mantine-color-gray-2);
+}
+
+.logoSection {
+  max-width: 280px;
+}
+
+.title {
+  font-size: var(--mantine-font-size-sm);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 20px;
+  color: var(--mantine-color-black);
+}
+
+.link {
+  display: block;
+  color: var(--mantine-color-dimmed);
+  font-size: var(--mantine-font-size-sm);
+  padding: 6px 0;
+  text-decoration: none;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: var(--mantine-color-blue-filled);
+    text-decoration: none;
+  }
+}
+
+.afterFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  @media (max-width: $mantine-breakpoint-sm) {
+    flex-direction: column;
+    gap: var(--mantine-spacing-md);
+    text-align: center;
+  }
+}
+
+.statusDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--mantine-color-teal-6);
+  box-shadow: 0 0 0 4px var(--mantine-color-teal-1);
+}

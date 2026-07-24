@@ -1,0 +1,31 @@
+services:
+  frugaast-web:
+    build:
+      context: ../
+      dockerfile: docker/dockerfile
+
+    image: hypnocaments-website-prod
+    container_name: hypnocaments-website
+    restart: always
+
+    env_file:
+      - ../.env.local
+
+    environment:
+      - NODE_ENV=production
+
+
+    volumes:
+      - /home/christophe/Workspace/chriswebplatform-data/files:/files
+      - /home/christophe/Workspace/chriswebplatform-data/protectedfiles:/app/protectedfiles
+      - /home/christophe/Workspace/hypnocaments-platform/public:/app/public #allows to read public/ folder from server-side calls
+      - /home/christophe/Workspace/chriswebplatform-data/blog:/blog
+      - /home/christophe/Workspace/Data/hypnocaments/user_data:/user_data
+      
+    ports:
+      - 3005:3000
+    #working_dir: /app
+    
+    #entrypoint: "tail -f /dev/null"
+    #entrypoint: "npm run start"
+    # The CMD ["npm", "run", "start"] from the Dockerfile will be used.

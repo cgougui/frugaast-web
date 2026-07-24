@@ -1,0 +1,13 @@
+{
+    "terminal.integrated.rightClickBehavior": "nothing",
+    "terminal.integrated.defaultProfile.linux": "tmuxinator",
+    "terminal.integrated.profiles.linux": {
+        "tmuxinator": {
+            "path": "/bin/bash",
+            "args": [
+                "-c",
+                "tmuxinator start -p /home/christophe/Workspace/chris-infra/tmux/react-template.yml"
+            ]
+        }
+    }
+}
