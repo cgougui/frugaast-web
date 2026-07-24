@@ -15,7 +15,6 @@ export default [
   // Main pages
   route("how-it-works", "routes/how-it-works.jsx"),
   route("setup-guide", "routes/setup-guide.jsx"),
-  route("free-vs-pro", "routes/free-vs-pro.jsx"),
   route("pricing", "routes/pricing.jsx"),
   route("download", "routes/download.jsx"),
 
