@@ -12,7 +12,6 @@
   },
   "headerLinks": [
     { "link": "/how-it-works", "label": "How it Works" },
-    { "link": "/setup-guide", "label": "Setup Guide" },
     { "link": "/pricing", "label": "Pricing" },
     { "link": "/download", "label": "Download", "isCTA": true }
   ],

@@ -93,19 +93,17 @@ export default function Download() {
             </Skeleton>
             
             <Title className="section-title text-center" order={1}>
-              Take back control. <br />
-              <span className="text-gradient">Download Frugaast.</span>
+             <span className="text-gradient">Download Frugäast</span>
             </Title>
             
             <Text c="dimmed" size="xl" ta="center" maw={650} lh={1.6}>
-              A blazing fast native desktop client powered by Tauri and a Python sidecar. 
-              No cloud telemetry, no bloated autonomous agents. Just your codebase and the models you choose.
+              Minimalist, non-agentic coding assistant that lets you precisely control what you send to the LLM.
             </Text>
 
             <Group justify="center" gap="xl" mt={20}>
-              <Group gap="xs"><ShieldCheck size={18} className="text-teal-500"/><Text fw={600} size="sm">100% Local Privacy</Text></Group>
-              <Group gap="xs"><Cpu size={18} className="text-teal-500"/><Text fw={600} size="sm">Tauri + Python Sidecar</Text></Group>
-              <Group gap="xs"><Monitor size={18} className="text-teal-500"/><Text fw={600} size="sm">Frugal RAM footprint</Text></Group>
+              <Group gap="xs"><Monitor size={18} className="text-teal-500"/><Text fw={600} size="sm">Free</Text></Group>
+              <Group gap="xs"><ShieldCheck size={18} className="text-teal-500"/><Text fw={600} size="sm">100% local</Text></Group>
+              <Group gap="xs"><Cpu size={18} className="text-teal-500"/><Text fw={600} size="sm">Desktop client</Text></Group>
             </Group>
           </Stack>
 
@@ -118,40 +116,6 @@ export default function Download() {
           {/* 2. DOWNLOAD PLATFORMS GRID */}
           <Grid gutter={40} mb={40}>
             
-            {/* macOS */}
-            <Grid.Col span={{ base: 12, md: 4 }}>
-              <Card shadow="sm" p="xl" radius="lg" withBorder className="h-full flex flex-col hover:-translate-y-1 hover:shadow-xl hover:border-violet-200 transition-all duration-300 relative overflow-hidden bg-white">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-violet-50 to-transparent opacity-80 rounded-bl-full pointer-events-none" />
-                
-                <Group gap="sm" mb="lg">
-                  <ThemeIcon size={42} radius="md" color="violet.1" c="violet.7">
-                    <Monitor size={22} />
-                  </ThemeIcon>
-                  <Title order={3} className="font-bold text-gray-800">macOS</Title>
-                </Group>
-                
-                <Skeleton visible={loading}>
-                  <Button 
-                    component="a" 
-                    href={getAssetUrl('.dmg')}
-                    size="md" 
-                    color="dark"
-                    leftSection={<DownloadIcon size={18} />}
-                    fullWidth
-                    radius="md"
-                    className="hover:bg-gray-800 transition-colors"
-                  >
-                    Universal .dmg
-                  </Button>
-                </Skeleton>
-
-                <Box mt="xl">
-                  <Text size="sm" fw={600} c="dark.6">System Requirements</Text>
-                  <Text size="sm" c="dimmed">macOS 11.0 (Big Sur) or newer.</Text>
-                  <Text size="sm" c="dimmed">Native Apple Silicon & Intel support.</Text>
-                </Box>
-              </Card>
-            </Grid.Col>
 
             {/* Windows */}
             <Grid.Col span={{ base: 12, md: 4 }}>
@@ -238,6 +202,41 @@ export default function Download() {
                 </Box>
               </Card>
             </Grid.Col>
+
+            {/* macOS */}
+            <Grid.Col span={{ base: 12, md: 4 }}>
+              <Card shadow="sm" p="xl" radius="lg" withBorder className="h-full flex flex-col hover:-translate-y-1 hover:shadow-xl hover:border-violet-200 transition-all duration-300 relative overflow-hidden bg-white">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-violet-50 to-transparent opacity-80 rounded-bl-full pointer-events-none" />
+                
+                <Group gap="sm" mb="lg">
+                  <ThemeIcon size={42} radius="md" color="violet.1" c="violet.7">
+                    <Monitor size={22} />
+                  </ThemeIcon>
+                  <Title order={3} className="font-bold text-gray-800">macOS</Title>
+                </Group>
+                
+                <Skeleton visible={loading}>
+                  <Button 
+                    component="a" 
+                    href={getAssetUrl('.dmg')}
+                    size="md" 
+                    color="dark"
+                    leftSection={<DownloadIcon size={18} />}
+                    fullWidth
+                    radius="md"
+                    className="hover:bg-gray-800 transition-colors"
+                  >
+                    Universal .dmg
+                  </Button>
+                </Skeleton>
+
+                <Box mt="xl">
+                  <Text size="sm" fw={600} c="dark.6">System Requirements</Text>
+                  <Text size="sm" c="dimmed">macOS 11.0 (Big Sur) or newer.</Text>
+                  <Text size="sm" c="dimmed">Native Apple Silicon & Intel support.</Text>
+                </Box>
+              </Card>
+            </Grid.Col>
           </Grid>
         </Container>
       </section>
@@ -291,22 +290,6 @@ export default function Download() {
                   <Anchor href={`${GITHUB_REPO}/issues`} fw={600} size="sm" className="text-violet-600 hover:text-violet-700">
                     Report an Issue or Request a Feature →
                   </Anchor>
-                </Box>
-                
-                <Divider />
-
-                <Box>
-                  <Group gap="sm" mb="md">
-                    <Hash size={24} className="text-gray-800" />
-                    <Title order={3} className="font-bold">Checksums</Title>
-                  </Group>
-                  <Text size="md" c="dimmed" mb="md" lh={1.6}>
-                    Verify your download using SHA-256 to ensure authenticity. For example: <br/>
-                    <code className="bg-gray-100 px-1 py-0.5 rounded text-gray-700 text-sm mt-2 inline-block border border-gray-200">shasum -a 256 /path/to/frugaast.dmg</code>
-                  </Text>
-                  <Text size="sm" c="dimmed">
-                    Download the latest <code>sha256sum.txt</code> file directly from the <Anchor href={`${GITHUB_REPO}/releases/latest`} fw={500}>latest release</Anchor> assets.
-                  </Text>
                 </Box>
               </Stack>
             </Grid.Col>

@@ -53,3 +53,91 @@ body {
   border-top: 1px solid var(--mantine-color-gray-1);
   border-bottom: 1px solid var(--mantine-color-gray-1);
 }
+
+/* --- Pricing Specific Styles --- */
+
+.pricing-card {
+  position: relative;
+  background: white;
+  border: 1px solid var(--mantine-color-gray-2);
+  border-radius: 20px;
+  padding: 40px 32px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.pricing-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
+}
+
+.pricing-card-popular {
+  border: 2px solid var(--mantine-color-violet-5);
+  box-shadow: 0 15px 35px rgba(132, 94, 247, 0.1);
+}
+
+.pricing-card-popular:hover {
+  box-shadow: 0 25px 50px rgba(132, 94, 247, 0.15);
+}
+
+.pricing-badge-popular {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, var(--mantine-color-violet-6) 0%, var(--mantine-color-indigo-6) 100%);
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  padding: 4px 16px;
+  border-radius: 20px;
+  text-transform: uppercase;
+}
+
+.pricing-price-group {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-top: 16px;
+  margin-bottom: 8px;
+}
+
+.pricing-amount {
+  font-size: 3.5rem;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--mantine-color-dark-9);
+  letter-spacing: -0.03em;
+}
+
+.pricing-currency {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--mantine-color-gray-5);
+  transform: translateY(-12px);
+}
+
+.discount-banner {
+  background: linear-gradient(135deg, rgba(230, 242, 255, 0.5) 0%, rgba(243, 232, 255, 0.5) 100%);
+  border: 1px dashed var(--mantine-color-violet-3);
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.ppp-box {
+  background-color: var(--mantine-color-gray-0);
+  border: 1px solid var(--mantine-color-gray-2);
+  border-radius: 16px;
+  padding: 40px 32px;
+  margin-top: 60px;
+  text-align: center;
+}

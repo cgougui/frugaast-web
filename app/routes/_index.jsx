@@ -26,7 +26,7 @@ export default function Index() {
           
           <Container size="md" p={0} mt="xl">
             <Text className={classes.heroSubtitle} ta="center" size="xl" mb="2xl" fw={500}>
-              Frugaast is a minimalist, non-agentic coding assistant that lets you precisely control what you send to the LLM.
+              Frugäast is a minimalist, non-agentic coding assistant that lets you precisely control what you send to the LLM.
             </Text>
             
             {/* The Results Checklist */}
@@ -38,7 +38,7 @@ export default function Index() {
           </Container>
         </Container>
 
-        {/* Frugaast UI Screenshot (90% wide, centered) */}
+        {/* Frugäast UI Screenshot (90% wide, centered) */}
         <Box
           w={{ base: "100%", md: "70%" }}
           mx="auto"
@@ -47,7 +47,7 @@ export default function Index() {
         >
           <img 
             src="/images/home/screen.png" 
-            alt="Frugaast Interface" 
+            alt="Frugäast Interface" 
             className={classes.heroImage}
           />
         </Box>
@@ -71,7 +71,7 @@ export default function Index() {
               className={classes.buttonPrimary} 
               rightSection={<ChevronRight size={18} />}
             >
-              Download Frugaast
+              Download Frugäast
             </Button>
           </Group>
         </Container>
@@ -87,7 +87,7 @@ export default function Index() {
               <Text c="dimmed" size="lg" ta="center" maw={700} lh={1.7}>
               Autonomous agentic loops are great for exploring.
               <br/><br/>
-              Frugaast is for day-to-day shipping.
+              Frugäast is for day-to-day shipping.
             </Text>
           </Stack>
 
@@ -103,7 +103,7 @@ export default function Index() {
             <Grid.Col span={{ base: 12, md: 6 }}>
               <Box h="100%" className={`${classes.splitCompareCard} ${classes.compareColAfter}`}>
                 <div className={classes.workflowImageWrapper}>
-                  <img src="/images/home/after.png" alt="After: Frugaast Workflow" />
+                  <img src="/images/home/after.png" alt="After: Frugäast Workflow" />
                 </div>
               </Box>
             </Grid.Col>
@@ -164,10 +164,12 @@ export default function Index() {
             
             <Grid.Col span={{ base: 12, md: 6 }} order={{ base: 1, md: 2 }}>
               <Title order={2} mb="xl" className={classes.sectionTitle} ta="left">
-                Smaller prompts aren't just faster.<br/>They're cheaper.
+                Very frugal.
               </Title>
               <Text size="lg" c="dimmed" mb="xl" lh={1.7}>
-                Autonomous agentic loops quietly consume 100K+ tokens while you grab a coffee. With Frugaast, you decide exactly what reaches the LLM.
+                Autonomous agentic loops quietly consume 100K+ tokens while you grab a coffee. 
+                <br/><br/>
+                With Frugäast, you decide exactly what reaches the LLM.
               </Text>
               
               <Stack gap="xl">
@@ -265,7 +267,7 @@ export default function Index() {
               className={classes.buttonCta} 
               rightSection={<ChevronRight size={18} />}
             >
-              Download Frugaast
+              Download Frugäast
             </Button>
           </Group>
         </Container>
