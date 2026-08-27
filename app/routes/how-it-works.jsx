@@ -3,9 +3,9 @@ import {
   ThemeIcon, Badge, Paper, Center, Box, Avatar
 } from '@mantine/core';
 import { 
-  Smartphone, Target, Eye, ShieldAlert, 
-  ShieldCheck, MousePointerClick, Gauge, Moon, ChevronRight, 
-  Sparkles, Laptop, Link2, FileDown, Play, MessageSquare
+  Search, FileCode2, GitCommit, ShieldAlert, 
+  TerminalSquare, Settings2, Cpu, History, ChevronRight, 
+  Sparkles, Layers, DollarSign, Zap, GitPullRequest
 } from 'lucide-react';
 import { MarketingLayout } from '../components/MarketingLayout';
 
@@ -20,34 +20,21 @@ export default function HowItWorks() {
       <section className={sharedClasses.hero}>
         <div className={classes.gridBackground} />
         
-        <Container size="md" className={sharedClasses.relativeZ} ta="center">
-          <Center mb="xl">
-            <Badge 
-              variant="light" 
-              color="violet" 
-              size="lg" 
-              radius="xl" 
-              className={sharedClasses.pillBadge}
-              leftSection={<Sparkles size={14} />}
-            >
-              How It Works
-            </Badge>
-          </Center>
-          
+        <Container size="md" className={sharedClasses.relativeZ} ta="center">          
           <Title className={sharedClasses.heroTitle} order={1}>
-            From download to autopilot in <br />
-            <span className={sharedClasses.textGradient}>under 3 minutes.</span>
+            Surgical edits. Zero bloat. <br />
+            <span className={sharedClasses.textGradient}>Complete control.</span>
           </Title>
           
           <Title order={2} size="h3" c="dark.8" mt="xl" fw={700}>
-            No servers. No APIs. No coding required.
+            No autonomous loops. No API bankruptcy.
           </Title>
 
           <Text className={sharedClasses.heroSubtitle} size="xl" mt="md" lh={1.6}>
-            Most Instagram growth tools are complicated, sketchy, and live in the cloud. SlyBot is different. It’s a lightweight Windows app that turns your computer and your physical Android phone into a secure, undetectable growth engine.
+            Agentic AI tools act like hyperactive junior developers: they read your entire repository, hallucinate dependencies, and rewrite code they shouldn't touch. 
           </Text>
           <Text className={sharedClasses.heroSubtitle} size="xl" mt="sm" lh={1.6}>
-            Here is exactly how SlyBot takes the soul-crushing grunt work off your plate, step by step.
+            Frugaast is different. It’s a Tauri-based desktop app that keeps you in the driver's seat. Here is how you ship clean code in three precise steps.
           </Text>
         </Container>
       </section>
@@ -62,17 +49,17 @@ export default function HowItWorks() {
             <Grid gutter={60} align="center" className={classes.stepContent}>
               <Grid.Col span={{ base: 12, md: 6 }} order={{ base: 2, md: 1 }}>
                 <Title order={3} fw={900} mb="md" size="h2" c="dark.9">
-                  Step 1: Download the Windows App (No login required)
+                  Step 1: Curate context with fuzzy search
                 </Title>
                 <Text size="lg" c="dimmed" lh={1.7} mb="xl">
-                  First, you download the SlyBot <code>.exe</code> to your PC. Because we know you hate spam as much as we do, the basic version is completely free. We don't ask for your credit card. We don't ask for an account. We don't even ask for your email address.
+                  Don't dump your entire <code>src/</code> directory into the prompt window. Use the left sidebar to quickly fuzzy-find and add only the specific files relevant to your current task. You control the context window, which means you control the output quality.
                 </Text>
                 <Paper radius="lg" p="xl" className={classes.featureAlert} style={{ borderLeftColor: 'var(--mantine-color-violet-5)' }}>
                   <Group gap="sm" mb="xs">
-                    <ShieldCheck size={20} color="var(--mantine-color-violet-6)" />
-                    <Text fw={800} c="dark.9">The Security Flex:</Text>
+                    <Zap size={20} color="var(--mantine-color-violet-6)" />
+                    <Text fw={800} c="dark.9">High Signal, Low Noise:</Text>
                   </Group>
-                  <Text c="dimmed" lh={1.6}>Because SlyBot lives entirely on your local hard drive, you never have to type your Instagram password into our software. Your credentials stay exactly where they belong: on your own device.</Text>
+                  <Text c="dimmed" lh={1.6}>Curated context means fewer hallucinated variables, strict adherence to your existing architecture, and an immediate drop in your token costs.</Text>
                 </Paper>
               </Grid.Col>
               <Grid.Col span={{ base: 12, md: 6 }} order={{ base: 1, md: 2 }}>
@@ -80,10 +67,10 @@ export default function HowItWorks() {
                   <Paper radius="xl" p="xl" shadow="xl" className={classes.floatingElement}>
                     <Stack align="center" gap="sm">
                       <ThemeIcon size={64} radius="xl" color="violet" variant="light">
-                        <FileDown size={32} />
+                        <Search size={32} />
                       </ThemeIcon>
-                      <Text fw={800} size="lg">SlyBot.exe</Text>
-                      <Badge color="green" variant="light">100% Free & Secure</Badge>
+                      <Text fw={800} size="lg">⌘ + P to add files</Text>
+                      <Badge color="violet" variant="light">app/routes/api.ts added</Badge>
                     </Stack>
                   </Paper>
                 </div>
@@ -97,28 +84,31 @@ export default function HowItWorks() {
             <Grid gutter={60} align="center" className={classes.stepContent}>
               <Grid.Col span={{ base: 12, md: 6 }}>
                 <div className={`${classes.visualPanel} ${classes.bgGradientBlue}`}>
-                  <Group gap="lg" className={classes.floatingElement}>
-                    <Paper radius="xl" p="lg" shadow="md"><Laptop size={40} color="var(--mantine-color-dark-8)" /></Paper>
-                    <div className={classes.connectionLine}>
-                      <Link2 size={24} color="var(--mantine-color-blue-5)" className={classes.pulseIcon} />
-                    </div>
-                    <Paper radius="xl" p="lg" shadow="md"><Smartphone size={40} color="var(--mantine-color-teal-6)" /></Paper>
-                  </Group>
+                  <Paper radius="xl" p="xl" shadow="xl" className={classes.floatingElement}>
+                    <Group wrap="nowrap" gap="lg">
+                      <Avatar size="xl" radius="xl" color="blue"><Layers size={28} /></Avatar>
+                      <div>
+                        <Text fw={800} size="lg">Building prompt...</Text>
+                        <Text size="sm" c="dimmed">+ Repomap injected</Text>
+                        <Badge color="blue" variant="light" mt="sm">Cost Est: $0.002</Badge>
+                      </div>
+                    </Group>
+                  </Paper>
                 </div>
               </Grid.Col>
               <Grid.Col span={{ base: 12, md: 6 }}>
                 <Title order={3} fw={900} mb="md" size="h2" c="dark.9">
-                  Step 2: Plug in your Android Phone
+                  Step 2: Type your request
                 </Title>
                 <Text size="lg" c="dimmed" lh={1.7} mb="xl">
-                  Grab a standard USB cable and connect your Android phone to your computer. With two simple taps on your phone, you enable "USB Debugging." (Don't worry, we show you exactly where this is).
+                  In the central chat view, tell the LLM exactly what you want it to build or refactor. Frugaast automatically bundles your selected files and injects a highly compressed repomap, giving the LLM deep awareness of your project structure without the token bloat.
                 </Text>
                 <Paper radius="lg" p="xl" className={classes.featureAlert} style={{ borderLeftColor: 'var(--mantine-color-blue-5)' }}>
                   <Group gap="sm" mb="xs">
-                    <Sparkles size={20} color="var(--mantine-color-blue-6)" />
-                    <Text fw={800} c="dark.9">The Magic Bridge:</Text>
+                    <DollarSign size={20} color="var(--mantine-color-blue-6)" />
+                    <Text fw={800} c="dark.9">Total Cost Transparency:</Text>
                   </Group>
-                  <Text c="dimmed" lh={1.6}>This enables ADB (Android Debug Bridge), a safe, native Android feature that allows your computer to send "touch" commands to your phone's screen.</Text>
+                  <Text c="dimmed" lh={1.6}>See the exact token count and estimated API cost <i>before</i> you hit send. Want to use a web interface instead? The prompt builder lets you copy the optimized context to your clipboard in one click.</Text>
                 </Paper>
               </Grid.Col>
             </Grid>
@@ -130,66 +120,31 @@ export default function HowItWorks() {
             <Grid gutter={60} align="center" className={classes.stepContent}>
               <Grid.Col span={{ base: 12, md: 6 }} order={{ base: 2, md: 1 }}>
                 <Title order={3} fw={900} mb="md" size="h2" c="dark.9">
-                  Step 3: Point SlyBot at your Competitors
+                  Step 3: Send, Review, and Commit
                 </Title>
                 <Text size="lg" c="dimmed" lh={1.7} mb="xl">
-                  Open SlyBot on your computer and tell it what you want it to do. Enter the Instagram handle of a giant competitor in your niche. Choose your actions: view stories, like posts, follow, or drop comments.
+                  Hit send to your preferred model (Claude, GPT-4, or Local Ollama). The assistant streams the diffs back and perfectly applies the edits to your local files. Every change is instantly wrapped in a clean Git commit.
                 </Text>
                 <Paper radius="lg" p="xl" className={classes.featureAlert} style={{ borderLeftColor: 'var(--mantine-color-teal-5)' }}>
                   <Group gap="sm" mb="xs">
-                    <MessageSquare size={20} color="var(--mantine-color-teal-6)" />
-                    <Text fw={800} c="dark.9">The Anti-Cringe AI:</Text>
+                    <GitPullRequest size={20} color="var(--mantine-color-teal-6)" />
+                    <Text fw={800} c="dark.9">Smart File Fetching:</Text>
                   </Group>
-                  <Text c="dimmed" lh={1.6}>If you turn on comments, you tell the AI exactly how to behave. Tell it to "be polite, act like a peer, and ask a relevant question about the image." SlyBot will analyze the visual context of the post and write a thoughtful comment that sounds exactly like you.</Text>
+                  <Text c="dimmed" lh={1.6}>If the LLM realizes it needs to see a missing file (like a schema or utility function), it can securely request it. Frugaast adds it to the context and continues—without triggering an uncontrolled agentic loop.</Text>
                 </Paper>
               </Grid.Col>
               <Grid.Col span={{ base: 12, md: 6 }} order={{ base: 1, md: 2 }}>
                 <div className={`${classes.visualPanel} ${classes.bgGradientTeal}`}>
                   <Paper radius="xl" p="xl" shadow="xl" className={classes.floatingElement}>
-                    <Group wrap="nowrap" gap="lg">
-                      <Avatar size="xl" radius="xl" color="teal"><Target size={28} /></Avatar>
-                      <div>
-                        <Text fw={800} size="lg">Targeting: @competitor</Text>
-                        <Text size="sm" c="dimmed">Action: Engage & Comment</Text>
-                        <Badge color="teal" variant="light" mt="sm">AI Enabled</Badge>
-                      </div>
-                    </Group>
-                  </Paper>
-                </div>
-              </Grid.Col>
-            </Grid>
-          </Box>
-
-          {/* STEP 4 */}
-          <Box className={classes.stepBlock}>
-            <div className={classes.watermarkNumberRight}>04</div>
-            <Grid gutter={60} align="center" className={classes.stepContent}>
-              <Grid.Col span={{ base: 12, md: 6 }}>
-                <div className={`${classes.visualPanel} ${classes.bgGradientOrange}`}>
-                  <Paper radius="xl" p="xl" shadow="xl" className={classes.floatingElement}>
-                    <Stack align="center" gap="md">
-                      <ThemeIcon size={80} radius="100%" color="orange" variant="filled" className={classes.pulsePlay}>
-                        <Play size={40} fill="currentColor" style={{ marginLeft: 6 }} />
+                    <Stack align="center" gap="sm">
+                      <ThemeIcon size={64} radius="xl" color="teal" variant="light">
+                        <GitCommit size={32} />
                       </ThemeIcon>
-                      <Badge color="orange" variant="dot" size="lg">Status: Running...</Badge>
+                      <Text fw={800} size="lg">Edits Applied</Text>
+                      <Badge color="teal" variant="dot" size="lg">git commit -m "feat: added auth"</Badge>
                     </Stack>
                   </Paper>
                 </div>
-              </Grid.Col>
-              <Grid.Col span={{ base: 12, md: 6 }}>
-                <Title order={3} fw={900} mb="md" size="h2" c="dark.9">
-                  Step 4: Sit Back and Watch the Magic
-                </Title>
-                <Text size="lg" c="dimmed" lh={1.7} mb="xl">
-                  Hit "Start." Look over at your physical phone sitting on your desk. You will literally watch the screen wake up. You will see the Instagram app open. You will watch as it scrolls down the page, pauses to read a caption, types out a comment, and hits send.
-                </Text>
-                <Paper radius="lg" p="xl" className={classes.featureAlert} style={{ borderLeftColor: 'var(--mantine-color-orange-5)' }}>
-                  <Group gap="sm" mb="xs">
-                    <Eye size={20} color="var(--mantine-color-orange-6)" />
-                    <Text fw={800} c="dark.9">The Ultimate Proof:</Text>
-                  </Group>
-                  <Text c="dimmed" lh={1.6}>You don't have to trust that the bot is doing its job. You can physically watch it happen with your own two eyes until you trust it completely.</Text>
-                </Paper>
               </Grid.Col>
             </Grid>
           </Box>
@@ -203,13 +158,13 @@ export default function HowItWorks() {
           <Stack align="center" mb={60} ta="center">
             <Badge color="dark" variant="outline" mb="sm" size="lg" radius="sm" fw={700}>Under the Hood</Badge>
             <Title order={2} className={sharedClasses.sectionTitle}>
-              Why Instagram Can't Catch SlyBot.
+              Why Frugaast keeps your codebase maintainable.
             </Title>
             <Text c="dark.5" size="xl" fw={600}>
-              The technical reason you are immune to the Ban Hammer.
+              Agents are for prototypes. Frugaast is for production.
             </Text>
             <Text size="lg" c="dimmed" maw={800} mt="md" lh={1.6}>
-              If you are terrified of losing your account, you should be. Meta is ruthless when it comes to catching bots. But to understand why SlyBot is safe, you need to understand how Meta catches the <i>other</i> guys.
+              If you are tired of AI generating spaghetti code, you should be. The hype demands autonomy, but mature codebases demand precision. Here is why curating context beats autonomous agents every time.
             </Text>
           </Stack>
 
@@ -223,41 +178,38 @@ export default function HowItWorks() {
                   <Center h="100%" p="xl">
                     <Stack align="center">
                       <ShieldAlert size={64} color="var(--mantine-color-red-5)" />
-                      <Title order={4} c="white" fw={800} ta="center">The "Old Way"</Title>
+                      <Title order={4} c="white" fw={800} ta="center">The Agentic Loop</Title>
                     </Stack>
                   </Center>
                 </Grid.Col>
                 <Grid.Col span={{ base: 12, sm: 8 }} p={40}>
-                  <Title order={4} fw={800} mb="sm" c="red.9">How the "Old Way" gets you banned:</Title>
+                  <Title order={4} fw={800} mb="sm" c="red.9">How agents generate tech debt:</Title>
                   <Text c="dark.7" size="lg" lh={1.6}>
-                    Standard bots run on cheap virtual servers in the cloud. To engage with users, they try to bypass the actual Instagram app and inject commands directly into Instagram's backend API. Meta’s security systems detect these unauthorized server requests in milliseconds, resulting in an instant shadowban or account deletion.
+                    They grep your entire repo, flood the context window with hundreds of thousands of tokens, and attempt to write code autonomously. Because they lack your architectural context, they reinvent the wheel, hallucinate dependencies, edit random files, and quickly burn through your API limits while stuck in error-correction loops.
                   </Text>
                 </Grid.Col>
               </Grid>
             </Card>
 
-            {/* The SlyBot Way */}
+            {/* The Frugaast Way */}
             <Card radius="2rem" p={0} className={classes.comparisonCardGood}>
               <Grid gutter={0}>
                 <Grid.Col span={{ base: 12, sm: 4 }} className={classes.goodSidebar}>
                   <Center h="100%" p="xl">
                     <Stack align="center">
-                      <ShieldCheck size={64} color="white" />
-                      <Title order={4} c="white" fw={800} ta="center">The "SlyBot Way"</Title>
+                      <Sparkles size={64} color="white" />
+                      <Title order={4} c="white" fw={800} ta="center">The Frugaast Way</Title>
                     </Stack>
                   </Center>
                 </Grid.Col>
                 <Grid.Col span={{ base: 12, sm: 8 }} p={40}>
-                  <Title order={4} fw={800} mb="sm" c="teal.9">How the "SlyBot Way" keeps you safe:</Title>
+                  <Title order={4} fw={800} mb="sm" c="teal.9">Surgical strikes, guided by you:</Title>
                   <Text c="dark.7" size="lg" lh={1.6} mb="md">
-                    SlyBot doesn't know Instagram's backend code. It doesn't use the cloud, and it doesn't use fake IP addresses.
-                  </Text>
-                  <Text c="dark.7" size="lg" lh={1.6} mb="md">
-                    SlyBot simply calculates X and Y coordinates on a screen. Through the USB cable, it tells your Android phone: <i>"Swipe up," "Tap here," "Type these letters."</i>
+                    You know what you want to build. You define the exact boundaries. Frugaast’s Nuitka-compiled Python sidecar parses your code at blistering speeds, generating a precise AST-based repomap. 
                   </Text>
                   <Paper bg="teal.0" p="md" radius="md">
                     <Text c="teal.9" size="md" fw={700} lh={1.6}>
-                      To the Instagram app, there is literally zero difference between SlyBot touching the screen, and your actual human finger touching the screen.
+                      The LLM gets a high-signal, low-noise prompt. It executes exactly what you asked for, and nothing else. You maintain ownership of the design.
                     </Text>
                   </Paper>
                 </Grid.Col>
@@ -269,36 +221,36 @@ export default function HowItWorks() {
           {/* Imperfections Divider/List */}
           <Box className={classes.imperfectionsBox}>
             <Title order={3} ta="center" mb="xl" fw={800} size="h2">
-              To make it even more bulletproof, <br/>SlyBot mimics human imperfections:
+              A UI built for developers, not tourists:
             </Title>
             
             <Grid gutter={40} mt={40}>
               <Grid.Col span={{ base: 12, md: 4 }}>
                 <Group wrap="nowrap" align="flex-start">
-                  <ThemeIcon size={40} radius="xl" color="dark" variant="white" shadow="sm"><MousePointerClick size={20}/></ThemeIcon>
+                  <ThemeIcon size={40} radius="xl" color="dark" variant="white" shadow="sm"><History size={20}/></ThemeIcon>
                   <div>
-                    <Text fw={800} size="lg" mb="4px">Sloppy Taps:</Text>
-                    <Text c="dimmed" lh={1.5} size="sm">It doesn't click the exact dead-center of a button every time.</Text>
+                    <Text fw={800} size="lg" mb="4px">Session Time-Travel:</Text>
+                    <Text c="dimmed" lh={1.5} size="sm">The right sidebar tracks your chat history. Re-add files from a previous session or copy old prompts in a single click.</Text>
                   </div>
                 </Group>
               </Grid.Col>
               
               <Grid.Col span={{ base: 12, md: 4 }}>
                 <Group wrap="nowrap" align="flex-start">
-                  <ThemeIcon size={40} radius="xl" color="dark" variant="white" shadow="sm"><Gauge size={20}/></ThemeIcon>
+                  <ThemeIcon size={40} radius="xl" color="dark" variant="white" shadow="sm"><Cpu size={20}/></ThemeIcon>
                   <div>
-                    <Text fw={800} size="lg" mb="4px">Variable Speeds:</Text>
-                    <Text c="dimmed" lh={1.5} size="sm">It scrolls fast, then slow, then pauses to "read."</Text>
+                    <Text fw={800} size="lg" mb="4px">Native Performance:</Text>
+                    <Text c="dimmed" lh={1.5} size="sm">Built with Tauri for a lightweight UI, powered by a compiled Python sidecar for heavy lifting. No sluggish Electron wrappers.</Text>
                   </div>
                 </Group>
               </Grid.Col>
               
               <Grid.Col span={{ base: 12, md: 4 }}>
                 <Group wrap="nowrap" align="flex-start">
-                  <ThemeIcon size={40} radius="xl" color="dark" variant="white" shadow="sm"><Moon size={20}/></ThemeIcon>
+                  <ThemeIcon size={40} radius="xl" color="dark" variant="white" shadow="sm"><Settings2 size={20}/></ThemeIcon>
                   <div>
-                    <Text fw={800} size="lg" mb="4px">Built-in Exhaustion:</Text>
-                    <Text c="dimmed" lh={1.5} size="sm">It takes random breaks and goes to sleep at night so you don't trigger behavioral spam filters.</Text>
+                    <Text fw={800} size="lg" mb="4px">Multi-Model & Tabbed:</Text>
+                    <Text c="dimmed" lh={1.5} size="sm">Juggle multiple tasks in tabbed workspaces. Instantly swap between OpenAI, Anthropic, or local open-source models.</Text>
                   </div>
                 </Group>
               </Grid.Col>
@@ -311,17 +263,17 @@ export default function HowItWorks() {
       <section className={sharedClasses.ctaSection}>
         <Container size="md" className={sharedClasses.ctaContainer}>
           <Title order={2} className={sharedClasses.ctaTitle} mb="sm">
-            Ready to hire your free, undetectable intern?
+            Ready to take back control of your codebase?
           </Title>
           <Title order={3} size="h2" c="violet.2" fw={700}>
-            Stop scrolling and start growing.
+            Stop exploring. Start shipping.
           </Title>
           
           <Text size="xl" c="white" maw={700} lh={1.6} mt="xl" opacity={0.9}>
-            You built a great product. You created a great coaching business. Your time is too valuable to be spent doing mind-numbing data entry on a social media app.
+            You are the senior developer. The AI is just an exceptionally fast typist. Keep it that way by giving it the right boundaries, the right context, and explicit instructions.
           </Text>
           <Text size="xl" c="white" maw={700} lh={1.6} mt="sm" mb="xl" fw={600}>
-            Let SlyBot do the heavy lifting, so you can get back to doing the work you actually love.
+            Get the 3x speed boost without the agentic tech debt.
           </Text>
 
           <Button 
@@ -331,10 +283,10 @@ export default function HowItWorks() {
             mt="md"
             rightSection={<ChevronRight size={20} />}
           >
-            Download SlyBot for Free (Windows .exe)
+            Download Frugaast
           </Button>
           <Text size="sm" mt="lg" c="violet.2" fw={500} opacity={0.8}>
-            Setup takes 2 minutes. No email required. Upgrade only when you are ready for more power.
+            Available for Mac, Windows, and Linux. Bring your own API key.
           </Text>
         </Container>
         
