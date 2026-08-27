@@ -1,4 +1,4 @@
-import { Instagram, Twitter, Youtube, Shield, Check } from 'lucide-react';
+import { Github, Twitter } from 'lucide-react';
 import { ActionIcon, Container, Group, Text, SimpleGrid, Stack, Divider } from '@mantine/core';
 import { HypnocamentsLogo } from './HypnocamentsLogo';
 import classes from './Footer.module.css';
@@ -31,7 +31,18 @@ export function Footer() {
       <Container size="lg">
         <SimpleGrid cols={{ base: 1, sm: 2, md: 4 }} spacing={40}>
           <Stack gap="md" className={classes.logoSection}>
-            <HypnocamentsLogo width={160} />
+            <Link to="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center' }}>
+              <HypnocamentsLogo width={140} height={32} />
+              <Text 
+                fw={800} 
+                fz="xl" 
+                variant="gradient" 
+                gradient={{ from: 'gray.9', to: 'gray.6', deg: 45 }}
+                style={{ marginLeft: '-40px', letterSpacing: '-0.5px' }}
+              >
+                Frugäast
+              </Text>
+            </Link>
             <Text size="sm" c="dimmed" className={classes.description}>
               {siteMetadata.description}
             </Text>
@@ -55,14 +66,11 @@ export function Footer() {
           </Stack>
 
           <Group gap="xs" justify="flex-end" wrap="nowrap">
-            <ActionIcon size="lg" color="gray" variant="subtle" radius="xl" component="a" href={siteMetadata.social.instagram}>
-              <Instagram size={18} strokeWidth={1.5} />
+            <ActionIcon size="lg" color="gray" variant="subtle" radius="xl" component="a" href={siteMetadata.social.github}>
+              <Github size={18} strokeWidth={1.5} />
             </ActionIcon>
-            <ActionIcon size="lg" color="gray" variant="subtle" radius="xl">
+            <ActionIcon size="lg" color="gray" variant="subtle" radius="xl" component="a" href={siteMetadata.social.twitter}>
               <Twitter size={18} strokeWidth={1.5} />
-            </ActionIcon>
-            <ActionIcon size="lg" color="gray" variant="subtle" radius="xl">
-              <Youtube size={18} strokeWidth={1.5} />
             </ActionIcon>
           </Group>
         </div>

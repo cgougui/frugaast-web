@@ -1,38 +1,35 @@
 {
-  "title": "SlyBot - Undetectable Instagram Growth via Android Automation",
-  "description": "Scale your Instagram reach safely using your own hardware. SlyBot automates interactions with your competitors' followers via ADB—mimicking real human behavior. Download for free, no account required.",
-  "copyright": "© {year} slybot.io. All rights reserved.",
-  "siteUrl": "https://www.slybot.io",
-  "author": "SlyBot",
+  "title": "Frugäast - The frugal coding assistant",
+  "description": "Frugaast is a minimalist, non-agentic coding assistant that lets you precisely control what you send to the LLM.",
+  "copyright": "© {year} frugaast.dev. All rights reserved.",
+  "siteUrl": "https://github.com/Frugaast/frugaast",
+  "author": "Frugäast",
   "language": "en",
-  "email": "contact@slybot.io",
+  "email": "contact@frugaast.dev",
   "social": {
-    "instagram": "https://www.instagram.com/slybot_app/"
+    "twitter": "https://twitter.com/frugaast",
+    "github": "https://github.com/Frugaast/frugaast"
   },
   "headerLinks": [
     { "link": "/how-it-works", "label": "How it Works" },
     { "link": "/setup-guide", "label": "Setup Guide" },
     { "link": "/pricing", "label": "Pricing" },
-    { "link": "/download", "label": "Download SlyBot Free", "isCTA": true }
+    { "link": "/download", "label": "Download", "isCTA": true }
   ],
   "footerLinks": [
     {
       "title": "Product",
       "links": [
-        { "label": "Download Free Version", "link": "/download" },
-        { "label": "Upgrade to Pro", "link": "/pro" },
-        { "label": "Development Roadmap", "link": "/roadmap" },
-        { "label": "Affiliate Program", "link": "/affiliates" }
+        { "label": "Download", "link": "/download" },
+        { "label": "How it Works", "link": "/how-it-works" },
+        { "label": "Pricing", "link": "/pricing" }
       ]
     },
     {
       "title": "Resources",
       "links": [
-        { "label": "ADB Setup Wizard", "link": "/adb-setup" },
-        { "label": "Safety Best Practices", "link": "/safety-tips" },
-        { "label": "Questions & Answers", "link": "/faq" },
-        { "label": "SlyBot vs Meta Ads", "link": "/vs-meta-ads" },
-        { "label": "SlyBot vs Cloud Bots", "link": "/vs-cloud-bots" }
+        { "label": "Setup Guide", "link": "/setup-guide" },
+        { "label": "GitHub Repository", "link": "https://github.com/Frugaast/frugaast" }
       ]
     },
     {
@@ -40,8 +37,7 @@
       "links": [
         { "label": "Contact Support", "link": "/contact" },
         { "label": "Terms of Service", "link": "/terms" },
-        { "label": "Privacy Policy", "link": "/privacy" },
-        { "label": "Refund Policy", "link": "/refunds" }
+        { "label": "Privacy Policy", "link": "/privacy" }
       ]
     }
   ]

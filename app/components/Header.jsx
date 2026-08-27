@@ -53,25 +53,23 @@ export function Header() {
     <header className={classes.header}>
       <Container size="lg" h="100%">
         <Group justify="space-between" h="100%" wrap="nowrap">
-          <Link to="/" style={{ textDecoration: 'none', display: 'flex' }}>
+          <Link to="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center' }}>
             <HypnocamentsLogo width={140} height={32} />
+            <Text 
+              fw={800} 
+              fz="xl" 
+              variant="gradient" 
+              gradient={{ from: 'gray.9', to: 'gray.6', deg: 45 }}
+              className={classes.websiteName} 
+              style={{ marginLeft: '-40px', letterSpacing: '-0.5px' }}
+            >
+              Frugäast
+            </Text>
           </Link>
 
           <Group gap="lg" visibleFrom="md">
             <Group gap="md">{items}</Group>
             
-            <Divider orientation="vertical" h={20} />
-            
-            <ActionIcon 
-              variant="subtle" 
-              component={Link} 
-              to="/profil"
-              radius="xl"
-              size="lg"
-              color={pathname.startsWith('/profil') ? 'blue' : 'gray'}
-            >
-              <User size={20} />
-            </ActionIcon>
           </Group>
 
           <Burger opened={opened} onClick={toggle} hiddenFrom="md" size="sm" />
@@ -108,20 +106,7 @@ export function Header() {
               </Group>
             </UnstyledButton>
           ))}
-          
-          <Divider my="sm" label="Account" labelPosition="center" />
-          
-          <UnstyledButton
-            component={Link}
-            to="/profil"
-            onClick={close}
-            className={classes.mobileLink}
-          >
-            <Group>
-              <User size={20} />
-              <Text fw={500}>Mon compte</Text>
-            </Group>
-          </UnstyledButton>
+
         </Stack>
 
         <Box mt="xl">

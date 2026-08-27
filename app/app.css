@@ -7,5 +7,49 @@
 
 html,
 body {
-  @apply bg-white;
+  @apply bg-white text-slate-900;
+}
+
+/* --- Common Shared Layout Styles --- */
+
+.hero-grid-pattern {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-size: 40px 40px;
+  background-image: radial-gradient(circle at 1px 1px, var(--mantine-color-gray-3) 1px, transparent 0);
+  mask-image: linear-gradient(to bottom, black 0%, transparent 80%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hero-glow {
+  position: absolute;
+  top: -20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1000px;
+  height: 600px;
+  background: radial-gradient(ellipse, rgba(132, 94, 247, 0.1) 0%, rgba(255, 255, 255, 0) 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.text-gradient {
+  background: linear-gradient(135deg, var(--mantine-color-violet-6) 0%, var(--mantine-color-indigo-6) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.section-title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--mantine-color-dark-9);
+}
+
+.section-alt {
+  background-color: var(--mantine-color-gray-0);
+  border-top: 1px solid var(--mantine-color-gray-1);
+  border-bottom: 1px solid var(--mantine-color-gray-1);
 }

@@ -39,7 +39,12 @@ export default function Index() {
         </Container>
 
         {/* Frugaast UI Screenshot (90% wide, centered) */}
-        <Box w="95%" mx="auto" mt={80} className={classes.relativeZ}>
+        <Box
+          w={{ base: "100%", md: "70%" }}
+          mx="auto"
+          mt={80}
+          className={classes.relativeZ}
+        >
           <img 
             src="/images/home/screen.png" 
             alt="Frugaast Interface" 
@@ -59,6 +64,8 @@ export default function Index() {
 
           <Group justify="center" mt={50} gap="md">
             <Button 
+              component="a"
+              href="/download"
               size="lg" 
               radius="md" 
               className={classes.buttonPrimary} 
@@ -121,7 +128,7 @@ export default function Index() {
               
               <Stack gap="md">
                 {[
-                  "Less irrelevant code to confuse the model.",
+                  "Only relevant code to focus the model.",
                   "Fewer hallucinated dependencies.",
                   "Smaller, more focused edits.",
                   "Code that strictly respects your existing architecture."
@@ -241,14 +248,18 @@ export default function Index() {
       <section className={classes.ctaSection}>
         <Container size="md" className={classes.relativeZ}>
           <Title order={2} className={classes.ctaTitle}>
-            Take control of your AI workflow.
+            Start frugal AI coding
           </Title>
           <Text size="xl" c="violet.1" maw={700} mx="auto" ta="center" lh={1.6} mt="lg" fw={400}>
-            Download Frugaast today. Choose your context, direct the LLM, and review perfect commits in seconds.
+            Open your existing codebase, select the files you want to edit, <br/>and let Frugäast handle the rest. 
+            <br/><br/>
+            No agents. No hallucinations. Just clean, controlled edits.
           </Text>
 
           <Group justify="center" mt={40}>
             <Button 
+              component="a"
+              href="/download"
               size="xl" 
               radius="md" 
               className={classes.buttonCta} 

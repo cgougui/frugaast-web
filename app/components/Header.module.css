@@ -44,3 +44,13 @@
     margin-top: 8px;
   }
 }
+
+.websiteName {
+  white-space: nowrap;
+}
+
+@media (max-width: 576px) {
+  .websiteName {
+    display: none;
+  }
+}
