@@ -45,15 +45,15 @@ export default function Pricing() {
             <Grid.Col span={{ base: 12, md: 4 }}>
               <div className="pricing-card">
                 <Text fw={700} size="xl" c="dark.9">Free Edition</Text>
-                <Text c="dimmed" size="sm" mt={6} mih={48}>For quick edits and evaluating the workflow.</Text>
+                <Text c="dimmed" size="sm" mt={6} mih={48}>For evaluating the power of context control.</Text>
                 
                 <div className="pricing-price-group">
                   <span className="pricing-currency">$</span>
                   <span className="pricing-amount">0</span>
                 </div>
-                <Text c="dimmed" size="sm" fw={500} mb="xl">Forever free</Text>
+                <Text c="dimmed" size="sm" fw={500} mb="xl">Forever free<br />No credit card required</Text>
 
-                <Button variant="default" size="md" radius="md" fullWidth mb="xl" color="gray.2">
+                <Button variant="default" size="md" radius="md" fullWidth mb="xl" color="gray.2" component="a" href="/download">
                   Download Free
                 </Button>
 
@@ -65,7 +65,7 @@ export default function Pricing() {
                     <ThemeIcon color="gray.1" c="gray.6" size={24} radius="xl">
                       <Check size={14} strokeWidth={3} />
                     </ThemeIcon>
-                    <Text size="sm" fw={500}>Bring your own API keys</Text>
+                    <Text size="sm" fw={500}>95% of premium features</Text>
                   </Flex>
 
                   {/* The limitations, reworded and softened visually */}
@@ -94,7 +94,6 @@ export default function Pricing() {
             {/* Personal Tier */}
             <Grid.Col span={{ base: 12, md: 4 }}>
               <div className="pricing-card pricing-card-popular">
-                <div className="pricing-badge-popular">Most Popular</div>
                 
                 <Group gap="sm">
                   <User size={24} className="text-violet-600" />
@@ -108,7 +107,7 @@ export default function Pricing() {
                   <span className="pricing-amount">59</span>
                 </div>
                 <Text c="dimmed" size="sm" fw={500} mb="xl">
-                  One-time payment • <Text span c="violet.6">$29 optional</Text> yearly renewal
+                  One-time payment<br /><Text span c="violet.6">$29 optional</Text> yearly renewal
                 </Text>
 
                 <Button 
@@ -119,6 +118,8 @@ export default function Pricing() {
                   color="dark.9"
                   style={{ transition: "transform 0.2s ease" }}
                   className="hover:-translate-y-0.5"
+                  component="a"
+                  href="https://buy.stripe.com/test_cNi8wJ6xv3sL1os1pXasg00"
                 >
                   Buy Personal License
                 </Button>
@@ -168,10 +169,10 @@ export default function Pricing() {
                   <span className="pricing-amount">119</span>
                 </div>
                 <Text c="dimmed" size="sm" fw={500} mb="xl">
-                  One-time payment • <Text span c="dark.9">$59 optional</Text> yearly renewal
+                  One-time payment<br /><Text span c="dark.9">$59 optional</Text> yearly renewal
                 </Text>
 
-                <Button variant="outline" size="md" radius="md" fullWidth mb="xl" color="dark.9" className="hover:bg-slate-50">
+                <Button variant="outline" size="md" radius="md" fullWidth mb="xl" color="dark.9" className="hover:bg-slate-50" component="a" href="https://buy.stripe.com/test_bJe7sF5tr5ATc363y5asg01">
                   Buy Commercial License
                 </Button>
 
@@ -208,7 +209,7 @@ export default function Pricing() {
           </Grid>
 
           {/* Early Adopter Banner */}
-          <Container size="md" p={0} mt={60}>
+          {/* <Container size="md" p={0} mt={60}>
             <Box className="discount-banner">
               <Group gap="sm">
                 <ThemeIcon color="violet.1" c="violet.7" size={40} radius="xl">
@@ -223,10 +224,10 @@ export default function Pricing() {
                 USE CODE: FRUGAL30
               </Badge>
             </Box>
-          </Container>
+          </Container> */}
 
           {/* Purchasing Power Parity & FAQ Info */}
-          <Container size="md" p={0}>
+          {/* <Container size="md" p={0}>
             <Box className="ppp-box">
               <Group justify="center" mb="md">
                 <ThemeIcon size={48} radius="xl" color="teal.1" c="teal.7">
@@ -248,7 +249,9 @@ export default function Pricing() {
               The optional renewal gives you access to an additional year of feature updates. 
               If you choose not to renew, you can keep using your fallback version indefinitely.
             </Text>
-          </Container>
+          </Container> */}
+
+          
         </Container>
       </section>
     </MarketingLayout>
