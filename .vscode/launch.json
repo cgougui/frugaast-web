@@ -13,6 +13,21 @@
       "restart": true
     },
     {
+      "name": "Python API",
+      "type": "python",
+      "request": "attach",
+      "connect": {
+          "port": 9231,
+          "host": "localhost"
+      },
+      "pathMappings": [
+          {
+              "localRoot": "${workspaceFolder}/api",
+              "remoteRoot": "/app/"
+          }
+      ],
+    },
+    {
       // --- NEW: Configuration for Debugging Client-Side Code ---
       "name": "Launch Browser against localhost",
       "type": "chrome", // Or "msedge" if you prefer Edge

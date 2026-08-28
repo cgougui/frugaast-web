@@ -2,7 +2,7 @@ services:
   frugaast-web:
     build:
       context: ../
-      dockerfile: docker/dockerfile
+      dockerfile: docker/dockerfile-react
       target: build-env
     container_name: frugaast-web
     restart: always
@@ -13,7 +13,6 @@ services:
       #- /app/.next #removed otherwise the debug breakpoints won't bind
     ports:
       - 3006:3000
-      - 9231:9230
     environment:
       - DEBUG=remix:*
     working_dir: /app
@@ -23,3 +22,16 @@ services:
 
     # NODE_OPTIONS="--inspect=0.0.0.0:9229" npm run dev
 
+
+  frugaast-api:
+    build: 
+      context: ../
+      dockerfile: docker/dockerfile-python
+    container_name: frugaast-api
+    restart: unless-stopped
+    ports:
+      - 4242:4242
+      - 9231:9230
+    env_file:
+      - ../.env.local
+    entrypoint: tail -f /dev/null
