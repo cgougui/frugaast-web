@@ -2,6 +2,10 @@ import os
 import secrets
 import string
 import stripe
+from datetime import date, timedelta
+
+import jwt
+
 from flask import Flask, request, jsonify
 
 # ==========================================
@@ -10,26 +14,54 @@ from flask import Flask, request, jsonify
 # TODO: Replace with your actual Stripe keys
 stripe.api_key = os.environ.get("STRIPE_SECRET_KEY", "YOUR_STRIPE_SECRET_KEY")
 WEBHOOK_SECRET = os.environ.get("STRIPE_WEBHOOK_SECRET", "dummy")
+PRIVATE_KEY_PATH = "/keys/private.pem"
 
 app = Flask(__name__)
 
 # ==========================================
 # Helper Functions
 # ==========================================
-def generate_license_key() -> str:
+def generate_license_jwt(
+    email: str,
+    name: str,
+    transaction_id: str,
+    is_business: bool = False,
+) -> str:
     """
-    Generates a secure, random software license key.
-    Format: XXXX-XXXX-XXXX-XXXX
+    Generate an RS256-signed license JWT.
+
+    The license is valid for updates for one year from today.
     """
-    alphabet = string.ascii_uppercase + string.digits
-    parts = []
-    
-    # Generate 4 segments of 4 characters each
-    for _ in range(4):
-        segment = ''.join(secrets.choice(alphabet) for _ in range(4))
-        parts.append(segment)
-        
-    return '-'.join(parts)
+
+    # Today + 1 year, handling Feb 29 safely
+    today = date.today()
+
+    try:
+        updates_valid_until = today.replace(year=today.year + 1)
+    except ValueError:
+        # Feb 29 -> Feb 28 in a non-leap year
+        updates_valid_until = today.replace(
+            year=today.year + 1,
+            day=28,
+        )
+
+    with open(PRIVATE_KEY_PATH, "rb") as f:
+        private_key = f.read()
+
+    payload = {
+        "email": email,
+        "name": name,
+        "updates_valid_until": updates_valid_until.isoformat(),
+        "transaction_id": transaction_id,
+        "license_version": 1.0,
+        "is_business": is_business,
+    }
+
+    return jwt.encode(
+        payload,
+        private_key,
+        algorithm="RS256",
+    )
 
 def send_license_email(email: str, license_key: str) -> None:
     """
@@ -80,7 +112,7 @@ def stripe_webhook():
 
     # 4. Handle the specific event type
     if event['type'] == 'checkout.session.completed':
-        session = event['data']['object']
+        session = event['data']['object'].to_dict()
         
         # 5. Extract customer email securely using .get() to prevent KeyErrors
         customer_details = session.get('customer_details', {})
@@ -88,7 +120,12 @@ def stripe_webhook():
         
         if customer_email:
             # 6. Generate the license key and send the email
-            license_key = generate_license_key()
+            license_key = generate_license_jwt(
+                email=customer_email,
+                name=customer_details.get('name', 'Customer'),
+                transaction_id=session.get('id'),
+                is_business=customer_details.get('is_business', False)
+            )
             send_license_email(customer_email, license_key)
             print(f"✅ Successfully fulfilled order for {customer_email}")
         else:
