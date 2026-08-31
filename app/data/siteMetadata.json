@@ -11,7 +11,6 @@
     "github": "https://github.com/Frugaast/frugaast"
   },
   "headerLinks": [
-    { "link": "/how-it-works", "label": "How it Works" },
     { "link": "/pricing", "label": "Pricing" },
     { "link": "/download", "label": "Download", "isCTA": true }
   ],
@@ -20,14 +19,12 @@
       "title": "Product",
       "links": [
         { "label": "Download", "link": "/download" },
-        { "label": "How it Works", "link": "/how-it-works" },
         { "label": "Pricing", "link": "/pricing" }
       ]
     },
     {
       "title": "Resources",
       "links": [
-        { "label": "Setup Guide", "link": "/setup-guide" },
         { "label": "GitHub Repository", "link": "https://github.com/Frugaast/frugaast" }
       ]
     },

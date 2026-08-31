@@ -111,6 +111,18 @@ export default function Index() {
         </Container>
       </section>
 
+      {/* WHY FRUGAAST TITLE */}
+      <section className={classes.section}>
+        <Container size="lg">
+            <Title order={4} ta="center" mb="xl" className={classes.sectionSubtitle}>
+              You tried 10 different coding harnesses ?
+            </Title>
+          <Title order={1} ta="center" className={classes.heroTitle}>
+            Frugäast is <span className={classes.textGradient}>different.</span>
+          </Title>
+        </Container>
+      </section>
+
       {/* 3. EXCEPTIONALLY CLEAN CODE */}
       <section className={classes.section}>
         <Container size="lg">
