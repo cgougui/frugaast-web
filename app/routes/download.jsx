@@ -151,10 +151,6 @@ export default function Download() {
                   </Skeleton>
                 </Box>
 
-                <Box pt="sm">
-                  <Text size="sm" fw={600} c="dark.6">System Requirements</Text>
-                  <Text size="sm" c="dimmed">Windows 10 or newer (x64).</Text>
-                </Box>
               </Card>
             </Grid.Col>
 
@@ -196,10 +192,6 @@ export default function Download() {
                   </Skeleton>
                 </Box>
 
-                <Box mt="auto" pt="sm">
-                  <Text size="sm" fw={600} c="dark.6">System Requirements</Text>
-                  <Text size="sm" c="dimmed">glibc 2.31+ (Ubuntu 20.04+).</Text>
-                </Box>
               </Card>
             </Grid.Col>
 
@@ -230,11 +222,6 @@ export default function Download() {
                   </Button>
                 </Skeleton>
 
-                <Box mt="xl">
-                  <Text size="sm" fw={600} c="dark.6">System Requirements</Text>
-                  <Text size="sm" c="dimmed">macOS 11.0 (Big Sur) or newer.</Text>
-                  <Text size="sm" c="dimmed">Native Apple Silicon & Intel support.</Text>
-                </Box>
               </Card>
             </Grid.Col>
           </Grid>

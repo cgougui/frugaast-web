@@ -34,7 +34,7 @@ export default function Pricing() {
                 <Sparkles size={18} className="text-violet-600" />
                 <Text size="sm" fw={500} c="dark.8">
                   Bring your own API keys. No markups. 
-                  <br />Use the built-in cost analyzer to see exactly where your tokens are going—down to the cent.
+                  <br />Use the built-in cost analyzer to see exactly where your tokens are going.
                 </Text>
               </Group>
             </Box>

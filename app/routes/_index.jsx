@@ -3,7 +3,7 @@ import {
 } from '@mantine/core';
 import { 
   CheckCircle2, ChevronRight, ArrowRight, Layers, Zap, 
-  Wallet, Cpu, Terminal, FileCode, Check
+  Wallet, Cpu, Terminal, FileCode, Check, Search, Gauge
 } from 'lucide-react';
 import { MarketingLayout } from '../components/MarketingLayout';
 
@@ -40,7 +40,7 @@ export default function Index() {
 
         {/* Frugäast UI Screenshot (90% wide, centered) */}
         <Box
-          w={{ base: "100%", md: "70%" }}
+          w={{ base: "100%", xl: "80%" }}
           mx="auto"
           mt={80}
           className={classes.relativeZ}
@@ -85,9 +85,9 @@ export default function Index() {
               Stop paying AI to rediscover what you already know.
             </Title>
               <Text c="dimmed" size="lg" ta="center" maw={700} lh={1.7}>
-              Autonomous agentic loops are great for exploring.
-              <br/><br/>
-              Frugäast is for day-to-day shipping.
+              Autonomous agentic loops are great for exploring new idea.
+              <br/>
+              Frugäast is for maintaining your (large) codebase.
             </Text>
           </Stack>
 
@@ -120,32 +120,47 @@ export default function Index() {
                 Exceptionally clean code.
               </Title>
               <Text size="lg" c="dimmed" mb="md" lh={1.7}>
-                Every coding assistant ultimately relies on an LLM. The quality of the output depends entirely on the size and quality of the context you feed it.
+                Your LLM has a 200k context window. Cool.<br/>
+                But its peak performance is at 10k. 
               </Text>
               <Text size="lg" c="dimmed" mb="xl" lh={1.7}>
-                By controlling the context, you're not giving the model <i>less</i> information. You're giving it the <i>right</i> information.
+                Pass only relevant code to the model, get clean edits.
               </Text>
               
-              <Stack gap="md">
-                {[
-                  "Only relevant code to focus the model.",
-                  "Fewer hallucinated dependencies.",
-                  "Smaller, more focused edits.",
-                  "Code that strictly respects your existing architecture."
-                ].map((item, i) => (
-                  <Flex key={i} align="flex-start" gap="md">
-                    <ThemeIcon color="violet.1" c="violet.7" size={28} radius="xl" mt={2}>
-                      <Check size={16} strokeWidth={3} />
-                    </ThemeIcon>
-                    <Text fw={500} size="md" c="dark.7">{item}</Text>
-                  </Flex>
-                ))}
+              <Stack gap="xl">
+                <Flex align="center" gap="md">
+                  <ThemeIcon size={40} radius="md" color="violet.1" c="violet.7">
+                    <Search size={20} />
+                  </ThemeIcon>
+                  <div>
+                    <Text fw={700} size="lg" mb={4}>Easily create curated context.</Text>
+                    <Text c="dimmed" lh={1.6}>Fuzzy search files to add to your context.<br/>Repomap created on the fly.</Text>
+                  </div>
+                </Flex>
+                <Flex align="center" gap="md">
+                  <ThemeIcon size={40} radius="md" color="violet.1" c="violet.7">
+                    <Zap size={20} />
+                  </ThemeIcon>
+                  <div>
+                    <Text fw={700} size="lg" mb={4}>One pass to rules them all.</Text>
+                    <Text c="dimmed" lh={1.6}>No agentic loops. Send the curated context, apply the edits. That's it.</Text>
+                  </div>
+                </Flex>
+                <Flex align="center" gap="md">
+                  <ThemeIcon size={40} radius="md" color="violet.1" c="violet.7">
+                    <FileCode size={20} />
+                  </ThemeIcon>
+                  <div>
+                    <Text fw={700} size="lg" mb={4}>Produce clean, predictable code.</Text>
+                    <Text c="dimmed" lh={1.6}>No hallucinated dependencies, no code duplicated. <br/>No more surprises.</Text>
+                  </div>
+                </Flex>
               </Stack>
             </Grid.Col>
             
             <Grid.Col span={{ base: 12, md: 6 }}>
               <div className={classes.imagePlaceholderWrapper}>
-                <img src="/images/home/clean-code.png" alt="Context Filtering Visual" />
+                <img src="/images/home/feature1.png" alt="Context Filtering Visual" />
               </div>
             </Grid.Col>
           </Grid>
@@ -158,46 +173,47 @@ export default function Index() {
           <Grid align="center" gutter={{ base: 60, md: 80 }}>
             <Grid.Col span={{ base: 12, md: 6 }} order={{ base: 2, md: 1 }}>
               <div className={classes.imagePlaceholderWrapper}>
-                <img src="/images/home/cost-chart.png" alt="Token consumption comparison" />
+                <img src="/images/home/feature2.png" alt="Token consumption comparison" />
               </div>
             </Grid.Col>
             
             <Grid.Col span={{ base: 12, md: 6 }} order={{ base: 1, md: 2 }}>
               <Title order={2} mb="xl" className={classes.sectionTitle} ta="left">
-                Very frugal.
+                Frugal by design.
               </Title>
               <Text size="lg" c="dimmed" mb="xl" lh={1.7}>
                 Autonomous agentic loops quietly consume 100K+ tokens while you grab a coffee. 
                 <br/><br/>
-                With Frugäast, you decide exactly what reaches the LLM.
+                Frugäast does not burn tokens wondering what tool to use: <br/>
+                just one pass with controlled context for frugal, predictable edits.
               </Text>
               
               <Stack gap="xl">
-                <Flex align="flex-start" gap="md">
+                <Flex align="center" gap="md">
                   <ThemeIcon size={40} radius="md" color="violet.1" c="violet.7">
-                    <Wallet size={20} />
+                    <Gauge size={20} />
                   </ThemeIcon>
                   <div>
-                    <Text fw={700} size="lg" mb={4}>Track the cost of every edit.</Text>
-                    <Text c="dimmed" lh={1.6}>See exactly how much a prompt will cost before you send it.</Text>
+                    <Text fw={700} size="lg" mb={4}>No loop, no waste.</Text>
+                    <Text c="dimmed" lh={1.6}>Predictable token usage for better cost control.</Text>
                   </div>
                 </Flex>
-                <Flex align="flex-start" gap="md">
+                <Flex align="center" gap="md">
                   <ThemeIcon size={40} radius="md" color="violet.1" c="violet.7">
                     <Cpu size={20} />
                   </ThemeIcon>
                   <div>
                     <Text fw={700} size="lg" mb={4}>Bring your own models.</Text>
-                    <Text c="dimmed" lh={1.6}>Use API keys for Claude or GPT-4, or connect completely free local models via Ollama.</Text>
+                    <Text c="dimmed" lh={1.6}>Reserve premium for difficult tasks.</Text>
                   </div>
                 </Flex>
-                <Flex align="flex-start" gap="md">
+                <Flex align="center" gap="md">
                   <ThemeIcon size={40} radius="md" color="violet.1" c="violet.7">
-                    <Terminal size={20} />
+                    <Wallet size={20} />
                   </ThemeIcon>
                   <div>
-                    <Text fw={700} size="lg" mb={4}>Reserve premium for reasoning.</Text>
-                    <Text c="dimmed" lh={1.6}>Use Opus or GPT-4o for hard architecture tasks, and Haiku or local models for boilerplate.</Text>
+                    <Text fw={700} size="lg" mb={4}>Track the cost of every edit.</Text>
+                    <Text c="dimmed" lh={1.6}>Review your spendings with cost analysis dashboards.</Text>
                   </div>
                 </Flex>
               </Stack>
@@ -214,32 +230,17 @@ export default function Index() {
               <Title order={2} mb="xl" className={classes.sectionTitle} ta="left">
                 Built for developers who own their codebase.
               </Title>
-              <Text size="lg" c="dimmed" mb="md" lh={1.7}>
-                Agents shine for small boilerplate projects. On a mature, production codebase, their autonomous loops accumulate technical debt faster than you can fix it.
-              </Text>
               <Text size="lg" c="dimmed" mb="xl" lh={1.7}>
                 You already know what you want. You don't need an AI to take over—you just need it to execute what you have in mind.
               </Text>
-              
-              <Stack gap="md">
-                {[
-                  <><b>You</b> choose the exact context.</>,
-                  <><b>You</b> dictate the architecture and logic.</>,
-                  <><b>You</b> review the resulting commits.</>
-                ].map((content, i) => (
-                  <Flex key={i} align="center" gap="md">
-                    <ThemeIcon color="blue.1" c="blue.6" size={28} radius="xl">
-                      <Check size={16} strokeWidth={3} />
-                    </ThemeIcon>
-                    <Text fw={500} size="md" c="dark.7">{content}</Text>
-                  </Flex>
-                ))}
-              </Stack>
+              <Text size="lg" c="dimmed" mb="md" lh={1.7}>
+                Frugäast shines on large, complex codebases where you need to keep control.
+              </Text>
             </Grid.Col>
             
             <Grid.Col span={{ base: 12, md: 6 }}>
               <div className={classes.imagePlaceholderWrapper}>
-                 <img src="/images/home/developer-workflow.png" alt="Developer led architecture workflow" />
+                 <img src="/images/home/feature3.png" alt="Developer led architecture workflow" />
               </div>
             </Grid.Col>
           </Grid>
