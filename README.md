@@ -8,6 +8,12 @@ docker compose up -d --force-recreate
 http://localhost:3006
 
 
+## Production
+```bash
+docker compose -f docker-compose.prod.yml up -d --force-recreate 
+```
+
+
 # API
 ## docker
 ```
@@ -15,7 +21,7 @@ gunicorn --bind 0.0.0.0:4242 app:app
 python -m debugpy --listen 0.0.0.0:9230 -m gunicorn --bind 0.0.0.0:4242 app:app
 ```
 
-## testing
+## testing (local)
 ```bash
 curl -X POST http://localhost:4242/stripe-webhook \
   -H "Content-Type: application/json" \
@@ -41,3 +47,14 @@ stripe listen --forward-to localhost:4242/stripe-webhook
 # generate a fake transaction
 stripe trigger checkout.session.completed
 ```
+
+
+## API Deployment
+Added WAF rules for Stripe API : block all adresses not in the webhook IP list -> https://docs.stripe.com/ips
+
+Create webhook on `Stripe > Developers` with event `checkout.session.completed`
+
+### Prod testing troubleshooting
+- 404 -> make sure the webhook API endpoint is correct: https://api.frugaast.dev/stripe-webhook
+- 502 -> API server not started properly
+- 400 -> Probably a "Invalid Signature" problem. Verify the env var STRIPE_WEBHOOK_SECRET (should match `Signing secret` in Stripe)

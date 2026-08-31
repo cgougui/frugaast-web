@@ -2,30 +2,41 @@ services:
   frugaast-web:
     build:
       context: ../
-      dockerfile: docker/dockerfile
-
-    image: hypnocaments-website-prod
-    container_name: hypnocaments-website
+      dockerfile: docker/dockerfile-react
+      target: build-env
+    image: frugaast-website-prod
+    container_name: frugaast-web
     restart: always
-
-    env_file:
-      - ../.env.local
 
     environment:
       - NODE_ENV=production
 
-
     volumes:
-      - /home/christophe/Workspace/chriswebplatform-data/files:/files
-      - /home/christophe/Workspace/chriswebplatform-data/protectedfiles:/app/protectedfiles
-      - /home/christophe/Workspace/hypnocaments-platform/public:/app/public #allows to read public/ folder from server-side calls
-      - /home/christophe/Workspace/chriswebplatform-data/blog:/blog
-      - /home/christophe/Workspace/Data/hypnocaments/user_data:/user_data
-      
+      - ${PWD}/..:/app
+      - ${PWD}/../.env.local:/app/.env.local
+      - /app/node_modules
+      #- /app/.next #removed otherwise the debug breakpoints won't bind
     ports:
-      - 3005:3000
-    #working_dir: /app
+      - 3007:3000
+    working_dir: /app
     
-    #entrypoint: "tail -f /dev/null"
-    #entrypoint: "npm run start"
-    # The CMD ["npm", "run", "start"] from the Dockerfile will be used.
+    entrypoint: "npm run start"
+
+    # NODE_OPTIONS="--inspect=0.0.0.0:9229" npm run dev
+
+
+  frugaast-api:
+    build: 
+      context: ../
+      dockerfile: docker/dockerfile-python
+    container_name: frugaast-api
+    restart: unless-stopped
+    volumes:
+      - ${PWD}/../api:/app
+      - ${PWD}/../.env.local:/app/.env.local
+      - ${PWD}/../keys:/keys
+    ports:
+      - 4242:4242
+    env_file:
+      - ../.env.local
+    entrypoint: ["gunicorn", "--bind", "0.0.0.0:4242", "app:app"] 
