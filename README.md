@@ -17,8 +17,9 @@ docker compose -f docker-compose.prod.yml up -d --force-recreate
 # API
 ## docker
 ```
-gunicorn --bind 0.0.0.0:4242 app:app
-python -m debugpy --listen 0.0.0.0:9230 -m gunicorn --bind 0.0.0.0:4242 app:app
+docker exec -ti frugaast-api bash 
+(docker) gunicorn --bind 0.0.0.0:4242 app:app
+(docker) python -m debugpy --listen 0.0.0.0:9230 -m gunicorn --bind 0.0.0.0:4242 app:app
 ```
 
 ## testing (local)

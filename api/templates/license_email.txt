@@ -1,0 +1,11 @@
+Hello {{ name }},
+
+Thank you for your purchase! 
+
+Here is your new license key:
+{{ license_key }}
+
+Keep this key safe. Your license is valid for updates for one year from today.
+
+Best regards,
+The Frugaast Team

@@ -1,4 +1,6 @@
 import os
+import smtplib
+from email.message import EmailMessage
 import secrets
 import string
 import stripe
@@ -6,7 +8,7 @@ from datetime import date, timedelta
 
 import jwt
 
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 
 # ==========================================
 # Configuration & Credentials
@@ -63,18 +65,56 @@ def generate_license_jwt(
         algorithm="RS256",
     )
 
-def send_license_email(email: str, license_key: str) -> None:
+def send_license_email(email_address: str, name: str, license_key: str) -> None:
     """
-    Dummy function to simulate sending an email to the customer.
-    In production, integrate with SendGrid, Postmark, AWS SES, etc.
+    Sends the license key email using an SMTP relay.
+    Uses Flask's render_template to load the email from a file.
     """
     print("--------------------------------------------------")
-    print(f"✉️ [MOCK EMAIL] Sending license key to: {email}")
+    print(f"✉️ [MOCK EMAIL] Sending license key to: {email_address}")
     print(f"🔑 License Key: {license_key}")
     print("--------------------------------------------------")
     
-    # TODO: Add your actual email sending logic here
-    pass
+    # 1. Load SMTP credentials from environment variables (Never hardcode!)
+    smtp_server = os.environ.get("VITE_SMTP_HOST", "smtp.sendgrid.net")
+    smtp_port = int(os.environ.get("SMTP_PORT", 587))
+    smtp_user = os.environ.get("VITE_SMTP_USER")
+    smtp_pass = os.environ.get("VITE_SMTP_PASSWORD")
+    sender_email = "hello@frugaast.dev"
+
+    # Safety check
+    if not smtp_user or not smtp_pass:
+        print("⚠️ SMTP credentials missing. Skipping email send.")
+        return
+
+    # 2. Read and populate the template file using Flask
+    # (Since this runs inside the webhook route, the Flask request context is active)
+    email_body = render_template(
+        "license_email.txt", 
+        name=name, 
+        license_key=license_key
+    )
+
+    # 3. Construct the email
+    msg = EmailMessage()
+    msg['Subject'] = 'Your License Key'
+    msg['From'] = sender_email
+    msg['To'] = email_address
+    msg.set_content(email_body)
+
+    # 4. Send the email securely
+    try:
+        # Best Practice: Use a context manager to ensure the connection closes automatically
+        with smtplib.SMTP(smtp_server, smtp_port) as server:
+            server.starttls() # Secure the connection with TLS
+            server.login(smtp_user, smtp_pass)
+            server.send_message(msg)
+        print(f"✅ Successfully sent license email to {email_address}")
+    except Exception as e:
+        # We catch the error so the webhook doesn't return a 500 status to Stripe
+        # If we return 500, Stripe will continually retry generating redundant licenses
+        print(f"❌ Failed to send email to {email_address}: {e}")
+        
 
 # ==========================================
 # Webhook Endpoint
@@ -114,24 +154,24 @@ def stripe_webhook():
     if event['type'] == 'checkout.session.completed':
         session = event['data']['object'].to_dict()
         
-        # 5. Extract customer email securely using .get() to prevent KeyErrors
         customer_details = session.get('customer_details', {})
         customer_email = customer_details.get('email')
+        customer_name = customer_details.get('name', 'Customer') # Get the name
         
         if customer_email:
-            # 6. Generate the license key and send the email
             license_key = generate_license_jwt(
                 email=customer_email,
-                name=customer_details.get('name', 'Customer'),
+                name=customer_name,
                 transaction_id=session.get('id'),
                 is_business=customer_details.get('is_business', False)
             )
-            send_license_email(customer_email, license_key)
+            
+            # Pass the name into the email sender here:
+            send_license_email(customer_email, customer_name, license_key)
             print(f"✅ Successfully fulfilled order for {customer_email}")
         else:
             print("⚠️ No customer email found in checkout session details.")
 
-    # Return a 200 OK to acknowledge receipt of the event
     return jsonify({'status': 'success'}), 200
 
 # ==========================================
