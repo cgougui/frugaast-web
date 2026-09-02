@@ -3,7 +3,7 @@ services:
     build:
       context: ../
       dockerfile: docker/dockerfile-react
-      target: build-env
+      target: final_image
     image: frugaast-website-prod
     container_name: frugaast-web
     restart: always
@@ -12,10 +12,7 @@ services:
       - NODE_ENV=production
 
     volumes:
-      - ${PWD}/..:/app
       - ${PWD}/../.env.local:/app/.env.local
-      - /app/node_modules
-      #- /app/.next #removed otherwise the debug breakpoints won't bind
     ports:
       - 3007:3000
     working_dir: /app
