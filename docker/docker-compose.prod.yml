@@ -36,4 +36,8 @@ services:
       - 4242:4242
     env_file:
       - ../.env.local
+
+    environment:
+      # allows to show printf in the logs
+      - PYTHONUNBUFFERED=1 
     entrypoint: ["gunicorn", "--bind", "0.0.0.0:4242", "app:app"] 
