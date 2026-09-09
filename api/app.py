@@ -5,10 +5,12 @@ import secrets
 import string
 import stripe
 from datetime import date, timedelta
+import threading
 
 import jwt
 
 from flask import Flask, request, jsonify, render_template
+from flask import copy_current_request_context
 
 # ==========================================
 # Configuration & Credentials
@@ -64,7 +66,7 @@ def generate_license_jwt(
         private_key,
         algorithm="RS256",
     )
-
+    
 def send_license_email(email_address: str, name: str, license_key: str) -> None:
     """
     Sends the license key email using an SMTP relay.
@@ -75,9 +77,9 @@ def send_license_email(email_address: str, name: str, license_key: str) -> None:
     print(f"🔑 License Key: {license_key}")
     print("--------------------------------------------------")
     
-    # 1. Load SMTP credentials from environment variables (Never hardcode!)
-    smtp_server = os.environ.get("VITE_SMTP_HOST", "smtp.sendgrid.net")
-    smtp_port = int(os.environ.get("SMTP_PORT", 587))
+    # 1. FIXED: Matching the variable names and defaults from your working test script
+    smtp_server = os.environ.get("VITE_SMTP_HOST", "smtp.purelymail.com")
+    smtp_port = int(os.environ.get("SMTP_PORT", 465))
     smtp_user = os.environ.get("VITE_SMTP_USER")
     smtp_pass = os.environ.get("VITE_SMTP_PASSWORD")
     sender_email = "hello@frugaast.dev"
@@ -88,7 +90,6 @@ def send_license_email(email_address: str, name: str, license_key: str) -> None:
         return
 
     # 2. Read and populate the template file using Flask
-    # (Since this runs inside the webhook route, the Flask request context is active)
     email_body = render_template(
         "license_email.txt", 
         name=name, 
@@ -104,15 +105,15 @@ def send_license_email(email_address: str, name: str, license_key: str) -> None:
 
     # 4. Send the email securely
     try:
-        # Best Practice: Use a context manager to ensure the connection closes automatically
-        with smtplib.SMTP(smtp_server, smtp_port) as server:
-            server.starttls() # Secure the connection with TLS
+        print(f"🔍 DEBUG SMTP: Host: {smtp_server} | Port: {smtp_port} | User: {smtp_user}")
+        
+        # FIXED: Use SMTP_SSL and add a timeout (Removed starttls entirely)
+        with smtplib.SMTP_SSL(smtp_server, smtp_port, timeout=15) as server:
             server.login(smtp_user, smtp_pass)
             server.send_message(msg)
+            
         print(f"✅ Successfully sent license email to {email_address}")
     except Exception as e:
-        # We catch the error so the webhook doesn't return a 500 status to Stripe
-        # If we return 500, Stripe will continually retry generating redundant licenses
         print(f"❌ Failed to send email to {email_address}: {e}")
         
 
@@ -156,7 +157,7 @@ def stripe_webhook():
         
         customer_details = session.get('customer_details', {})
         customer_email = customer_details.get('email')
-        customer_name = customer_details.get('name', 'Customer') # Get the name
+        customer_name = customer_details.get('name', 'Customer')
         
         if customer_email:
             license_key = generate_license_jwt(
@@ -166,9 +167,20 @@ def stripe_webhook():
                 is_business=customer_details.get('is_business', False)
             )
             
-            # Pass the name into the email sender here:
-            send_license_email(customer_email, customer_name, license_key)
-            print(f"✅ Successfully fulfilled order for {customer_email}")
+            # 1. Create a decorator to copy the Flask context 
+            # (Required because render_template needs to know about the Flask app)
+            @copy_current_request_context
+            def send_email_background(email, name, key):
+                send_license_email(email, name, key)
+
+            # 2. Start the email process in the background
+            thread = threading.Thread(
+                target=send_email_background, 
+                args=(customer_email, customer_name, license_key)
+            )
+            thread.start()
+
+            print(f"✅ Order fulfilled, email is sending in background for {customer_email}")
         else:
             print("⚠️ No customer email found in checkout session details.")
 
