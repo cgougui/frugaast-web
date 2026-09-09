@@ -126,13 +126,13 @@ export default function Download() {
                   <ThemeIcon size={42} radius="md" color="blue.1" c="blue.7">
                     <Monitor size={22} />
                   </ThemeIcon>
-                  <Title order={3} className="font-bold text-gray-800">Windows</Title>
+                  <Title order={3} className="font-bold text-gray-800">Windows 10 / 11</Title>
                 </Group>
                 
                 <Skeleton visible={loading}>
                   <Button 
                     component="a" 
-                    href={getAssetUrl('.exe')}
+                    href={getAssetUrl('setup.exe')}
                     size="md" 
                     color="blue"
                     variant="light"
@@ -140,16 +140,9 @@ export default function Download() {
                     fullWidth
                     radius="md"
                   >
-                    x64 Setup .exe
+                    Download setup.exe
                   </Button>
                 </Skeleton>
-
-                <Box mt="xl">
-                  <Text size="sm" fw={600} c="dark.6">Alternative Downloads</Text>
-                  <Skeleton visible={loading} mt={4}>
-                    <Anchor href={getAssetUrl('portable.zip')} size="sm">Portable .zip</Anchor>
-                  </Skeleton>
-                </Box>
 
               </Card>
             </Grid.Col>
@@ -177,17 +170,26 @@ export default function Download() {
                     fullWidth
                     radius="md"
                   >
-                    Download .AppImage
+                    x64 .AppImage
                   </Button>
                 </Skeleton>
 
                 <Box mt="xl">
-                  <Text size="sm" fw={600} c="dark.6">Alternative Downloads</Text>
+                  <Text size="sm" fw={600} c="dark.6">x64 Packages</Text>
                   <Skeleton visible={loading} mt={4}>
                     <Group gap="xs">
-                      <Anchor href={getAssetUrl('.deb')} size="sm">.deb</Anchor>
+                      <Anchor href={getAssetUrl('amd64.deb')} size="sm">.deb</Anchor>
                       <Text size="sm" c="dimmed">•</Text>
                       <Anchor href={getAssetUrl('.rpm')} size="sm">.rpm</Anchor>
+                    </Group>
+                  </Skeleton>
+                </Box>
+
+                <Box mt="md">
+                  <Text size="sm" fw={600} c="dark.6">ARM64 Packages</Text>
+                  <Skeleton visible={loading} mt={4}>
+                    <Group gap="xs">
+                      <Anchor href={getAssetUrl('arm64.deb')} size="sm">.deb</Anchor>
                     </Group>
                   </Skeleton>
                 </Box>
