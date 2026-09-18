@@ -11,6 +11,7 @@ services:
       - ${PWD}/../.env.local:/app/.env.local
       - /app/node_modules
       #- /app/.next #removed otherwise the debug breakpoints won't bind
+      - ${PWD}/../blog:/blog
     ports:
       - 3006:3000
     environment:

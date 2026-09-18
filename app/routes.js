@@ -18,6 +18,9 @@ export default [
   route("pricing", "routes/pricing.jsx"),
   route("download", "routes/download.jsx"),
 
+  route("/blog", "routes/blog.jsx"),
+  route("/blog/:articleId", "routes/blog.$articleId.jsx"), // Add route for individual articles
+
   // Minor pages
   route("pro", "routes/minor/pro.jsx"),
   route("roadmap", "routes/minor/roadmap.jsx"),

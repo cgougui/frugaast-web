@@ -1,0 +1,60 @@
+.header {
+    padding-bottom: calc(var(--mantine-spacing-xl) * 2);
+    border-bottom: rem(1px) solid var(--mantine-color-gray-3);
+    margin-bottom: calc(var(--mantine-spacing-xl) * 1.5);
+}
+
+.title {
+    font-size: rem(44px);
+    font-weight: 900;
+    line-height: 1.1;
+}
+
+.cardLink {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    height: 100%;
+}
+
+.card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--mantine-color-body);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--mantine-shadow-lg);
+}
+
+.cardImage {
+    transition: transform 0.3s ease;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+}
+
+.card:hover .cardImage {
+    transform: scale(1.03);
+}
+
+.cardContent {
+    padding: var(--mantine-spacing-lg);
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.cardTitle {
+    line-height: 1.3;
+    font-size: var(--mantine-font-size-lg);
+    color: var(--mantine-color-black);
+    margin-top: var(--mantine-spacing-xs);
+}
+
+.cardTitle:hover {
+    text-decoration: underline;
+}

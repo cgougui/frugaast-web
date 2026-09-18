@@ -1,0 +1,243 @@
+/* Styles for the container holding the article */
+.articleContainer {
+    background-color: var(--mantine-color-body);
+}
+
+/* Base styles for the rendered Markdown content */
+.markdownContent {
+    line-height: 1.8; /* Increased line-height for readability */
+    font-size: var(--mantine-font-size-lg); /* Larger base font size */
+    color: var(--mantine-color-dark-8);
+}
+
+/* Headings - Improved spacing and weights */
+.markdownContent h1,
+.markdownContent h2,
+.markdownContent h3,
+.markdownContent h4,
+.markdownContent h5,
+.markdownContent h6 {
+    margin-top: calc(var(--mantine-spacing-xl) * 1.5); /* More space above headings */
+    margin-bottom: var(--mantine-spacing-md);
+    font-weight: 700; /* Bolder headings */
+    line-height: 1.4;
+    color: var(--mantine-color-black); /* Or a dark gray from theme */
+}
+
+.markdownContent h1 {
+    font-size: calc(var(--mantine-font-size-xl) * 2); /* Larger H1 */
+    color: var(--mantine-color-black);
+    margin-top: 0; /* No top margin for the first H1 */
+    margin-bottom: var(--mantine-spacing-lg);
+    font-weight: 800; /* Bolder */
+    line-height: 1.2;
+}
+
+.markdownContent h2 {
+    font-size: calc(var(--mantine-font-size-xl) * 1.5); /* Larger H2 */
+    font-weight: 700;
+    margin-top: calc(var(--mantine-spacing-xl) * 2);
+    padding-bottom: var(--mantine-spacing-sm);
+}
+
+.markdownContent h3 {
+    font-size: var(--mantine-font-size-xl);
+    font-weight: 600;
+}
+
+.markdownContent h4 {
+    font-size: var(--mantine-font-size-lg);
+    font-weight: 600;
+    color: var(--mantine-color-gray-7);
+}
+
+/* Paragraphs - Ensure consistent bottom margin */
+.markdownContent p {
+    margin-top: 0;
+    margin-bottom: var(--mantine-spacing-lg); /* Slightly more space after paragraphs */
+}
+
+/* Links - Ensure text-like appearance */
+.markdownContent a {
+    color: var(--mantine-color-blue-7);
+    text-decoration: none; /* Remove underline by default */
+    font-weight: 500;
+    background: none; /* Ensure no background */
+    border: none; /* Ensure no border */
+    padding: 0; /* Ensure no padding */
+    cursor: pointer;
+    display: inline; /* Ensure inline display */
+    background-image: linear-gradient(var(--mantine-color-blue-7), var(--mantine-color-blue-7));
+    background-position: 0% 100%;
+    background-repeat: no-repeat;
+    background-size: 0% 2px;
+    transition: background-size .3s;
+}
+
+.markdownContent a:hover {
+    color: var(--mantine-color-blue-8);
+    background-size: 100% 2px;
+}
+
+/* Lists - Improved spacing */
+.markdownContent ul,
+.markdownContent ol {
+    margin-top: var(--mantine-spacing-md);
+    margin-bottom: var(--mantine-spacing-lg);
+    padding-left: var(--mantine-spacing-xl);
+}
+
+.markdownContent li {
+    margin-bottom: var(--mantine-spacing-sm); /* Space between list items */
+}
+
+.markdownContent li > p {
+    margin-bottom: var(--mantine-spacing-sm); /* Adjust paragraph margin within list items */
+}
+
+/* Blockquotes - Enhanced visual distinction */
+.markdownContent blockquote {
+    margin: var(--mantine-spacing-lg) 0;
+    padding: var(--mantine-spacing-md) var(--mantine-spacing-lg);
+    border-left: 5px solid var(--mantine-color-blue-5); /* Use theme color for border */
+    background-color: var(--mantine-color-blue-0); /* Subtle background */
+    color: var(--mantine-color-black);
+    font-style: italic;
+}
+
+.markdownContent blockquote p {
+    margin-bottom: 0;
+    font-size: var(--mantine-font-size-md); /* Ensure consistent font size */
+}
+
+/* Code blocks - Improved styling using theme colors */
+.markdownContent pre {
+    background-color: var(--mantine-color-dark-8); /* Darker background */
+    color: var(--mantine-color-gray-2); /* Lighter text */
+    padding: var(--mantine-spacing-lg); /* More padding */
+    border-radius: var(--mantine-radius-md); /* Slightly larger radius */
+    overflow-x: auto;
+    margin-top: var(--mantine-spacing-md);
+    margin-bottom: var(--mantine-spacing-lg);
+    font-family: var(--mantine-font-family-monospace);
+    font-size: var(--mantine-font-size-sm);
+    line-height: 1.6; /* Adjust line height for code */
+}
+
+/* Inline code - Subtle background */
+.markdownContent code {
+    background-color: var(--mantine-color-gray-1);
+    color: var(--mantine-color-red-8); /* Use a distinct color for inline code */
+    padding: 0.2em 0.5em; /* Adjust padding */
+    border-radius: var(--mantine-radius-sm);
+    font-family: var(--mantine-font-family-monospace);
+    font-size: 90%;
+    /* Prevent line breaks within inline code */
+    white-space: nowrap;
+}
+
+.markdownContent pre code {
+    /* Reset styles for code inside pre blocks */
+    background-color: transparent;
+    color: inherit; /* Inherit color from pre */
+    padding: 0;
+    border-radius: 0;
+    font-size: inherit;
+    white-space: inherit; /* Allow wrapping within code blocks */
+}
+
+/* Images - Added subtle shadow and centered */
+.markdownContent img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: var(--mantine-spacing-xl) auto; /* Center images and add vertical space */
+    border-radius: var(--mantine-radius-md); /* Match pre radius */
+    box-shadow: var(--mantine-shadow-sm); /* Add subtle shadow */
+}
+
+/* Special styling for the main illustration image */
+.markdownContent h1 + p > img:first-child {
+    /* Break out of the container padding */
+    width: calc(100% + 2 * var(--mantine-spacing-xl));
+    margin-left: calc(-1 * var(--mantine-spacing-xl));
+    margin-right: calc(-1 * var(--mantine-spacing-xl));
+    margin-top: var(--mantine-spacing-lg);
+    margin-bottom: var(--mantine-spacing-xs);
+    max-width: none;
+    border-radius: var(--mantine-radius-md) var(--mantine-radius-md) 0 0; /* Match paper radius on top */
+}
+
+/* Style for the image attribution text */
+.markdownContent h1 + p em {
+    font-size: var(--mantine-font-size-sm); /* Slightly larger for readability */
+    color: var(--mantine-color-gray-6);
+    display: block;
+    text-align: center;
+    margin-bottom: var(--mantine-spacing-xl);
+}
+
+/* Horizontal Rules - Lighter and more subtle */
+.markdownContent hr {
+    border: 0;
+    border-top: 1px solid var(--mantine-color-gray-2); /* Lighter rule */
+    margin: var(--mantine-spacing-xl) 0;
+}
+
+/* Style for bold text */
+.boldText {
+    color: var(--mantine-color-blue-7);
+    font-weight: 700; /* Ensure it's bold */
+}
+
+/* CTA Button styles */
+.ctaContainer {
+    text-align: center;
+    margin-top: calc(var(--mantine-spacing-xl) * 1.5);
+    margin-bottom: calc(var(--mantine-spacing-xl) * 1.5);
+}
+
+.markdownContent a.ctaButton {
+    display: inline-block;
+    padding: var(--mantine-spacing-md) var(--mantine-spacing-xl);
+    background-color: var(--mantine-color-blue-6);
+    color: white;
+    font-weight: 700;
+    border-radius: var(--mantine-radius-md);
+    text-decoration: none;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    font-size: var(--mantine-font-size-lg);
+    border: none;
+    cursor: pointer;
+    /* Override default link styles */
+    background-image: none;
+}
+
+.markdownContent a.ctaButton:hover {
+    background-color: var(--mantine-color-blue-7);
+    transform: translateY(-2px);
+    box-shadow: var(--mantine-shadow-md);
+    /* Override default link hover styles */
+    color: white;
+    background-size: auto;
+}
+
+/* Style for breadcrumb links */
+.breadcrumbLink {
+    color: var(--mantine-color-blue-7);
+    text-decoration: none;
+    font-size: var(--mantine-font-size-sm);
+}
+.breadcrumbLink:hover {
+    text-decoration: underline;
+}
+
+/* Style for back link */
+.backLink {
+    color: var(--mantine-color-blue-7);
+    text-decoration: none;
+    font-size: var(--mantine-font-size-sm);
+}
+.backLink:hover {
+    text-decoration: underline;
+}
