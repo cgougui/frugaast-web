@@ -60,10 +60,10 @@ export default function Blog() {
     <Container size="lg" py="xl">
       <div className={classes.header}>
         <Title order={1} ta="center" className={classes.title}>
-          Notre Blog
+          AI-Assisted Coding Blog
         </Title>
         <Text c="dimmed" ta="center" size="lg" maw={580} mx="auto" mt="xl">
-          Découvrez nos articles sur l'hypnose, le développement personnel et bien plus encore.
+          Learn to code with AI effectively.
         </Text>
       </div>
 
@@ -116,7 +116,7 @@ export default function Blog() {
                   </div>
                   <Group mt="md">
                     <Text c="blue" fw={500} size="sm">
-                      Lire la suite &rarr;
+                      Read &rarr;
                     </Text>
                   </Group>
                 </Flex>

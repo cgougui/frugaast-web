@@ -164,11 +164,11 @@ export default function ArticlePage() {
   const { htmlContent, title, articleId } = useLoaderData();
 
   return (
-    <Container size="sm" py="xl">
-       <Text component={Link} to="/blog" mb="xl" display="inline-block" className={classes.backLink}>
-         &larr; Retour au Blog
+    <Container size="md" py={{ base: 'md', sm: 'xl' }} className={classes.pageContainer}>
+       <Text component={Link} to="/blog" mb="lg" display="inline-block" className={classes.backLink}>
+         &larr; Back to Blog
        </Text>
-      <Paper shadow="md" p="xl" radius="md" className={classes.articleContainer}>
+      <Paper shadow="sm" radius="md" className={classes.articleContainer}>
         {/* Title can be rendered here or rely on the H1 from Markdown */}
         {/* <Title order={1} mb="xl">{title}</Title> */}
         <div
@@ -176,9 +176,11 @@ export default function ArticlePage() {
           dangerouslySetInnerHTML={{ __html: htmlContent }}
         />
       </Paper>
-       <Text component={Link} to="/blog" mt="xl" display="inline-block" className={classes.backLink}>
-         &larr; Retour au Blog
-       </Text>
+       <div className={classes.footerNav}>
+         <Text component={Link} to="/blog" display="inline-block" className={classes.backLink}>
+           &larr; Back to Blog
+         </Text>
+       </div>
     </Container>
   );
 }

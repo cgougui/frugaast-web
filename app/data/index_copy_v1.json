@@ -1,0 +1,104 @@
+{
+  "hero": {
+    "title1": "The frugal",
+    "title2": "coding assistant.",
+    "subtitle": "Frugäast is a minimalist, non-agentic coding assistant that lets you precisely control what you send to the LLM.",
+    "checklist": [
+      "Better code",
+      "Lower costs",
+      "Full control"
+    ],
+    "promise1": "Instead of chasing the \"10x\" promise that generates technical debt and spaghetti code, Go for a 3x boost — for a fraction of the cost, and ",
+    "promise2": "with code that actually scales",
+    "promise3": ".",
+    "button": "Download Frugäast",
+    "image": {
+      "src": "/images/home/screen.png",
+      "alt": "Frugäast Interface with description of main feature using arrows"
+    }
+  },
+  "workflow": {
+    "title": "Stop paying AI to rediscover what you already know.",
+    "subtitle1": "Autonomous agentic loops are great for exploring new idea.",
+    "subtitle2": "Frugäast is for maintaining your (large) codebase.",
+    "imageBefore": {
+      "src": "/images/home/before.png",
+      "alt": "Before: Agentic Workflow"
+    },
+    "imageAfter": {
+      "src": "/images/home/after.png",
+      "alt": "After: Frugäast Workflow"
+    }
+  },
+  "different": {
+    "subtitle": "You tried 10 different coding harnesses ?",
+    "title1": "Frugäast is",
+    "title2": "different."
+  },
+  "cleanCode": {
+    "title": "Exceptionally clean code.",
+    "para1_1": "Your LLM has a 200k context window. Cool.",
+    "para1_2": "But its peak performance is at 10k.",
+    "para2": "Pass only relevant code to the model, get clean edits.",
+    "features": [
+      {
+        "title": "Easily create curated context.",
+        "desc1": "Fuzzy search files to add to your context.",
+        "desc2": "Repomap created on the fly."
+      },
+      {
+        "title": "One pass to rules them all.",
+        "desc1": "No agentic loops. Send the curated context, apply the edits. That's it."
+      },
+      {
+        "title": "Produce clean, predictable code.",
+        "desc1": "No hallucinated dependencies, no code duplicated.",
+        "desc2": "No more surprises."
+      }
+    ],
+    "image": {
+      "src": "/images/home/feature1.png",
+      "alt": "Funny cartoon of a developer with a messy codebase and a frustrated expression, contrasted with a clean codebase and a happy expression"
+    }
+  },
+  "costControl": {
+    "title": "Frugal by design.",
+    "para1_1": "Autonomous agentic loops quietly consume 100K+ tokens while you grab a coffee.",
+    "para1_2": "Frugäast does not burn tokens wondering what tool to use:",
+    "para1_3": "just one pass with controlled context for frugal, predictable edits.",
+    "features": [
+      {
+        "title": "No loop, no waste.",
+        "desc": "Predictable token usage for better cost control."
+      },
+      {
+        "title": "Bring your own models.",
+        "desc": "Reserve premium for difficult tasks."
+      },
+      {
+        "title": "Track the cost of every edit.",
+        "desc": "Review your spendings with cost analysis dashboards."
+      }
+    ],
+    "image": {
+      "src": "/images/home/feature2.png",
+      "alt": "Stylized chart of token consumption comparison"
+    }
+  },
+  "philosophy": {
+    "title": "Built for developers who own their codebase.",
+    "para1": "You already know what you want. You don't need an AI to take over—you just need it to execute what you have in mind.",
+    "para2": "Frugäast shines on large, complex codebases where you need to keep control.",
+    "image": {
+      "src": "/images/home/feature3.png",
+      "alt": "Cartoon of a haystack representing a large codebase, and arrows pointing to a needle representing the files needed for the edit (which the developper already knows)"
+    }
+  },
+  "cta": {
+    "title": "Start frugal AI coding",
+    "subtitle1": "Open your existing codebase, select the files you want to edit,",
+    "subtitle2": "and let Frugäast handle the rest.",
+    "subtitle3": "No agents. No hallucinations. Just clean, controlled edits.",
+    "button": "Download Frugäast"
+  }
+}

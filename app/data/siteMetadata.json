@@ -11,6 +11,7 @@
     "github": "https://github.com/Frugaast/frugaast"
   },
   "headerLinks": [
+    { "link": "/blog", "label": "Blog" },
     { "link": "/pricing", "label": "Pricing" },
     { "link": "/download", "label": "Download", "isCTA": true }
   ],
@@ -25,6 +26,7 @@
     {
       "title": "Resources",
       "links": [
+        { "label": "Blog", "link": "/blog" },
         { "label": "GitHub Repository", "link": "https://github.com/Frugaast/frugaast" }
       ]
     },

@@ -1,0 +1,104 @@
+{
+  "hero": {
+    "title1": "AI coding.",
+    "title2": "Without the AI takeover.",
+    "subtitle": "Frugäast is a non-agentic coding assistant for developers who want the LLM to change exactly what they asked for — and nothing else.",
+    "checklist": [
+      "Total context control",
+      "BYOK (Base API costs)",
+      "Deterministic edits"
+    ],
+    "promise1": "Stop paying $200/month to watch black-box agents endlessly grep your codebase. Keep your hands on the steering wheel, ship ",
+    "promise2": "maintainable code",
+    "promise3": ", and pay a fraction of the cost.",
+    "button": "Download Frugäast",
+    "image": {
+      "src": "/images/home/screen.png",
+      "alt": "Frugäast Interface showing exact file selection, fuzzy search, and clean SEARCH/REPLACE diffs"
+    }
+  },
+  "workflow": {
+    "title": "Stop paying AI to grep your codebase.",
+    "subtitle1": "Agentic slot-machines burn your quotas reading 500 irrelevant files just to change a CSS class.",
+    "subtitle2": "With Frugäast, you define the exact boundary. It reads what you explicitly select, and nothing else.",
+    "imageBefore": {
+      "src": "/images/home/before.png",
+      "alt": "Before: Expensive Agentic Loop spinning out of control"
+    },
+    "imageAfter": {
+      "src": "/images/home/after.png",
+      "alt": "After: Frugäast's precise file selection and instant execution"
+    }
+  },
+  "different": {
+    "subtitle": "Tired of babysitting autonomous agents that rewrite your tests to hide their bugs?",
+    "title1": "Take back",
+    "title2": "control."
+  },
+  "cleanCode": {
+    "title": "Say goodbye to AI slop.",
+    "para1_1": "Yes, frontier models boast 1M+ token context windows.",
+    "para1_2": "But dump your whole repo in, and watch them suffer from context rot, amnesia, and extreme over-engineering.",
+    "para2": "Frugäast keeps your context lean. Send only the files that matter, and get surgically precise SEARCH/REPLACE blocks applied directly via Git.",
+    "features": [
+      {
+        "title": "Lightning-fast context curation.",
+        "desc1": "Ultra-fast fuzzy search to build your exact context.",
+        "desc2": "A clean left-sidebar treeview ensures no hidden files slip in."
+      },
+      {
+        "title": "One prompt. One deterministic edit.",
+        "desc1": "No \"Let me think about this\" loops. You prompt, it executes the code blocks, you review."
+      },
+      {
+        "title": "No hallucinated architecture.",
+        "desc1": "Protect your core abstractions. The LLM fixes the code you gave it,",
+        "desc2": "it doesn't try to rewrite your entire SaaS."
+      }
+    ],
+    "image": {
+      "src": "/images/home/feature1.png",
+      "alt": "Comparison showing a massive 2000-line messy AI PR versus a clean, 15-line Frugäast surgical edit"
+    }
+  },
+  "costControl": {
+    "title": "End the token-burning slot machine.",
+    "para1_1": "Autonomous agentic loops quietly consume 100K+ tokens while they poll themselves, apologize to you, and spawn unnecessary sub-agents.",
+    "para1_2": "Frugäast is strictly BYOK (Bring Your Own Key). No $200/mo limits, no hidden downgrades to cheaper models, and no opaque rate caps.",
+    "para1_3": "You pay exactly for what you prompt, at base API costs. Period.",
+    "features": [
+      {
+        "title": "Zero \"polling\" waste.",
+        "desc": "Stop paying for the AI to talk to itself. Frugäast cuts the multi-agent messaging overhead to absolute zero."
+      },
+      {
+        "title": "Use the model you actually want.",
+        "desc": "Easily copy your context to the clipboard for web chats, or use the API. No vendor lock-in."
+      },
+      {
+        "title": "Radical token transparency.",
+        "desc": "A built-in dashboard tracks the exact API cost of every project, file, and specific edit."
+      }
+    ],
+    "image": {
+      "src": "/images/home/feature2.png",
+      "alt": "Dashboard showing completely transparent, extremely low API costs compared to an exhausted $200 subscription limit"
+    }
+  },
+  "philosophy": {
+    "title": "For engineers, not vibe-coders.",
+    "para1": "You know your architecture. You know where the bug is. You don't need a black-box AI playing CTO and destroying your database schema in the process.",
+    "para2": "Frugäast is built for senior developers who want an incredibly fast pair of hands—not a junior dev that needs constant supervision.",
+    "image": {
+      "src": "/images/home/feature3.png",
+      "alt": "An experienced developer pointing exactly to the specific files needed for an edit, ignoring the noise of the rest of the codebase"
+    }
+  },
+  "cta": {
+    "title": "Start coding with intention.",
+    "subtitle1": "Open your existing codebase, fuzzy-search the exact files you want to edit,",
+    "subtitle2": "and let Frugäast handle the boilerplate.",
+    "subtitle3": "No agents. No hallucinations. Just clean, controlled, and frugal edits.",
+    "button": "Download Frugäast"
+  }
+}
