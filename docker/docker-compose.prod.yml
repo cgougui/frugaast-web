@@ -13,6 +13,7 @@ services:
 
     volumes:
       - ${PWD}/../.env.local:/app/.env.local
+      - ${PWD}/../blog:/blog
     ports:
       - 3007:3000
     working_dir: /app
