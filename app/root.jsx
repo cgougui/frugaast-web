@@ -89,6 +89,7 @@ export function Layout({ children }) {
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <script defer src="https://cloud.umami.is/script.js" data-website-id="5405206b-72d5-48d1-ab84-ac9e7c33b1e6"></script>
         <link rel="canonical" href={`https://frugaast.dev${location.pathname === '/' ? '' : location.pathname}`} />
         <Meta />
         <Links />

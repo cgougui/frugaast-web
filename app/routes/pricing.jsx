@@ -126,7 +126,7 @@ export default function Pricing() {
                   style={{ transition: "transform 0.2s ease" }}
                   className="hover:-translate-y-0.5"
                   component="a"
-                  href="https://buy.stripe.com/test_cNi8wJ6xv3sL1os1pXasg00"
+                  href="https://buy.stripe.com/28E6oB1bYa9U2uy1HUcfK00"
                 >
                   Buy Personal License
                 </Button>
@@ -179,7 +179,7 @@ export default function Pricing() {
                   One-time payment<br /><Text span c="dark.9">$59 optional</Text> yearly renewal
                 </Text>
 
-                <Button variant="outline" size="md" radius="md" fullWidth mb="xl" color="dark.9" className="hover:bg-slate-50" component="a" href="https://buy.stripe.com/test_bJe7sF5tr5ATc363y5asg01">
+                <Button variant="outline" size="md" radius="md" fullWidth mb="xl" color="dark.9" className="hover:bg-slate-50" component="a" href="https://buy.stripe.com/dRm3cp9IubdY3yCdqCcfK01">
                   Buy Commercial License
                 </Button>
 
