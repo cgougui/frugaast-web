@@ -11,10 +11,12 @@ import { index, route } from "@react-router/dev/routes";
 
 export default [
   index("routes/_index.jsx"),
+
+  // Sitemap for SEO
+  route("sitemap.xml", "routes/sitemap.xml.js"),
   
   // Main pages
   route("how-it-works", "routes/how-it-works.jsx"),
-  route("setup-guide", "routes/setup-guide.jsx"),
   route("pricing", "routes/pricing.jsx"),
   route("download", "routes/download.jsx"),
 

@@ -6,6 +6,13 @@ import {
 } from 'lucide-react';
 import { MarketingLayout } from '../components/MarketingLayout';
 
+export const meta = () => {
+  return [
+    { title: "Pricing | Frugäast AI Coding Assistant" },
+    { name: "description", content: "Simple, developer-first pricing. Free core features for personal use, and lifetime licenses for premium." }
+  ];
+};
+
 export default function Pricing() {
   return (
     <MarketingLayout>

@@ -5,7 +5,14 @@ import path from 'path';
 import classes from './blog.module.css'; // Assuming you might want custom styles
 
 export function meta() {
-  return [{ title: "Blog Hypnose et Bien-être | Hypnocaments" }];
+  return [
+    { title: "Blog | Frugäast AI Coding Assistant" },
+    { name: "description", content: "Insights, guides, and tutorials on AI-assisted coding, keeping your codebase clean, and maximizing productivity." },
+    { property: "og:type", content: "website" },
+    { property: "og:title", content: "Blog | Frugäast AI Coding Assistant" },
+    { property: "og:description", content: "Insights, guides, and tutorials on AI-assisted coding, keeping your codebase clean, and maximizing productivity." },
+    { property: "og:url", content: "https://frugaast.dev/blog" }
+  ];
 }
 
 // Helper function to format date YYYYMMDD to DD MMMM YYYY (French)

@@ -1,5 +1,5 @@
 import { Container, Paper, Title, Text, Anchor, Alert } from '@mantine/core';
-import { useLoaderData, useParams, Link, useRouteError } from 'react-router-dom';
+import { useLoaderData, useParams, Link, useRouteError, isRouteErrorResponse } from 'react-router';
 import fs from 'fs/promises';
 import path from 'path';
 import { marked } from 'marked'; // Markdown parser
@@ -79,11 +79,27 @@ renderer.strong = function(token) {
 };
 // --- End Custom Renderer ---
 
-export function meta({ loaderData }) {
-  if (!loaderData || !loaderData.title) {
-    return [{ title: "Article de Blog | Hypnocaments" }];
+export function meta({ data }) {
+  if (!data || !data.title) {
+    return [
+      { title: "Blog Article | Frugäast" },
+      { name: "description", content: "Read our latest insights on AI-assisted coding." }
+    ];
   }
-  return [{ title: `${loaderData.title} - Blog | Hypnocaments` }];
+  
+  const articleUrl = `https://frugaast.dev/blog/${data.articleId}`;
+  
+  return [
+    { title: `${data.title} | Frugäast Blog` },
+    { name: "description", content: data.description },
+    { property: "og:type", content: "article" },
+    { property: "og:url", content: articleUrl },
+    { property: "og:title", content: data.title },
+    { property: "og:description", content: data.description },
+    { name: "twitter:card", content: "summary_large_image" },
+    { name: "twitter:title", content: data.title },
+    { name: "twitter:description", content: data.description }
+  ];
 }
 
 export async function loader({ params }) {
@@ -114,7 +130,17 @@ export async function loader({ params }) {
     const titleMatch = markdownContent.match(/^#\s+(.*)/m);
     const title = titleMatch ? titleMatch[1] : 'Article'; // Default title
 
-    return { htmlContent, title, articleId };
+    // Extract a brief description from the first normal text paragraph
+    const textLines = markdownContent.split('\n').filter(line => line.trim().length > 0 && !line.startsWith('#') && !line.startsWith('<') && !line.startsWith('>'));
+    let description = `Read ${title} on the Frugäast blog.`;
+    if (textLines.length > 0) {
+      description = textLines[0].replace(/[\[\]*`_]/g, '').trim();
+      if (description.length > 155) {
+        description = description.substring(0, 155) + '...';
+      }
+    }
+
+    return { htmlContent, title, description, articleId };
   } catch (error) {
     if (error.code === 'ENOENT') {
       // File not found
@@ -131,8 +157,8 @@ export async function loader({ params }) {
 export function ErrorBoundary() {
     const error = useRouteError(); // Catches errors thrown from the loader
 
-    // Check if it's a Response object to get status and statusText
-    if (error instanceof Response) {
+    // Check if it's a RouteErrorResponse to get status and statusText
+    if (isRouteErrorResponse(error)) {
         return (
             <Container size="md" py="xl">
                 <Alert icon={<AlertCircle size="1rem" />} title="Erreur" color="red" variant="light">

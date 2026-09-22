@@ -12,6 +12,13 @@ import { MarketingLayout } from '../components/MarketingLayout';
 import sharedClasses from '../styles/shared.module.css';
 import classes from './how-it-works.module.css';
 
+export const meta = () => {
+  return [
+    { title: "How it Works | Frugäast AI Coding Assistant" },
+    { name: "description", content: "Learn how Frugäast uses surgical edits, fuzzy search, and repomaps to give you perfect AI-assisted code generation without the agentic bloat." }
+  ];
+};
+
 export default function HowItWorks() {
   return (
     <MarketingLayout>

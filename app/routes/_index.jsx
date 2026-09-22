@@ -11,6 +11,13 @@ import sharedClasses from '../styles/shared.module.css';
 import classes from './_index.module.css';
 import copy from '../data/index_copy.json';
 
+export const meta = () => {
+  return [
+    { title: "Frugäast | Minimalist AI Coding Assistant" },
+    { name: "description", content: "The minimalist, non-agentic coding assistant that gives you complete control over your LLM prompts. Mac, Windows & Linux." }
+  ];
+};
+
 export default function Index() {
   return (
     <MarketingLayout>

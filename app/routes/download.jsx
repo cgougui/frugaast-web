@@ -11,6 +11,13 @@ import {
 } from "lucide-react";
 import { MarketingLayout } from '../components/MarketingLayout';
 
+export const meta = () => {
+  return [
+    { title: "Download Frugäast | AI Coding Assistant" },
+    { name: "description", content: "Download Frugäast for Windows, macOS, and Linux. Start shipping clean code faster with complete context control." }
+  ];
+};
+
 export default function Download() {
   const GITHUB_REPO = "https://github.com/Frugaast/frugaast";
   

@@ -7,6 +7,7 @@ import {
   ScrollRestoration,
   useLoaderData,
   useLocation, // Already imported
+  useRouteError,
 } from "react-router";
 import { useEffect } from 'react'; // Import useEffect
 import { MantineProvider } from '@mantine/core'; // Removed createTheme as it's unused here
@@ -25,6 +26,16 @@ const gaMeasurementId = import.meta.env.VITE_GA_MEASUREMENT_ID;
 // --- Microsoft Clarity Configuration ---
 const clarityProjectId = import.meta.env.VITE_CLARITY_PROJECT_ID;
 // ------------------------------------
+
+export const meta = () => [
+  { title: "Frugäast | Minimalist AI Coding Assistant" },
+  { name: "description", content: "Surgical edits. Zero bloat. Complete control. The desktop AI coding assistant for senior developers." },
+  { property: "og:type", content: "website" },
+  { property: "og:url", content: "https://frugaast.dev" },
+  { property: "og:title", content: "Frugäast | Minimalist AI Coding Assistant" },
+  { property: "og:description", content: "Surgical edits. Zero bloat. Complete control. The desktop AI coding assistant for senior developers." },
+  { name: "twitter:card", content: "summary_large_image" },
+];
 
 export const links = () => [
   { rel: "stylesheet", href: stylesheet },
@@ -74,10 +85,11 @@ export function Layout({ children }) {
   // -----------------------------------------
 
   return (
-    <html lang="fr">
+    <html lang="en">
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="canonical" href={`https://frugaast.dev${location.pathname === '/' ? '' : location.pathname}`} />
         <Meta />
         <Links />
         {/* --- Google Analytics Script --- */}
@@ -137,7 +149,8 @@ export default function App() {
   );
 }
 
-export function ErrorBoundary({ error }) {
+export function ErrorBoundary() {
+  const error = useRouteError();
   let message = "Oops!";
   let details = "An unexpected error occurred.";
   let stack;
