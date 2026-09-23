@@ -79,6 +79,14 @@ renderer.strong = function(token) {
 };
 // --- End Custom Renderer ---
 
+// Better SEO: Implement HTTP Caching Headers
+export function headers() {
+  return {
+    // Caches in the browser for 1 hour, and in a CDN/Proxy for 24 hours
+    "Cache-Control": "public, max-age=3600, s-maxage=86400",
+  };
+}
+
 export function meta({ data }) {
   if (!data || !data.title) {
     return [

@@ -1,15 +1,52 @@
+import fs from 'fs/promises';
+import path from 'path';
+import siteMetadata from '@/data/siteMetadata.json'; // Utilizing your Vite alias
+
 export async function loader({ request }) {
-  const baseUrl = "https://frugaast.dev"; // Change this
+  const baseUrl = "https://frugaast.dev";
 
-  // 1. Define your static routes
-  const staticRoutes = [
-    "", "/how-it-works", "/pricing", "/download", "/blog"
-  ];
+  // 1. Extract static routes dynamically from siteMetadata
+  const routeSet = new Set();
+  
+  // Always include the homepage (using an empty string to avoid trailing slash on the root domain)
+  routeSet.add("");
 
-  // 2. Fetch your dynamic routes (e.g., from your Python API or database)
-  // Example: const articles = await fetch('http://frugaast-api:4242/articles').then(res => res.json());
-  // Mocking it for this example:
-  const articles = [{ slug: "how-to-use-ai" }, { slug: "react-router-v7-seo" }];
+  // Helper function to safely add internal links
+  const addLink = (url) => {
+    // Only add internal paths (starts with '/')
+    if (url && url.startsWith('/')) {
+      // Normalize "/" to "" for the homepage to match our formatting
+      routeSet.add(url === '/' ? "" : url);
+    }
+  };
+
+  // Grab links from Header
+  if (siteMetadata.headerLinks) {
+    siteMetadata.headerLinks.forEach(item => addLink(item.link));
+  }
+
+  // Grab links from Footer
+  if (siteMetadata.footerLinks) {
+    siteMetadata.footerLinks.forEach(group => {
+      if (group.links) {
+        group.links.forEach(item => addLink(item.link));
+      }
+    });
+  }
+
+  // Convert the Set back to an Array
+  const staticRoutes = Array.from(routeSet);
+
+  // 2. Fetch your dynamic routes dynamically from articles.json
+  let articles = [];
+  try {
+    const articlesPath = path.resolve('/blog/articles.json');
+    const fileContent = await fs.readFile(articlesPath, 'utf-8');
+    const data = JSON.parse(fileContent);
+    articles = data.articles || [];
+  } catch (error) {
+    console.error("Erreur lors de la lecture des articles pour le sitemap:", error);
+  }
 
   // 3. Construct the XML
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
@@ -17,13 +54,13 @@ export async function loader({ request }) {
       ${staticRoutes.map((route) => `
         <url>
           <loc>${baseUrl}${route}</loc>
-          <changefreq>weekly</changefreq>
-          <priority>${route === "" ? "1.0" : "0.8"}</priority>
+          <changefreq>${route === "" || route === "/blog" ? "weekly" : "monthly"}</changefreq>
+          <priority>${route === "" ? "1.0" : route === "/blog" ? "0.9" : "0.8"}</priority>
         </url>
       `).join("")}
       ${articles.map((article) => `
         <url>
-          <loc>${baseUrl}/blog/${article.slug}</loc>
+          <loc>${baseUrl}/blog/${article.id}</loc>
           <changefreq>monthly</changefreq>
           <priority>0.7</priority>
         </url>
@@ -35,7 +72,7 @@ export async function loader({ request }) {
   return new Response(sitemap.trim(), {
     headers: {
       "Content-Type": "application/xml",
-      "Content-Length": String(Buffer.byteLength(sitemap)),
+      "Cache-Control": "public, max-age=3600, s-maxage=86400",
     },
   });
 }

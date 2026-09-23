@@ -122,10 +122,10 @@ export default function Index() {
       {/* WHY FRUGAAST TITLE */}
       <section className={classes.section}>
         <Container size="lg">
-            <Title order={4} ta="center" mb="xl" className={classes.sectionSubtitle}>
+            <Title order={3} ta="center" mb="xl" className={classes.sectionSubtitle}>
               {copy.different.subtitle}
             </Title>
-          <Title order={1} ta="center" className={classes.heroTitle}>
+          <Title order={2} ta="center" className={classes.heroTitle}>
             {copy.different.title1} <span className={classes.textGradient}>{copy.different.title2}</span>
           </Title>
         </Container>

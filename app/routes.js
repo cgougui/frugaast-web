@@ -26,9 +26,6 @@ export default [
   // Minor pages
   route("pro", "routes/minor/pro.jsx"),
   route("roadmap", "routes/minor/roadmap.jsx"),
-  route("affiliates", "routes/minor/affiliates.jsx"),
-  route("adb-setup", "routes/minor/adb-setup.jsx"),
-  route("safety-tips", "routes/minor/safety-tips.jsx"),
   route("faq", "routes/minor/faq.jsx"),
   route("vs-meta-ads", "routes/minor/vs-meta-ads.jsx"),
   route("vs-cloud-bots", "routes/minor/vs-cloud-bots.jsx"),

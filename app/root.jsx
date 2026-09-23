@@ -49,6 +49,10 @@ export function Layout({ children }) {
   const location = useLocation(); // Get location object
   const isAdminRoute = location.pathname.startsWith('/admin'); // Check if it's an admin route
 
+  // Ensure canonical URL is absolute, strips query params (via pathname), and strips trailing slashes
+  const canonicalPath = location.pathname.replace(/\/+$/, '');
+  const canonicalUrl = `https://frugaast.dev${canonicalPath}`;
+
   useEffect(() => {
     if (mauticSourceTag && !document.cookie.includes('mautic_source_tag=')) {
       const d = new Date();
@@ -90,7 +94,8 @@ export function Layout({ children }) {
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <script defer src="https://cloud.umami.is/script.js" data-website-id="5405206b-72d5-48d1-ab84-ac9e7c33b1e6"></script>
-        <link rel="canonical" href={`https://frugaast.dev${location.pathname === '/' ? '' : location.pathname}`} />
+        
+        <link rel="canonical" href={canonicalUrl} />
         <Meta />
         <Links />
         {/* --- Google Analytics Script --- */}
