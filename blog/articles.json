@@ -1,16 +1,16 @@
 {
   "articles": [
     {
-      "id": "why-your-200-mo-ai-coding-subscription-is-a-mathematical-scam",
-      "title": "Why Your $200/mo AI Coding Subscription is a Mathematical Scam: Developer-Centric Guide",
-      "subtitle": "Data from frustrated developers shows how AI SaaS subscriptions use hidden rate limits and silent model downgrades to cap your productivity.",
+      "id": "the-api-math-behind-ai-coding-subscriptions-and-why-agentic-ides-drain-your-quota",
+      "title": "The API Math Behind AI Coding Subscriptions (And Why Agentic IDEs Drain Your Quota)",
+      "subtitle": "An engineering look at how AI SaaS tools use sliding windows and dynamic model routing to cap productivity—and why I went back to agentless, BYOK development.",
       "date": "20260921",
       "image": "https://images.unsplash.com/vector-1788102313918-220a9c812557?q=80&w=2360&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
     },
     {
-      "id": "stop-merging-ai-slop",
-      "title": "Stop Merging AI Slop: Ship Faster Without the Technical Debt",
-      "subtitle": "Autonomous agents are quietly filling codebases with unmaintainable garbage. Here is why experienced engineers are putting their hands back on the steering wheel.",
+      "id": "the-vibecoding-hangover-why-agents-fill-codebases-with-slop-and-turn-you-into-a-middle-manager",
+      "title": "The Vibecoding Hangover: Why Agents Fill Codebases with Slop (And Turn You Into a Middle-Manager)",
+      "subtitle": "You are either shipping rigged tests, or you are spending 80% of your day writing \"task.md\" files for sub-agents. Here is why experienced engineers are abandoning the autonomous hype.",
       "date": "20260922",
       "image": "https://plus.unsplash.com/premium_vector-1682269310298-9bc35b3228d0?q=80&w=1310&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
     }
