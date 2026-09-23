@@ -1,4 +1,4 @@
-import { Container, Paper, Title, Text, Anchor, Alert } from '@mantine/core';
+import { Container, Paper, Title, Text, Anchor, Alert, Box, Button, Image } from '@mantine/core';
 import { useLoaderData, useParams, Link, useRouteError, isRouteErrorResponse } from 'react-router';
 import fs from 'fs/promises';
 import path from 'path';
@@ -104,9 +104,11 @@ export function meta({ data }) {
     { property: "og:url", content: articleUrl },
     { property: "og:title", content: data.title },
     { property: "og:description", content: data.description },
+    ...(data.image ? [{ property: "og:image", content: data.image }] : []),
     { name: "twitter:card", content: "summary_large_image" },
     { name: "twitter:title", content: data.title },
-    { name: "twitter:description", content: data.description }
+    { name: "twitter:description", content: data.description },
+    ...(data.image ? [{ name: "twitter:image", content: data.image }] : [])
   ];
 }
 
@@ -119,8 +121,18 @@ export async function loader({ params }) {
   }
 
   const articlePath = path.resolve(`/blog/published/${articleId}.md`); // Absolute path inside the container
+  const articlesJsonPath = path.resolve('/blog/articles.json');
 
   try {
+    // Load metadata from articles.json
+    const articlesContent = await fs.readFile(articlesJsonPath, 'utf-8');
+    const articlesData = JSON.parse(articlesContent);
+    const articleMeta = articlesData.articles.find(a => a.id === articleId);
+
+    if (!articleMeta) {
+      throw new Response("Article non trouvé", { status: 404 });
+    }
+
     let markdownContent = await fs.readFile(articlePath, 'utf-8');
 
     // Strip frontmatter from the content before parsing
@@ -134,21 +146,11 @@ export async function loader({ params }) {
     // Use the custom renderer when parsing
     const htmlContent = await marked.parse(markdownContent, { renderer });
 
-    // Simple title extraction (assumes first H1 is the title)
-    const titleMatch = markdownContent.match(/^#\s+(.*)/m);
-    const title = titleMatch ? titleMatch[1] : 'Article'; // Default title
+    const title = articleMeta.title;
+    const description = articleMeta.subtitle;
+    const image = articleMeta.image;
 
-    // Extract a brief description from the first normal text paragraph
-    const textLines = markdownContent.split('\n').filter(line => line.trim().length > 0 && !line.startsWith('#') && !line.startsWith('<') && !line.startsWith('>'));
-    let description = `Read ${title} on the Frugäast blog.`;
-    if (textLines.length > 0) {
-      description = textLines[0].replace(/[\[\]*`_]/g, '').trim();
-      if (description.length > 155) {
-        description = description.substring(0, 155) + '...';
-      }
-    }
-
-    return { htmlContent, title, description, articleId };
+    return { htmlContent, title, description, image, articleId };
   } catch (error) {
     if (error.code === 'ENOENT') {
       // File not found
@@ -195,26 +197,51 @@ export function ErrorBoundary() {
 
 
 export default function ArticlePage() {
-  const { htmlContent, title, articleId } = useLoaderData();
+  const { htmlContent, title, description, image, articleId } = useLoaderData();
 
   return (
     <Container size="md" py={{ base: 'md', sm: 'xl' }} className={classes.pageContainer}>
-       <Text component={Link} to="/blog" mb="lg" display="inline-block" className={classes.backLink}>
-         &larr; Back to Blog
-       </Text>
       <Paper shadow="sm" radius="md" className={classes.articleContainer}>
-        {/* Title can be rendered here or rely on the H1 from Markdown */}
-        {/* <Title order={1} mb="xl">{title}</Title> */}
+        
+        <Title order={1} mb="sm" ta="center">{title}</Title>
+        <Text size="lg" c="dimmed" mb="xl" ta="center">
+          {description}
+        </Text>
+
+        {image && (
+          <Image
+            src={image}
+            alt={title}
+            radius="md"
+            mb="xl"
+          />
+        )}
+
         <div
           className={classes.markdownContent} // Apply styles to the rendered HTML
           dangerouslySetInnerHTML={{ __html: htmlContent }}
         />
+
+        {/* Frugaast CTA */}
+        <Box mt={50} p="xl" bg="gray.0" style={{ borderRadius: 'var(--mantine-radius-md)', border: '1px solid var(--mantine-color-gray-3)' }}>
+          <Title order={3} size="h4" mb="sm" c="gray.9">
+            The AI assistant for developers who want to own their codebase.
+          </Title>
+          <Text c="gray.7" mb="lg" lh={1.6}>
+            Frugäast is an agentless coding assistant for developers who want to keep their hands on the steering wheel. Get the surgical file selection of a native GUI, zero background polling, and direct Git commits — all without the autonomous AI slop. 
+          </Text>
+          <Button 
+            component="a" 
+            href="/" 
+            variant="filled" 
+            color="blue.7" 
+            size="md" 
+            radius="md"
+          >
+            Try Frugäast (free) &rarr;
+          </Button>
+        </Box>
       </Paper>
-       <div className={classes.footerNav}>
-         <Text component={Link} to="/blog" display="inline-block" className={classes.backLink}>
-           &larr; Back to Blog
-         </Text>
-       </div>
     </Container>
   );
 }

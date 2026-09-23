@@ -1,4 +1,3 @@
-# Stop Merging AI Slop: Ship Faster Without the Technical Debt
 "Vibe coding" is a great party trick, but autonomous agents are quietly filling your codebase with unmaintainable, over-engineered garbage. Here is why experienced engineers are abandoning the autonomous hype to put their hands back on the steering wheel.
 
 ---

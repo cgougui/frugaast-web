@@ -118,14 +118,9 @@ export default function Blog() {
                       {article.title}
                     </Title>
                     <Text size="sm" c="dimmed" lineClamp={3} mt="sm">
-                      {article.description.replace(/^!\[.*\]\(.*\)\s*\*Photo par .*?\*\s*/, '')}
+                      {article.subtitle}
                     </Text>
                   </div>
-                  <Group mt="md">
-                    <Text c="blue" fw={500} size="sm">
-                      Read &rarr;
-                    </Text>
-                  </Group>
                 </Flex>
               </Card>
             </Link>

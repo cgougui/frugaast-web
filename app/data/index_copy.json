@@ -1,8 +1,9 @@
 {
   "hero": {
-    "title1": "AI coding.",
-    "title2": "Without the AI takeover.",
-    "subtitle": "Frugäast is a non-agentic coding assistant for developers who want the LLM to change exactly what they asked for — and nothing else.",
+    "title1": "AI coding",
+    "title2": "for control freaks.",
+    "subtitle": "You hate giving up control to an agentic harness ? So do we ! \nFrugäast is a minimalist 1-pass assistant that let's you keep total control.",
+    "subtitle_alt": "Frugäast is a non-agentic coding assistant for developers who want the LLM to change exactly what they asked for — and nothing else.",
     "checklist": [
       "Total context control",
       "BYOK (Base API costs)",
