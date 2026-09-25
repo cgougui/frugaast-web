@@ -71,6 +71,13 @@
     margin-bottom: var(--mantine-spacing-lg); /* Slightly more space after paragraphs */
 }
 
+/* Bold text - Use heavy weight and dark text to prevent confusion with links */
+.markdownContent strong,
+.markdownContent b {
+    font-weight: 700;
+    color: var(--mantine-color-black);
+}
+
 /* Links - Ensure text-like appearance */
 .markdownContent a {
     color: var(--mantine-color-blue-7);
@@ -226,12 +233,6 @@
     border: 0;
     border-top: 1px solid var(--mantine-color-gray-2); /* Lighter rule */
     margin: var(--mantine-spacing-xl) 0;
-}
-
-/* Style for bold text */
-.boldText {
-    color: var(--mantine-color-blue-7);
-    font-weight: 700; /* Ensure it's bold */
 }
 
 /* CTA Button styles */

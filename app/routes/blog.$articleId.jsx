@@ -70,13 +70,6 @@ renderer.paragraph = function(token) {
   // Otherwise, return a standard paragraph.
   return `<p>${text}</p>`;
 };
-
-renderer.strong = function(token) {
-  // `this.parser.parseInline` is needed to render the content of the strong tag
-  const text = this.parser.parseInline(token.tokens);
-  // Use a specific class for styling bold text
-  return `<strong class="${classes.boldText}">${text}</strong>`;
-};
 // --- End Custom Renderer ---
 
 // Better SEO: Implement HTTP Caching Headers
@@ -131,6 +124,16 @@ export async function loader({ params }) {
 
     if (!articleMeta) {
       throw new Response("Article non trouvé", { status: 404 });
+    }
+
+    // Set default image if not specified
+    if (!articleMeta.image) {
+      const id = articleId;
+      // Check for .png first, then .jpg
+      const pngPath = `/images/blog/${id}.png`;
+      const jpgPath = `/images/blog/${id}.jpg`;
+      // For now, we'll use .png as the default extension
+      articleMeta.image = pngPath;
     }
 
     let markdownContent = await fs.readFile(articlePath, 'utf-8');

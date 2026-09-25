@@ -40,7 +40,22 @@ export async function loader() {
     const data = JSON.parse(fileContent);
     // Sort articles by date descending (most recent first)
     const sortedArticles = data.articles.sort((a, b) => parseInt(b.date, 10) - parseInt(a.date, 10));
-    return { articles: sortedArticles };
+    
+    // Add default image paths for articles that don't have an image
+    const articlesWithImages = sortedArticles.map(article => {
+      if (!article.image) {
+        const id = article.id;
+        // Check for .png first, then .jpg
+        const pngPath = `/images/blog/${id}.png`;
+        const jpgPath = `/images/blog/${id}.jpg`;
+        // For now, we'll use .png as the default extension
+        // In production, you might want to check if the file exists
+        article.image = pngPath;
+      }
+      return article;
+    });
+    
+    return { articles: articlesWithImages };
   } catch (error) {
     console.error("Erreur lors de la lecture ou du parsing du fichier d'articles:", error);
     // Return empty array or throw an error depending on desired behavior
