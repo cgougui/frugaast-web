@@ -5,5 +5,7 @@ build
 .next
 out
 dist
-.env.local
 .git
+.env*
+.env.local
+docker
