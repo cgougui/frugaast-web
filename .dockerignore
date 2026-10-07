@@ -8,4 +8,6 @@ dist
 .git
 .env*
 .env.local
-docker
+docker/*
+# Required by docker/dockerfile-python during the API image build.
+!docker/requirements.txt
