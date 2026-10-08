@@ -1,7 +1,6 @@
 import { Container, Title, Text, Card, Group, SimpleGrid, useMantineTheme, rem, Image, Flex } from '@mantine/core';
 import { Link, useLoaderData } from 'react-router-dom';
-import fs from 'fs/promises'; // Use promises API for async/await
-import path from 'path';
+import { loadAllArticles } from '../blog.server';
 import classes from './blog.module.css'; // Assuming you might want custom styles
 
 export function meta() {
@@ -34,12 +33,20 @@ const formatDate = (dateString) => {
 
 
 export async function loader() {
-  const articlesPath = path.resolve('/blog/articles.json'); // Absolute path inside the container
   try {
-    const fileContent = await fs.readFile(articlesPath, 'utf-8');
-    const data = JSON.parse(fileContent);
+    const articles = await loadAllArticles();
+
+    const today = new Date();
+    const todayInt = parseInt(
+      `${today.getFullYear()}${String(today.getMonth() + 1).padStart(2, '0')}${String(today.getDate()).padStart(2, '0')}`,
+      10
+    );
+
+    // Filter to only include articles with a date <= today
+    const filteredArticles = articles.filter(article => parseInt(article.date, 10) <= todayInt);
+
     // Sort articles by date descending (most recent first)
-    const sortedArticles = data.articles.sort((a, b) => parseInt(b.date, 10) - parseInt(a.date, 10));
+    const sortedArticles = filteredArticles.sort((a, b) => parseInt(b.date, 10) - parseInt(a.date, 10));
     
     // Add default image paths for articles that don't have an image
     const articlesWithImages = sortedArticles.map(article => {

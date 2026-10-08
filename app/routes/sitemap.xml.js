@@ -1,5 +1,4 @@
-import fs from 'fs/promises';
-import path from 'path';
+import { loadAllArticles } from '@/blog.server';
 import siteMetadata from '@/data/siteMetadata.json'; // Utilizing your Vite alias
 
 export async function loader({ request }) {
@@ -37,13 +36,10 @@ export async function loader({ request }) {
   // Convert the Set back to an Array
   const staticRoutes = Array.from(routeSet);
 
-  // 2. Fetch your dynamic routes dynamically from articles.json
+  // 2. Fetch your dynamic routes dynamically from each source's articles.json
   let articles = [];
   try {
-    const articlesPath = path.resolve('/blog/articles.json');
-    const fileContent = await fs.readFile(articlesPath, 'utf-8');
-    const data = JSON.parse(fileContent);
-    articles = data.articles || [];
+    articles = await loadAllArticles();
   } catch (error) {
     console.error("Erreur lors de la lecture des articles pour le sitemap:", error);
   }

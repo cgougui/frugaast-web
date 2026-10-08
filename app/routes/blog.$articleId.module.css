@@ -1,20 +1,55 @@
 /* Page container styling */
 .pageContainer {
-    max-width: 1000px; /* Optimal line-length for reading */
+    max-width: 800px; /* Tighter optimal line-length for reading */
+    margin: 0 auto;
 }
 
 /* Styles for the container holding the article */
 .articleContainer {
-    background-color: var(--mantine-color-body);
-    padding: calc(var(--mantine-spacing-xl) * 2);
-    border: 1px solid var(--mantine-color-gray-2);
+    background-color: var(--mantine-color-white);
+    padding: clamp(2rem, 5vw, 4rem);
+    border: none;
+    border-radius: var(--mantine-radius-xl);
+    box-shadow: 0 10px 40px -10px rgba(0,0,0,0.08); /* Premium soft shadow */
+}
+
+.mainTitle {
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    color: var(--mantine-color-black);
+}
+
+.subtitle {
+    font-size: clamp(1.1rem, 3vw, 1.35rem);
+    line-height: 1.5;
+    max-width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.heroImageContainer {
+    margin: 2rem -2rem; /* Bleed out slightly on mobile/tablet */
+}
+
+@media (min-width: 768px) {
+    .heroImageContainer {
+        margin: 3rem 0;
+    }
+}
+
+.heroImage {
+    width: 100%;
+    border-radius: var(--mantine-radius-lg);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
 }
 
 /* Base styles for the rendered Markdown content */
 .markdownContent {
-    line-height: 1.75; 
-    font-size: 1.125rem; /* 18px for excellent readability */
-    color: var(--mantine-color-gray-9);
+    line-height: 1.8; 
+    font-size: 1.15rem; /* ~18.4px for excellent readability */
+    color: var(--mantine-color-gray-8);
     font-family: var(--mantine-font-family);
 }
 
@@ -25,38 +60,35 @@
 .markdownContent h4,
 .markdownContent h5,
 .markdownContent h6 {
-    margin-top: calc(var(--mantine-spacing-xl) * 1.5); /* More space above headings */
-    margin-bottom: var(--mantine-spacing-md);
-    font-weight: 700; /* Bolder headings */
-    line-height: 1.4;
-    color: var(--mantine-color-black); /* Or a dark gray from theme */
+    margin-top: 2em; /* Proportional space above headings */
+    margin-bottom: 0.75em;
+    font-weight: 700; 
+    line-height: 1.3;
+    color: var(--mantine-color-black);
 }
 
 .markdownContent h1 {
-    font-size: clamp(2rem, 5vw, 3rem); /* Responsive fluid typography */
-    color: var(--mantine-color-black);
+    font-size: clamp(2rem, 5vw, 2.75rem);
     margin-top: 0; 
-    margin-bottom: calc(var(--mantine-spacing-xl) * 1.5);
     font-weight: 900; 
     line-height: 1.15;
     letter-spacing: -0.02em;
 }
 
 .markdownContent h2 {
-    font-size: clamp(1.5rem, 3vw, 2rem);
-    color: var(--mantine-color-black);
+    font-size: clamp(1.6rem, 3vw, 2rem);
     font-weight: 800;
-    margin-top: calc(var(--mantine-spacing-xl) * 2.5);
-    margin-bottom: var(--mantine-spacing-md);
-    line-height: 1.3;
+    margin-top: 2.2em;
+    padding-bottom: 0.3em;
+    border-bottom: 1px solid var(--mantine-color-gray-2);
     letter-spacing: -0.01em;
 }
 
 .markdownContent h3 {
-    font-size: clamp(1.25rem, 2.5vw, 1.5rem);
-    color: var(--mantine-color-gray-9);
+    font-size: clamp(1.3rem, 2.5vw, 1.5rem);
+    color: var(--mantine-color-black);
     font-weight: 700;
-    margin-top: calc(var(--mantine-spacing-xl) * 1.5);
+    margin-top: 1.8em;
 }
 
 .markdownContent h4 {
@@ -68,171 +100,162 @@
 /* Paragraphs - Ensure consistent bottom margin */
 .markdownContent p {
     margin-top: 0;
-    margin-bottom: var(--mantine-spacing-lg); /* Slightly more space after paragraphs */
+    margin-bottom: 1.5em; /* Proportional spacing */
 }
 
 /* Bold text - Use heavy weight and dark text to prevent confusion with links */
 .markdownContent strong,
 .markdownContent b {
     font-weight: 700;
-    color: var(--mantine-color-black);
+    color: var(--mantine-color-gray-9);
 }
 
 /* Links - Ensure text-like appearance */
 .markdownContent a {
     color: var(--mantine-color-blue-7);
-    text-decoration: none; /* Remove underline by default */
+    text-decoration: underline;
+    text-decoration-color: var(--mantine-color-blue-3);
+    text-underline-offset: 4px;
+    text-decoration-thickness: 2px;
     font-weight: 500;
-    background: none; /* Ensure no background */
-    border: none; /* Ensure no border */
-    padding: 0; /* Ensure no padding */
-    cursor: pointer;
-    display: inline; /* Ensure inline display */
-    background-image: linear-gradient(var(--mantine-color-blue-7), var(--mantine-color-blue-7));
-    background-position: 0% 100%;
-    background-repeat: no-repeat;
-    background-size: 0% 2px;
-    transition: background-size .3s;
+    transition: all 0.2s ease;
 }
 
 .markdownContent a:hover {
-    color: var(--mantine-color-blue-8);
-    background-size: 100% 2px;
+    color: var(--mantine-color-blue-9);
+    text-decoration-color: var(--mantine-color-blue-6);
+    background-color: var(--mantine-color-blue-0);
+    border-radius: 2px;
 }
 
 /* Lists - Improved spacing */
 .markdownContent ul,
 .markdownContent ol {
-    margin-top: var(--mantine-spacing-md);
-    margin-bottom: var(--mantine-spacing-lg);
-    padding-left: var(--mantine-spacing-xl);
+    margin-top: 1em;
+    margin-bottom: 1.5em;
+    padding-left: 1.5em;
 }
 
 .markdownContent li {
-    margin-bottom: var(--mantine-spacing-sm); /* Space between list items */
+    margin-bottom: 0.5em; 
+    line-height: 1.7;
 }
 
 .markdownContent li > p {
-    margin-bottom: var(--mantine-spacing-sm); /* Adjust paragraph margin within list items */
+    margin-bottom: 0.5em;
 }
 
-/* Blockquotes - Enhanced visual distinction */
+/* Blockquotes - Elegant editorial style */
 .markdownContent blockquote {
-    margin: calc(var(--mantine-spacing-xl) * 1.5) 0;
-    padding: var(--mantine-spacing-xl);
-    border-left: 4px solid var(--mantine-color-blue-6);
+    margin: 2.5em 0;
+    padding: 1.5em 2em;
+    border-left: 4px solid var(--mantine-color-black);
     background-color: var(--mantine-color-gray-0);
-    color: var(--mantine-color-gray-7);
+    color: var(--mantine-color-gray-9);
     font-style: italic;
-    border-radius: 0 var(--mantine-radius-md) var(--mantine-radius-md) 0;
+    border-radius: 0 var(--mantine-radius-lg) var(--mantine-radius-lg) 0;
 }
 
 .markdownContent blockquote p {
     margin-bottom: 0;
-    font-size: 1.25rem; /* Editorial style pull-quotes */
-    line-height: 1.6;
+    font-size: 1.25rem; 
+    line-height: 1.7;
 }
 
 /* Tables - Responsive and clean */
 .markdownContent table {
     width: 100%;
     border-collapse: collapse;
-    margin: calc(var(--mantine-spacing-xl) * 1.5) 0;
-    font-size: var(--mantine-font-size-md);
-    display: block; /* Enables horizontal scroll on small screens */
+    margin: 2.5em 0;
+    font-size: 1rem;
+    display: block; 
     overflow-x: auto;
     white-space: normal;
+    border-radius: var(--mantine-radius-md);
+    box-shadow: 0 0 0 1px var(--mantine-color-gray-3);
 }
 
 .markdownContent th,
 .markdownContent td {
-    padding: var(--mantine-spacing-md);
-    border: 1px solid var(--mantine-color-gray-3);
+    padding: 1rem;
+    border-bottom: 1px solid var(--mantine-color-gray-2);
     text-align: left;
 }
 
 .markdownContent th {
-    background-color: var(--mantine-color-gray-1);
+    background-color: var(--mantine-color-gray-0);
     font-weight: 700;
-    color: var(--mantine-color-gray-9);
+    color: var(--mantine-color-black);
+    border-bottom: 2px solid var(--mantine-color-gray-3);
+}
+
+.markdownContent tr:last-child td {
+    border-bottom: none;
 }
 
 .markdownContent tr:nth-of-type(even) {
     background-color: var(--mantine-color-gray-0);
 }
 
-/* Code blocks - Improved styling using theme colors */
+/* Code blocks - Sleek dark theme */
 .markdownContent pre {
-    background-color: var(--mantine-color-dark-8); /* Darker background */
-    color: var(--mantine-color-gray-2); /* Lighter text */
-    padding: var(--mantine-spacing-lg); /* More padding */
-    border-radius: var(--mantine-radius-md); /* Slightly larger radius */
+    background-color: #1a1b1e; /* Very dark modern background */
+    color: #e4e5e7;
+    padding: 1.5em;
+    border-radius: var(--mantine-radius-lg);
     overflow-x: auto;
-    margin-top: var(--mantine-spacing-md);
-    margin-bottom: var(--mantine-spacing-lg);
+    margin: 2em 0;
     font-family: var(--mantine-font-family-monospace);
-    font-size: var(--mantine-font-size-sm);
-    line-height: 1.6; /* Adjust line height for code */
+    font-size: 0.95rem;
+    line-height: 1.6;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.1);
 }
 
 /* Inline code - Subtle background */
 .markdownContent code {
     background-color: var(--mantine-color-gray-1);
-    color: var(--mantine-color-red-8); /* Use a distinct color for inline code */
-    padding: 0.2em 0.5em; /* Adjust padding */
+    color: var(--mantine-color-dark-8); /* Dark text for better contrast */
+    padding: 0.2em 0.4em;
+    border: 1px solid var(--mantine-color-gray-3);
     border-radius: var(--mantine-radius-sm);
     font-family: var(--mantine-font-family-monospace);
-    font-size: 90%;
-    /* Prevent line breaks within inline code */
+    font-size: 0.9em;
     white-space: nowrap;
 }
 
 .markdownContent pre code {
-    /* Reset styles for code inside pre blocks */
     background-color: transparent;
-    color: inherit; /* Inherit color from pre */
+    color: inherit;
     padding: 0;
+    border: none;
     border-radius: 0;
     font-size: inherit;
-    white-space: inherit; /* Allow wrapping within code blocks */
+    white-space: inherit;
 }
 
-/* Images - Added subtle shadow and centered */
+/* Images - Elegant presentation */
 .markdownContent img {
     max-width: 100%;
     height: auto;
     display: block;
-    margin: var(--mantine-spacing-xl) auto; /* Center images and add vertical space */
-    border-radius: var(--mantine-radius-md); /* Match pre radius */
-    box-shadow: var(--mantine-shadow-sm); /* Add subtle shadow */
+    margin: 3em auto;
+    border-radius: var(--mantine-radius-lg);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
 }
 
-/* Special styling for the main illustration image */
-.markdownContent h1 + p > img:first-child {
-    /* Break out of the container padding */
-    width: calc(100% + 2 * var(--mantine-spacing-xl));
-    margin-left: calc(-1 * var(--mantine-spacing-xl));
-    margin-right: calc(-1 * var(--mantine-spacing-xl));
-    margin-top: var(--mantine-spacing-lg);
-    margin-bottom: var(--mantine-spacing-xs);
-    max-width: none;
-    border-radius: var(--mantine-radius-md) var(--mantine-radius-md) 0 0; /* Match paper radius on top */
-}
-
-/* Style for the image attribution text */
-.markdownContent h1 + p em {
-    font-size: var(--mantine-font-size-sm); /* Slightly larger for readability */
-    color: var(--mantine-color-gray-6);
-    display: block;
-    text-align: center;
-    margin-bottom: var(--mantine-spacing-xl);
-}
-
-/* Horizontal Rules - Lighter and more subtle */
+/* Horizontal Rules - Elegant separator */
 .markdownContent hr {
     border: 0;
-    border-top: 1px solid var(--mantine-color-gray-2); /* Lighter rule */
-    margin: var(--mantine-spacing-xl) 0;
+    text-align: center;
+    margin: 4em 0;
+}
+
+.markdownContent hr::before {
+    content: "•••";
+    font-size: 1.5rem;
+    letter-spacing: 1em;
+    color: var(--mantine-color-gray-4);
+    padding-left: 1em; /* Offset for letter-spacing to truly center */
 }
 
 /* CTA Button styles */
@@ -277,44 +300,53 @@
     text-decoration: underline;
 }
 
-/* Style for back link */
+/* Back link */
 .backLink {
-    color: var(--mantine-color-blue-7);
+    color: var(--mantine-color-gray-6);
     text-decoration: none;
-    font-size: var(--mantine-font-size-sm);
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: color 0.2s ease;
 }
 .backLink:hover {
-    text-decoration: underline;
+    color: var(--mantine-color-black);
 }
 
-.footerNav {
-    margin-top: calc(var(--mantine-spacing-xl) * 2);
-    padding-top: var(--mantine-spacing-xl);
-    border-top: 1px solid var(--mantine-color-gray-2);
-    text-align: center;
+/* Custom CTA Box */
+.bottomCta {
+    border-radius: var(--mantine-radius-xl);
+    border: 1px solid var(--mantine-color-blue-2);
+}
+
+.ctaButtonActual {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.ctaButtonActual:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
 }
 
 /* Mobile Adjustments */
 @media (max-width: 768px) {
     .articleContainer {
-        padding: var(--mantine-spacing-lg);
-        border: none;
-        border-radius: 0;
-        box-shadow: none !important; /* Flush edge-to-edge layout on mobile */
-        margin-left: calc(-1 * var(--mantine-spacing-md));
-        margin-right: calc(-1 * var(--mantine-spacing-md));
+        padding: 1.5rem;
+        border-radius: var(--mantine-radius-md);
+        box-shadow: 0 4px 20px rgba(0,0,0,0.05); /* Keep a subtle card look */
     }
 
     .markdownContent {
-        font-size: 1.05rem; /* Optimize readability for smaller screens */
+        font-size: 1.05rem;
+        line-height: 1.65;
     }
 
-    .markdownContent table {
-        min-width: 100%; 
+    .mainTitle {
+        font-size: 2rem;
     }
-    
+
     .markdownContent blockquote {
-        padding: var(--mantine-spacing-md);
-        font-size: 1.15rem;
+        padding: 1.2em;
+        margin: 1.5em 0;
+        font-size: 1.1rem;
+        border-left-width: 3px;
     }
 }

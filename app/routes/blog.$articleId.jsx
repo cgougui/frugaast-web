@@ -1,7 +1,7 @@
 import { Container, Paper, Title, Text, Anchor, Alert, Box, Button, Image } from '@mantine/core';
 import { useLoaderData, useParams, Link, useRouteError, isRouteErrorResponse } from 'react-router';
 import fs from 'fs/promises';
-import path from 'path';
+import { loadAllArticles, articleMarkdownPath } from '../blog.server';
 import { marked } from 'marked'; // Markdown parser
 import classes from './blog.$articleId.module.css'; // CSS Modules for styling
 import { AlertCircle } from 'lucide-react'; // Use lucide-react icon
@@ -89,7 +89,9 @@ export function meta({ data }) {
   }
   
   const articleUrl = `https://frugaast.dev/blog/${data.articleId}`;
-  
+  // Social crawlers require absolute image URLs
+  const imageUrl = data.image && new URL(data.image, "https://frugaast.dev").href;
+
   return [
     { title: `${data.title} | Frugäast Blog` },
     { name: "description", content: data.description },
@@ -97,11 +99,17 @@ export function meta({ data }) {
     { property: "og:url", content: articleUrl },
     { property: "og:title", content: data.title },
     { property: "og:description", content: data.description },
-    ...(data.image ? [{ property: "og:image", content: data.image }] : []),
+    ...(imageUrl ? [
+      { property: "og:image", content: imageUrl },
+      { property: "og:image:alt", content: data.title }
+    ] : []),
     { name: "twitter:card", content: "summary_large_image" },
     { name: "twitter:title", content: data.title },
     { name: "twitter:description", content: data.description },
-    ...(data.image ? [{ name: "twitter:image", content: data.image }] : [])
+    ...(imageUrl ? [
+      { name: "twitter:image", content: imageUrl },
+      { name: "twitter:image:alt", content: data.title }
+    ] : [])
   ];
 }
 
@@ -113,14 +121,10 @@ export async function loader({ params }) {
     throw new Response("Invalid article ID", { status: 400 });
   }
 
-  const articlePath = path.resolve(`/blog/published/${articleId}.md`); // Absolute path inside the container
-  const articlesJsonPath = path.resolve('/blog/articles.json');
-
   try {
-    // Load metadata from articles.json
-    const articlesContent = await fs.readFile(articlesJsonPath, 'utf-8');
-    const articlesData = JSON.parse(articlesContent);
-    const articleMeta = articlesData.articles.find(a => a.id === articleId);
+    // Load metadata from every source's articles.json
+    const articles = await loadAllArticles();
+    const articleMeta = articles.find(a => a.id === articleId);
 
     if (!articleMeta) {
       throw new Response("Article non trouvé", { status: 404 });
@@ -136,7 +140,7 @@ export async function loader({ params }) {
       articleMeta.image = pngPath;
     }
 
-    let markdownContent = await fs.readFile(articlePath, 'utf-8');
+    let markdownContent = await fs.readFile(articleMarkdownPath(articleMeta), 'utf-8');
 
     // Strip frontmatter from the content before parsing
     if (markdownContent.startsWith('---')) {
@@ -204,20 +208,26 @@ export default function ArticlePage() {
 
   return (
     <Container size="md" py={{ base: 'md', sm: 'xl' }} className={classes.pageContainer}>
-      <Paper shadow="sm" radius="md" className={classes.articleContainer}>
-        
-        <Title order={1} mb="sm" ta="center">{title}</Title>
-        <Text size="lg" c="dimmed" mb="xl" ta="center">
+      <Anchor component={Link} to="/blog" className={classes.backLink} mb="lg" display="inline-block">
+        &larr; Back to Blog
+      </Anchor>
+
+      <Paper shadow="xl" radius="lg" className={classes.articleContainer}>
+            
+        <Title order={1} mb="md" ta="center" className={classes.mainTitle}>{title}</Title>
+        <Text size="xl" c="dimmed" mb="xl" ta="center" className={classes.subtitle}>
           {description}
         </Text>
 
         {image && (
-          <Image
-            src={image}
-            alt={title}
-            radius="md"
-            mb="xl"
-          />
+          <Box mb="xl" className={classes.heroImageContainer}>
+            <Image
+              src={image}
+              alt={title}
+              radius="md"
+              className={classes.heroImage}
+            />
+          </Box>
         )}
 
         <div
@@ -226,11 +236,11 @@ export default function ArticlePage() {
         />
 
         {/* Frugaast CTA */}
-        <Box mt={50} p="xl" bg="gray.0" style={{ borderRadius: 'var(--mantine-radius-md)', border: '1px solid var(--mantine-color-gray-3)' }}>
-          <Title order={3} size="h4" mb="sm" c="gray.9">
-            The AI assistant for developers who want to own their codebase.
+        <Box mt={80} p="xl" bg="blue.0" className={classes.bottomCta}>
+          <Title order={3} size="h3" mb="sm" c="blue.9">
+            Build without the bloat.
           </Title>
-          <Text c="gray.7" mb="lg" lh={1.6}>
+          <Text c="blue.8" mb="lg" lh={1.7} size="lg">
             Frugäast is an agentless coding assistant for developers who want to keep their hands on the steering wheel. Get the surgical file selection of a native GUI, zero background polling, and direct Git commits — all without the autonomous AI slop. 
           </Text>
           <Button 
@@ -238,10 +248,11 @@ export default function ArticlePage() {
             href="/" 
             variant="filled" 
             color="blue.7" 
-            size="md" 
+            size="lg" 
             radius="md"
+            className={classes.ctaButtonActual}
           >
-            Try Frugäast (free) &rarr;
+            Try Frugäast for free &rarr;
           </Button>
         </Box>
       </Paper>

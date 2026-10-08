@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Generates 1200x630 abstract covers for blog articles listed in blog/articles.json.
+// Generates 1200x630 abstract covers for blog articles listed in blog/<source>/articles.json.
 // Each cover is generative SVG art rendered with headless Chrome (so blur/glow filters look right).
 //
 // Usage:
@@ -27,7 +27,7 @@ import { execFileSync } from 'child_process';
 import { fileURLToPath } from 'url';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const articlesPath = path.join(root, 'blog', 'articles.json');
+const blogDir = path.join(root, 'blog');
 const publicDir = path.join(root, 'public');
 const W = 1200;
 const H = 630;
@@ -821,7 +821,12 @@ const args = process.argv.slice(2);
 const force = args.includes('--force');
 const onlyIds = args.filter((a) => !a.startsWith('--'));
 
-const { articles } = JSON.parse(fs.readFileSync(articlesPath, 'utf-8'));
+// Every blog/<source>/articles.json, sources in name order, articles in file order.
+const articles = fs.readdirSync(blogDir, { withFileTypes: true })
+  .filter((e) => e.isDirectory() && fs.existsSync(path.join(blogDir, e.name, 'articles.json')))
+  .map((e) => e.name)
+  .sort()
+  .flatMap((source) => JSON.parse(fs.readFileSync(path.join(blogDir, source, 'articles.json'), 'utf-8')).articles || []);
 const looks = assignLooks(articles);
 const isGeneratedCover = (file) =>
   execFileSync('identify', ['-format', '%c', file], { encoding: 'utf-8' }).includes(COVER_MARKER);
