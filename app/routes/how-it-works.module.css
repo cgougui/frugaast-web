@@ -14,6 +14,11 @@
   pointer-events: none;
 }
 
+.heroContent {
+  position: relative;
+  z-index: 1;
+}
+
 /* --- ZIG ZAG STEPS --- */
 .stepBlock {
   position: relative;
@@ -68,29 +73,75 @@
   transform: translateY(-4px);
 }
 
-/* --- VISUAL PANELS --- */
-.visualPanel {
-  border-radius: 2rem;
-  height: 340px;
+/* --- SCREENSHOTS --- */
+.screenshotFrame {
+  border-radius: 1.25rem;
+  overflow: hidden;
+  border: 1px solid var(--mantine-color-gray-3);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
+  background: white;
+}
+
+.screenshotImg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.screenshotPlaceholder {
+  width: 100%;
+  border-radius: 1.25rem;
+  border: 2px dashed var(--mantine-color-violet-3);
+  background:
+    repeating-linear-gradient(45deg, rgba(132, 94, 247, 0.04) 0 12px, transparent 12px 24px),
+    linear-gradient(135deg, var(--mantine-color-violet-0), var(--mantine-color-indigo-0));
+  color: var(--mantine-color-violet-7);
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
-  overflow: hidden;
 }
 
-.bgGradientViolet { background: linear-gradient(135deg, var(--mantine-color-violet-1), var(--mantine-color-violet-3)); }
-.bgGradientBlue { background: linear-gradient(135deg, var(--mantine-color-blue-1), var(--mantine-color-cyan-3)); }
-.bgGradientTeal { background: linear-gradient(135deg, var(--mantine-color-teal-1), var(--mantine-color-green-3)); }
-
-.floatingElement {
-  animation: float 4s ease-in-out infinite;
-  border: 1px solid rgba(255,255,255,0.8);
+.heroShot {
+  box-shadow: 0 30px 80px rgba(132, 94, 247, 0.15);
 }
 
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
+.cardShot {
+  border-radius: 0;
+  border-width: 0 0 2px 0;
+  box-shadow: none;
+}
+
+/* --- LAYOUT / EXTRA CARDS --- */
+.layoutCard {
+  background: white;
+  border: 1px solid var(--mantine-color-gray-2);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+}
+
+.extraCard {
+  background: white;
+  border: 1px solid var(--mantine-color-gray-2);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+  transition: transform 0.3s ease;
+}
+
+.extraCard:hover {
+  transform: translateY(-4px);
+}
+
+.smallIcon {
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.keysCell {
+  white-space: nowrap;
+  width: 1%;
+}
+
+.inlineLink {
+  color: var(--mantine-color-violet-6);
+  font-weight: 600;
 }
 
 @media (max-width: 992px) {
@@ -100,7 +151,6 @@
     left: 10px;
   }
   .stepBlock { padding: 40px 0; }
-  .visualPanel { height: 260px; }
 }
 
 /* --- UNDER THE HOOD: STACKED PANELS --- */
