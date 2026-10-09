@@ -6,287 +6,287 @@
       "id": "00-prompts-ask-hooks-enforce",
       "title": "Prompts ask, hooks enforce",
       "subtitle": "A compliance rule sat in an agent's context thirteen times during one task, and the agent still deleted the validation step it had written itself. An instruction file is a request. The rules that hold are the ones a script can refuse.",
-      "date": "20261008",
+      "date": "20261009",
       "image": "/images/blog/00-prompts-ask-hooks-enforce.png"
     },
     {
       "id": "01-tokenmaxxing-to-token-budgets",
       "title": "Tokenmaxxing was a job requirement until the invoice arrived",
       "subtitle": "Companies told developers to burn tokens, then metered billing showed where the tokens went. What actually drives the bill, what rationing does to engineers, and which cost cuts have evidence behind them.",
-      "date": "20261008",
+      "date": "20261018",
       "image": "/images/blog/01-tokenmaxxing-to-token-budgets.png"
     },
     {
       "id": "02-claude-code-usage-burn-silent-nerfs-and-routing",
       "title": "The three numbers Claude Code doesn't show you",
       "subtitle": "Tokens per task, thinking per call, and which model actually answered. Limits and reasoning depth changed under users without notice, so they started reading session logs. Here is what can be measured, what is only claimed, and what to do about each.",
-      "date": "20261008",
+      "date": "20261025",
       "image": "/images/blog/02-claude-code-usage-burn-silent-nerfs-and-routing.png"
     },
     {
       "id": "03-claude-code-blast-radius-deletes-worms-hidden-triggers",
       "title": "Three ways an agent runs something you never asked for",
       "subtitle": "Agents delete things by accident, get used by attackers as a persistence point, and trip vendor-side logic that bills you for it. Each failure lives at a different layer, and a sentence in an instruction file is the weakest control at all of them.",
-      "date": "20261008",
+      "date": "20261103",
       "image": "/images/blog/03-claude-code-blast-radius-deletes-worms-hidden-triggers.png"
     },
     {
       "id": "04-tool-surface-mcp-skills-direct-apis-code-intelligence",
       "title": "Most MCP servers could be a credential and a markdown file",
       "subtitle": "The \"MCP is dead\" argument hides a better question: which capabilities need a protocol, which need only an API key and a short doc, and which need a real query interface. Each choice fails in its own way.",
-      "date": "20261008",
+      "date": "20261110",
       "image": "/images/blog/04-tool-surface-mcp-skills-direct-apis-code-intelligence.png"
     },
     {
       "id": "05-where-agent-tokens-go-and-savings-claims",
       "title": "Where your coding agent's tokens actually go",
       "subtitle": "Most of the waste that survives measurement is overhead loaded before any work starts: tool schemas, skill blurbs, duplicated instruction files. The tools promising 60 to 90 percent savings mostly fail independent reruns.",
-      "date": "20261008",
+      "date": "20261117",
       "image": "/images/blog/05-where-agent-tokens-go-and-savings-claims.png"
     },
     {
       "id": "06-local-open-weight-coding-configs-vs-benchmark-claims",
       "title": "A local model verdict without a config is just a mood",
       "subtitle": "Two developers run the same open-weight coding model on their own hardware and report opposite results. The difference is usually the quant, the KV cache, the sampler, the context window and the task, and almost nobody posts those.",
-      "date": "20261008",
+      "date": "20261122",
       "image": "/images/blog/06-local-open-weight-coding-configs-vs-benchmark-claims.png"
     },
     {
       "id": "07-opencode-go-quota-math-and-cache-hit-economics",
       "title": "\"$60 of usage for $10\" is only cheap for one workload",
       "subtitle": "Flat-rate coding plans pay off for cache-heavy agent loops on the provider's favoured model, and not much else. Multipliers, cache-read pricing and the break-even math, line by line.",
-      "date": "20261008",
+      "date": "20261129",
       "image": "/images/blog/07-opencode-go-quota-math-and-cache-hit-economics.png"
     },
     {
       "id": "08-opencode-agent-config-primary-subagents-permissions",
       "title": "Agent roles are config files, and only the permissions are enforced",
       "subtitle": "Most shared multi-agent workflows are markdown files with frontmatter and a model string. My \"read-only\" reviewer edited a file because the prompt only said please. Four lines of permissions fixed it.",
-      "date": "20261008",
+      "date": "20261205",
       "image": "/images/blog/08-opencode-agent-config-primary-subagents-permissions.png"
     },
     {
       "id": "09-evaluating-models-yourself-personal-evals-vs-leaderboards",
       "title": "Ten dollars of your own evals beats the leaderboard",
       "subtitle": "Leaderboards are fine for a shortlist and bad for the final pick. The final pick belongs to a small, boring, repeatable experiment on your own repo, scored in dollars and minutes per accepted task.",
-      "date": "20261008",
+      "date": "20261214",
       "image": "/images/blog/09-evaluating-models-yourself-personal-evals-vs-leaderboards.png"
     },
     {
       "id": "10-stealth-models-free-tiers-data-for-discounts",
       "title": "Free coding models are paid for with your code",
       "subtitle": "A model that costs nothing, or less than the vendor's own API, is paid for somewhere else: your data, your identity, your continuity, or the work in progress when it disappears on a Tuesday.",
-      "date": "20261008",
+      "date": "20261220",
       "image": "/images/blog/10-stealth-models-free-tiers-data-for-discounts.png"
     },
     {
       "id": "11-same-model-different-harness-benchmarks",
       "title": "Same model, different harness, 7x the cost",
       "subtitle": "Hold the model fixed, swap only the wrapper, and the bill moves by a factor of seven. The reasons are prompt bulk, runaway loops and request shapes that break the cache, and you can measure all three on your own setup.",
-      "date": "20261008",
+      "date": "20261229",
       "image": "/images/blog/11-same-model-different-harness-benchmarks.png"
     },
     {
       "id": "12-pi-extension-design-patterns-build-dont-install",
       "title": "Build your agent extensions, don't install them",
       "subtitle": "A harness with four core tools and an extension API turns every user into a harness author. What they build falls into a handful of patterns, and the same few collisions keep coming back.",
-      "date": "20261008",
+      "date": "20270104",
       "image": "/images/blog/12-pi-extension-design-patterns-build-dont-install.png"
     },
     {
       "id": "13-pi-yolo-by-default-sandboxing-layers",
       "title": "What stops rm -rf when your agent never asks first",
       "subtitle": "A harness with no permission prompts moves safety onto whoever is at the keyboard. People stack command guards, trash shims, filesystem jails and microVMs, and each layer stops a different failure.",
-      "date": "20261008",
+      "date": "20270112",
       "image": "/images/blog/13-pi-yolo-by-default-sandboxing-layers.png"
     },
     {
       "id": "14-pi-context-budget-token-spend",
       "title": "A 1,000-token system prompt and I still hit the five-hour cap",
       "subtitle": "A lean harness doesn't mean a lean bill. Spend is decided by what gets loaded, what floods the context and what breaks the prompt cache, not by the size of the starting prompt.",
-      "date": "20261008",
+      "date": "20270121",
       "image": "/images/blog/14-pi-context-budget-token-spend.png"
     },
     {
       "id": "15-pi-small-local-models-harness-repairs",
       "title": "Your local model probably isn't broken. Your serving stack is",
       "subtitle": "Most \"the local model falls apart in the agent\" reports turn out to be chat templates, samplers or serving bugs. Fix the stack first, then wrap the model in small repair hooks instead of rewriting the prompt again.",
-      "date": "20261008",
+      "date": "20270128",
       "image": "/images/blog/15-pi-small-local-models-harness-repairs.png"
     },
     {
       "id": "16-cheap-driver-expensive-advisor-model-routing",
       "title": "A cheap model to drive, an expensive one to advise",
       "subtitle": "Run an open-weight or budget model all day and call a premium model for the few decisions that matter. The router is easy to build. Keeping it honest across context limits, flat-plan quirks and silent provider changes is the hard part.",
-      "date": "20261008",
+      "date": "20270202",
       "image": "/images/blog/16-cheap-driver-expensive-advisor-model-routing.png"
     },
     {
       "id": "17-planning-before-code-specs-plan-mode-decomposition",
       "title": "We reinvented the design doc for coding agents",
       "subtitle": "Specs, plan mode and ticket slicing are requirements engineering with a new name. Nobody serious argues against planning anymore; the fight is over how much plan is too much and where it should live.",
-      "date": "20261008",
+      "date": "20270210",
       "image": "/images/blog/17-planning-before-code-specs-plan-mode-decomposition.png"
     },
     {
       "id": "18-verification-layers-for-agent-code",
       "title": "Don't let the agent grade its own homework",
       "subtitle": "Agents write code faster than anyone can read it, and they also write the report saying the code is fine. Treat every \"done\" as a claim that needs a witness other than its author.",
-      "date": "20261008",
+      "date": "20270219",
       "image": "/images/blog/18-verification-layers-for-agent-code.png"
     },
     {
       "id": "19-choosing-and-switching-coding-tools-lock-in",
       "title": "I switched coding agents four times in a year",
       "subtitle": "The reasons developers change tools are rarely the ones in benchmark threads. A few real triggers, and the handful of files that decide whether a switch costs an afternoon or a month.",
-      "date": "20261008",
+      "date": "20270226",
       "image": "/images/blog/19-choosing-and-switching-coding-tools-lock-in.png"
     },
     {
       "id": "20-agent-state-outside-the-chat",
       "title": "A conversation is a terrible database",
       "subtitle": "Compaction loops, two agents clobbering one types file, a rejected approach proposed again two hours later. Same bug every time: the state of the run lives in a chat transcript.",
-      "date": "20261008",
+      "date": "20270306",
       "image": "/images/blog/20-agent-state-outside-the-chat.png"
     },
     {
       "id": "21-claude-code-extension-ledger-what-earns-its-complexity",
       "title": "Most Claude Code add-ons don't earn their complexity",
       "subtitle": "Hooks, skills, output styles, memory layers and subagents, audited by running cost, evidence of payoff and failure mode. Small, deterministic, local things pay off. Heavy prompt-level layers mostly produce receipts for work that never happened.",
-      "date": "20261008",
+      "date": "20270315",
       "image": "/images/blog/21-claude-code-extension-ledger-what-earns-its-complexity.png"
     },
     {
       "id": "22-parallel-agents-fan-out-fan-in",
       "title": "Fan-out is easy, fan-in is the job",
       "subtitle": "Anyone can start six agents in six terminals. The hard part is when the work comes back: who owns which file, which agent is waiting on you, and who reads the combined diff.",
-      "date": "20261008",
+      "date": "20270323",
       "image": "/images/blog/22-parallel-agents-fan-out-fan-in.png"
     },
     {
       "id": "23-unattended-claude-code-what-breaks-overnight",
       "title": "What breaks when you leave a coding agent running overnight",
       "subtitle": "Unattended runs fail in three ways: you can't reach them, they stop, or they escape their box. Most overnight failures aren't the model being wrong; they're a quota boundary, a cap that doesn't cap, or an approval prompt nobody is awake to answer.",
-      "date": "20261008",
+      "date": "20270329",
       "image": "/images/blog/23-unattended-claude-code-what-breaks-overnight.png"
     },
     {
       "id": "24-measuring-agent-drift-nerf-or-harness-change",
       "title": "Is it nerfed? Diff your own config first",
       "subtitle": "Most \"the model got dumber\" threads can't be proven either way. The few that end in a real diagnosis share one habit: they logged something, diffed something, and changed one variable at a time.",
-      "date": "20261008",
+      "date": "20270404",
       "image": "/images/blog/24-measuring-agent-drift-nerf-or-harness-change.png"
     },
     {
       "id": "25-codex-quota-measuring-the-drain",
       "title": "Your Codex subscription is a prepaid card with no balance display",
       "subtitle": "A weekly limit shown as a bare percentage can't be compared with anything. Convert it to dollars per percent from your local logs, and the mystery drain becomes a short list of settings you control.",
-      "date": "20261008",
+      "date": "20270412",
       "image": "/images/blog/25-codex-quota-measuring-the-drain.png"
     },
     {
       "id": "26-codex-and-claude-together-cross-model-review-and-task-split",
       "title": "One model writes, a different model reviews",
       "subtitle": "Developers keep pairing Claude and GPT on the same repo. The useful part isn't which one wins; it's a role split where a differently trained model reviews the work in a clean session.",
-      "date": "20261008",
+      "date": "20270418",
       "image": "/images/blog/26-codex-and-claude-together-cross-model-review-and-task-split.png"
     },
     {
       "id": "27-codex-orchestrator-polling-tax",
       "title": "Your expensive planner is burning quota asking \"are you done yet?\"",
       "subtitle": "\"Plan with the big model, implement with the cheap one\" sounds like free money. Session logs show the supervisor often spends more on checking in than the workers spend on the work.",
-      "date": "20261008",
+      "date": "20270424",
       "image": "/images/blog/27-codex-orchestrator-polling-tax.png"
     },
     {
       "id": "28-sidecar-tools-for-coding-agents-how-to-evaluate",
       "title": "Threat-model the tools you install next to your agent",
       "subtitle": "Every week brings a new open-source monitor, memory layer or index for Codex and Claude Code, usually with a self-reported benchmark and a star count. Rank them by what they can read, rewrite and send, not by what they promise.",
-      "date": "20261008",
+      "date": "20270429",
       "image": "/images/blog/28-sidecar-tools-for-coding-agents-how-to-evaluate.png"
     },
     {
       "id": "29-human-review-bottleneck-ai-prs-team-norms",
       "title": "Generating a PR takes minutes. Reviewing it still takes hours",
       "subtitle": "Review is now a queue with one slow server. The authorship, size and accountability rules that teams use to push the cost back onto whoever opened the PR.",
-      "date": "20261008",
+      "date": "20270507",
       "image": "/images/blog/29-human-review-bottleneck-ai-prs-team-norms.png"
     },
     {
       "id": "30-when-ai-adoption-is-a-metric",
       "title": "When \"use AI\" becomes a KPI",
       "subtitle": "Measure AI usage instead of results and people optimise for usage. Throughput rises on the dashboard, review and rework quietly absorb it, and the cost lands on the people who were already the bottleneck.",
-      "date": "20261008",
+      "date": "20270512",
       "image": "/images/blog/30-when-ai-adoption-is-a-metric.png"
     },
     {
       "id": "31-judgment-is-the-bottleneck-expertise-and-slowing-down",
       "title": "When code is cheap, judgment is the bottleneck",
       "subtitle": "The scarce resource is now the person who can tell what's wrong. Experienced developers agree on that, then split over how to protect the skill, and over who will train the next people who have it.",
-      "date": "20261008",
+      "date": "20270519",
       "image": "/images/blog/31-judgment-is-the-bottleneck-expertise-and-slowing-down.png"
     },
     {
       "id": "32-ai-productivity-claims-what-counts-as-evidence",
       "title": "Four questions to ask about every AI productivity claim",
       "subtitle": "\"5x\", \"2-3x\", \"99% written by the model\". The comment threads under these posts work as an informal peer review, and they raise the same four objections every time: denominator, task shape, attribution and metric.",
-      "date": "20261008",
+      "date": "20270527",
       "image": "/images/blog/32-ai-productivity-claims-what-counts-as-evidence.png"
     },
     {
       "id": "33-hosted-open-weight-quality-of-service",
       "title": "Same model name, different service",
       "subtitle": "One open-weight model can feel brilliant on one host and broken on another. The difference is usually queueing, throughput, quantization and tool-call plumbing, not the weights, and a few small measurements tell them apart.",
-      "date": "20261008",
+      "date": "20270601",
       "image": "/images/blog/33-hosted-open-weight-quality-of-service.png"
     },
     {
       "id": "34-maintainers-vs-ai-slop-contribution-policies",
       "title": "Patches are free now. Reviewer attention isn't",
       "subtitle": "Open source assumed that whoever sends a patch spent more effort than whoever reads it. Generation made that false, and maintainers are answering with disclosure rules, bans, opt-outs and closed bug bounties.",
-      "date": "20261008",
+      "date": "20270606",
       "image": "/images/blog/34-maintainers-vs-ai-slop-contribution-policies.png"
     },
     {
       "id": "35-comprehension-debt-theory-building-agents",
       "title": "Who understands your code when an agent wrote it?",
       "subtitle": "Code is cheap to produce. The shared understanding of why it looks the way it does is not. Naur called it the theory of the program, and agent-heavy teams are spending it down without noticing.",
-      "date": "20261008",
+      "date": "20270613",
       "image": "/images/blog/35-comprehension-debt-theory-building-agents.png"
     },
     {
       "id": "36-filtering-what-agents-see-search-and-output-fidelity",
       "title": "The 91% token savings nobody can verify",
       "subtitle": "Output filters, semantic search and compression proxies promise to shrink what your agent reads. The savings are real on paper. Whether the agent can still finish the task on the reduced view is a separate question that almost nobody measures.",
-      "date": "20261008",
+      "date": "20270618",
       "image": "/images/blog/36-filtering-what-agents-see-search-and-output-fidelity.png"
     },
     {
       "id": "37-what-to-practice-when-the-agent-types",
       "title": "What to practice by hand when the agent types",
       "subtitle": "Debugging, reading code and design are the skills that atrophy first. Each career stage loses something different, and each needs a different low-tech drill to keep it.",
-      "date": "20261008",
+      "date": "20270627",
       "image": "/images/blog/37-what-to-practice-when-the-agent-types.png"
     },
     {
       "id": "38-month-three-rescuing-vibe-coded-codebases",
       "title": "Month three of a vibe-coded codebase",
       "subtitle": "Vibe-coded apps break in a predictable order: structure decays first, then the same security and operations gaps show up once real users arrive. A walk through the repo in the order a rescuer would read it, and how people get out.",
-      "date": "20261008",
+      "date": "20270703",
       "image": "/images/blog/38-month-three-rescuing-vibe-coded-codebases.png"
     },
     {
       "id": "39-client-side-trust-failures-in-vibe-coded-apps",
       "title": "The browser is not a trust boundary",
       "subtitle": "Security failures in AI-built apps are rarely clever. It's one design error repeated: roles, payment status, bans and secrets live in the one place the user can edit. The usual holes, and a one-hour audit that needs only a browser.",
-      "date": "20261008",
+      "date": "20270708",
       "image": "/images/blog/39-client-side-trust-failures-in-vibe-coded-apps.png"
     },
     {
       "id": "40-vibe-coding-operating-habits",
       "title": "What vibe coders whose projects survive do differently",
       "subtitle": "Skip the argument about whether vibe coding is engineering and a small set of habits is left: plan first, slice small, checkpoint everything, and break the retry loop before it eats your Saturday.",
-      "date": "20261008",
+      "date": "20270716",
       "image": "/images/blog/40-vibe-coding-operating-habits.png"
     }
   ]

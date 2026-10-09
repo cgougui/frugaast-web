@@ -28,6 +28,13 @@
       "subtitle": "The Architectural Lens: Why handing over codebase control to multi-agent loops results in compounding entropy, and how deterministic workflows reclaim engineering sanity.",
       "date": "20260925",
       "image": "/images/blog/single-pass-vs-agentic-loops.jpg"
+    },
+    {
+      "id": "agentic-costs-unsustainable",
+      "title": "Agentic coding is a financial trap",
+      "subtitle": "The hidden financial unit economics of pay-per-token autonomous coding loops.",
+      "date": "20261009",
+      "image": "/assets/blog/burning-tokens.png"
     }
   ]
 }
