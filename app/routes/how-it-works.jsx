@@ -13,6 +13,20 @@ import { MarketingLayout } from '../components/MarketingLayout';
 import sharedClasses from '../styles/shared.module.css';
 import classes from './how-it-works.module.css';
 
+// Required screenshot paths for the marketing page.
+// Drop images in public/images/how-it-works/ with these exact file names.
+const SCREENSHOT_PATHS = {
+  main: '/images/how-it-works/main_screenshot.png',
+  settings: '/images/how-it-works/settings_screenshot.png',
+  workspace: '/images/how-it-works/workspace_screenshot.png',
+  context: '/images/how-it-works/context_screenshot.png',
+  assistant: '/images/how-it-works/assistant_screenshot.png',
+  review: '/images/how-it-works/review_screenshot.png',
+  webChatbot: '/images/how-it-works/web_chatbot_screenshot.png',
+  remote: '/images/how-it-works/remote_screenshot.png',
+  costs: '/images/how-it-works/costs_screenshot.png',
+};
+
 export const meta = () => {
   return [
     { title: "How it Works | Frugäast AI Coding Assistant" },
@@ -23,15 +37,15 @@ export const meta = () => {
 // Screenshots: drop the files in public/images/how-it-works/ and set `src`.
 // While `src` is null, a labelled placeholder is rendered instead.
 const SCREENSHOTS = {
-  overview:      { src: null, alt: "Frugäast main window with left sidebar, Assistant view and Git History" },
-  settings:      { src: null, alt: "Models dialog with a model ID, API base and context window" },
-  workspace:     { src: null, alt: "Workspace menu with Open local workspace and Connect to host…" },
-  context:       { src: null, alt: "Explorer with files added to the Prompt Builder, one marked read-only" },
-  assistant:     { src: null, alt: "Assistant view in Code mode with the token and cost estimate" },
-  review:        { src: null, alt: "File access approval and the resulting commit in Git History" },
-  webChatbot:    { src: null, alt: "Web Chatbot view: copy context, copy prompt, paste and apply edits" },
-  remote:        { src: null, alt: "Connect to host dialog and the remote folder picker" },
-  costs:         { src: null, alt: "Costs view with spending over time stacked by model" },
+  overview:      { src: SCREENSHOT_PATHS.main, alt: "Frugäast main window with left sidebar, Assistant view and Git History" },
+  settings:      { src: SCREENSHOT_PATHS.settings, alt: "Models dialog with a model ID, API base and context window" },
+  workspace:     { src: SCREENSHOT_PATHS.workspace, alt: "Workspace menu with Open local workspace and Connect to host…" },
+  context:       { src: SCREENSHOT_PATHS.context, alt: "Explorer with files added to the Prompt Builder, one marked read-only" },
+  assistant:     { src: SCREENSHOT_PATHS.assistant, alt: "Assistant view in Code mode with the token and cost estimate" },
+  review:        { src: SCREENSHOT_PATHS.review, alt: "File access approval and the resulting commit in Git History" },
+  webChatbot:    { src: SCREENSHOT_PATHS.webChatbot, alt: "Web Chatbot view: copy context, copy prompt, paste and apply edits" },
+  remote:        { src: SCREENSHOT_PATHS.remote, alt: "Connect to host dialog and the remote folder picker" },
+  costs:         { src: SCREENSHOT_PATHS.costs, alt: "Costs view with spending over time stacked by model" },
 };
 
 function Screenshot({ shot, aspect = '16 / 10', className = '' }) {
