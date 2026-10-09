@@ -128,21 +128,47 @@
     border-radius: 2px;
 }
 
-/* Lists - Improved spacing */
+/* Restore list markers removed by Tailwind's reset. */
 .markdownContent ul,
 .markdownContent ol {
     margin-top: 1em;
     margin-bottom: 1.5em;
-    padding-left: 1.5em;
+    padding-inline-start: 1.75em;
+    list-style-position: outside;
+}
+
+.markdownContent ul {
+    list-style-type: disc;
+}
+
+.markdownContent ol {
+    list-style-type: decimal;
 }
 
 .markdownContent li {
-    margin-bottom: 0.5em; 
+    padding-inline-start: 0.25em;
     line-height: 1.7;
+}
+
+.markdownContent li + li {
+    margin-top: 0.75em;
 }
 
 .markdownContent li > p {
     margin-bottom: 0.5em;
+}
+
+.markdownContent li > :last-child {
+    margin-bottom: 0;
+}
+
+.markdownContent li > ul,
+.markdownContent li > ol {
+    margin-top: 0.5em;
+}
+
+.markdownContent ul ul {
+    list-style-type: circle;
 }
 
 /* Blockquotes - Elegant editorial style */
@@ -220,7 +246,8 @@
     border-radius: var(--mantine-radius-sm);
     font-family: var(--mantine-font-family-monospace);
     font-size: 0.9em;
-    white-space: nowrap;
+    white-space: normal;
+    overflow-wrap: anywhere;
 }
 
 .markdownContent pre code {
@@ -231,6 +258,7 @@
     border-radius: 0;
     font-size: inherit;
     white-space: inherit;
+    overflow-wrap: normal;
 }
 
 /* Images - Elegant presentation */
