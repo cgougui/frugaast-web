@@ -40,6 +40,15 @@ export async function loader({ request }) {
   let articles = [];
   try {
     articles = await loadAllArticles();
+
+    const today = new Date();
+    const todayInt = parseInt(
+      `${today.getFullYear()}${String(today.getMonth() + 1).padStart(2, '0')}${String(today.getDate()).padStart(2, '0')}`,
+      10
+    );
+
+    // Match blog.jsx: only include articles dated today or earlier.
+    articles = articles.filter(article => parseInt(article.date, 10) <= todayInt);
   } catch (error) {
     console.error("Erreur lors de la lecture des articles pour le sitemap:", error);
   }

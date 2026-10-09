@@ -1,0 +1,33 @@
+{
+  "illustrations": "https://flowbite.com/illustrations",
+  "articles": [
+    {
+      "id": "the-api-math-behind-ai-coding-subscriptions-and-why-agentic-ides-drain-your-quota",
+      "title": "The API Math Behind AI Coding Subscriptions (And Why Agentic IDEs Drain Your Quota)",
+      "subtitle": "An engineering look at how AI SaaS tools use sliding windows and dynamic model routing to cap productivity—and why I went back to agentless, BYOK development.",
+      "date": "20260921",
+      "image": "/images/blog/the-api-math-behind-ai-coding-subscriptions-and-why-agentic-ides-drain-your-quota.jpg"
+    },
+    {
+      "id": "the-vibecoding-hangover-why-agents-fill-codebases-with-slop-and-turn-you-into-a-middle-manager",
+      "title": "The Vibecoding Hangover: Why Agents Fill Codebases with Slop (And Turn You Into a Middle-Manager)",
+      "subtitle": "You are either shipping rigged tests, or you are spending 80% of your day writing \"task.md\" files for sub-agents. Here is why experienced engineers are abandoning the autonomous hype.",
+      "date": "20260922",
+      "image": "/images/blog/the-vibecoding-hangover-why-agents-fill-codebases-with-slop-and-turn-you-into-a-middle-manager.jpg"
+    },
+    {
+      "id": "why-your-ai-coding-agent-spent-400-overnight",
+      "title": "Stop the Token Bleed: How Autonomous AI Agents Drain Your API Budget Overnight",
+      "subtitle": "Unpacking the architectural flaws of autonomous coding loops, prompt cache invalidation taxes, and why senior engineers are reverting to deterministic, agentless paradigms.",
+      "date": "20260924",
+      "image": "/images/blog/why-your-ai-coding-agent-spent-400-overnight.jpg"
+    },
+    {
+      "id": "single-pass-vs-agentic-loops",
+      "title": "Why Single-Pass Direct Edits Outperform Autonomous Agentic Loops for 90% of Coding Tasks",
+      "subtitle": "The Architectural Lens: Why handing over codebase control to multi-agent loops results in compounding entropy, and how deterministic workflows reclaim engineering sanity.",
+      "date": "20260925",
+      "image": "/images/blog/single-pass-vs-agentic-loops.jpg"
+    }
+  ]
+}

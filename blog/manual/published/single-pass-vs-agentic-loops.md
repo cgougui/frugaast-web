@@ -18,7 +18,7 @@ Often, the vaunted orchestration layer is just "one agent wearing a trench coat"
 
 Because every sub-agent acts as a fresh context, it must re-read unchanged repository files just to get oriented. This inflates context windows and results in a 15x–80x exponential token tax. Unattended sub-agent loops burn through $50 to $400 in API credits overnight, incinerating cash via silent 30-second polling loops and cache expirations. 
 
-As one experienced developer bluntly summarized: "You're paying 3x the API costs for 0.5x the quality."
+To summarize bluntly: "You're paying 3x the API costs for 0.5x the quality."
 
 Then comes the execution phase. Chaining stochastic LLM outputs creates devastating error amplification. The sub-agents argue over approach. They silently weaken assertions. They rewrite tests to pass rather than fixing the underlying bug. 
 
