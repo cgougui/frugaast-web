@@ -1,0 +1,15 @@
+{
+  "terminal": {
+    "copy_on_select": true,
+    "working_directory": "current_project_directory",
+    "shell": {
+      "with_arguments": {
+        "program": "/bin/bash",
+        "args": [
+          "-c",
+          "exec tmuxinator start -p /home/christophe/Workspace/chris-infra/tmux/generic.yml \"$(basename \"$PWD\")\" \"$PWD\""
+        ]
+      }
+    }
+  }
+}

@@ -1,12 +1,13 @@
+import { useState } from 'react';
 import {
   Container, Title, Text, Button, Group, Stack, Grid, Card,
-  ThemeIcon, Badge, Paper, Center, Box, SimpleGrid, Kbd, Table, List
+  ThemeIcon, Badge, Paper, Center, Box, SimpleGrid, Kbd, Table, List, Modal
 } from '@mantine/core';
 import {
   KeyRound, FolderGit2, Layers, MessageSquareCode, GitCommit, ShieldAlert,
   Sparkles, ChevronRight, ImageIcon, Server, Globe, History, BarChart3,
   Binary, Lock, Search, Network, Undo2, Eye, HardDrive, PanelLeft,
-  PanelRight, LayoutPanelTop, Keyboard
+  PanelRight, LayoutPanelTop, Keyboard, ZoomIn, ZoomOut
 } from 'lucide-react';
 import { MarketingLayout } from '../components/MarketingLayout';
 
@@ -30,7 +31,7 @@ const SCREENSHOT_PATHS = {
 export const meta = () => {
   return [
     { title: "How it Works | Frugäast AI Coding Assistant" },
-    { name: "description", content: "A tour of Frugäast: curate exactly the context your model sees, ask or code, then review every edit as a Git commit. Works on local repositories and remote hosts over SSH." }
+    { name: "description", content: "Choose files, estimate cost, and review AI edits as Git commits. Frugäast works with your models on local repositories or remote hosts over SSH." }
   ];
 };
 
@@ -48,12 +49,21 @@ const SCREENSHOTS = {
   costs:         { src: SCREENSHOT_PATHS.costs, alt: "Costs view with spending over time stacked by model" },
 };
 
-function Screenshot({ shot, aspect = '16 / 10', className = '' }) {
+function Screenshot({ shot, onOpen, aspect = '16 / 10', className = '' }) {
   if (shot.src) {
     return (
-      <div className={`${classes.screenshotFrame} ${className}`}>
+      <button
+        type="button"
+        className={`${classes.screenshotFrame} ${className}`}
+        onClick={() => onOpen(shot)}
+        aria-label={`Enlarge screenshot: ${shot.alt}`}
+        aria-haspopup="dialog"
+      >
         <img src={shot.src} alt={shot.alt} className={classes.screenshotImg} loading="lazy" />
-      </div>
+        <span className={classes.screenshotHint} aria-hidden="true">
+          <ZoomIn size={16} /> View full size
+        </span>
+      </button>
     );
   }
   return (
@@ -67,22 +77,79 @@ function Screenshot({ shot, aspect = '16 / 10', className = '' }) {
   );
 }
 
+function ScreenshotViewer({ shot, opened, onClose }) {
+  const [actualSize, setActualSize] = useState(false);
+
+  return (
+    <Modal.Root
+      opened={opened}
+      onClose={onClose}
+      onExitTransitionEnd={() => setActualSize(false)}
+      size="calc(100vw - 2rem)"
+      xOffset="1rem"
+      yOffset="1rem"
+      centered
+      padding="md"
+      radius="lg"
+      classNames={{
+        content: classes.viewerContent,
+        header: classes.viewerHeader,
+        body: classes.viewerBody,
+      }}
+    >
+      <Modal.Overlay backgroundOpacity={0.85} blur={6} />
+      <Modal.Content>
+        <Modal.Header>
+          <Modal.Title fw={600}>Screenshot</Modal.Title>
+          <Group gap="sm" wrap="nowrap">
+            <Button
+              size="xs"
+              variant="light"
+              color="gray"
+              leftSection={actualSize ? <ZoomOut size={16} /> : <ZoomIn size={16} />}
+              onClick={() => setActualSize((value) => !value)}
+              aria-pressed={actualSize}
+            >
+              {actualSize ? 'Fit to screen' : 'Actual size'}
+            </Button>
+            <Modal.CloseButton aria-label="Close screenshot" data-autofocus />
+          </Group>
+        </Modal.Header>
+        <Modal.Body>
+          <div className={`${classes.viewerViewport} ${actualSize ? classes.viewerActualSize : ''}`}>
+            {shot && (
+              <button
+                type="button"
+                className={classes.viewerImageButton}
+                onClick={() => setActualSize((value) => !value)}
+                aria-label={actualSize ? 'Fit screenshot to screen' : 'View screenshot at actual size'}
+                aria-pressed={actualSize}
+              >
+                <img src={shot.src} alt={shot.alt} className={classes.viewerImage} draggable="false" />
+              </button>
+            )}
+          </div>
+          <Text size="sm" className={classes.viewerCaption}>{shot?.alt}</Text>
+        </Modal.Body>
+      </Modal.Content>
+    </Modal.Root>
+  );
+}
+
 const STEPS = [
   {
     icon: KeyRound,
     color: 'violet',
-    title: 'Bring your own keys and models',
-    body: (
-      <>
-        From the gear menu, add your provider keys under <b>API Keys</b> (e.g. <code>OPENAI_API_KEY</code>) and list
-        the models you want under <b>Models</b>. Any LiteLLM model ID works, such as <code>gemini/gemini-2.5-flash-lite</code>.
-        Point the API base at a compatible server on your machine to use a local model.
-      </>
-    ),
+    title: 'Configure keys and models',
+    items: [
+      <><strong>API Keys:</strong> add provider keys from the gear menu, e.g. <code>OPENAI_API_KEY</code>.</>,
+      <><strong>Models:</strong> use any LiteLLM model ID, e.g. <code>gemini/gemini-2.5-flash-lite</code>.</>,
+      <><strong>Local models:</strong> set the API base to a compatible server on your machine.</>,
+    ],
     callout: {
       icon: HardDrive,
-      title: 'Your keys stay on your computer',
-      text: 'Keys, models and settings live in your local Frugäast config directory, never in the repository and never on a remote host.',
+      title: 'Local configuration',
+      text: <>Keys, model definitions and settings stay in your <strong>local Frugäast config directory</strong>, outside repositories and remote hosts.</>,
     },
     shot: SCREENSHOTS.settings,
   },
@@ -90,71 +157,65 @@ const STEPS = [
     icon: FolderGit2,
     color: 'indigo',
     title: 'Open a workspace',
-    body: (
-      <>
-        Open any Git repository from the workspace menu, or choose <b>Connect to host…</b> to work on a repository
-        on another machine over SSH. Each repository gets its own tab with its own chat, context and operations,
-        so you can run tasks in several projects side by side.
-      </>
-    ),
+    items: [
+      <><strong>Local:</strong> open any Git repository from the workspace menu.</>,
+      <><strong>Remote:</strong> choose <strong>Connect to host…</strong> to open a repository over SSH.</>,
+      <><strong>One tab per repository:</strong> separate chat, context and operations. Run projects side by side.</>,
+    ],
     callout: {
       icon: Server,
-      title: 'Local or remote, same interface',
-      text: 'Remote workspaces use the same Explorer, Assistant and Git panels. Model calls still go out from your desktop, so the remote host needs no credentials or internet access.',
+      title: 'Same panels over SSH',
+      text: <>Use the same Explorer, Assistant and Git panels. <strong>Model calls run from your desktop</strong>; the host needs no model credentials or internet access.</>,
     },
     shot: SCREENSHOTS.workspace,
   },
   {
     icon: Layers,
     color: 'blue',
-    title: 'Pick the context, file by file',
-    body: (
-      <>
-        In the left sidebar, find files by name in <b>Explorer</b>, by content in <b>Search</b>, or by symbol in <b>Extend</b>,
-        which ranks related files from the repository map. Click <b>+</b> to add a file to the Prompt Builder.
-        The lock icon marks a file as <b>read-only</b>: the model can read it but not edit it.
-      </>
-    ),
+    title: 'Select context',
+    items: [
+      <><strong>Find files:</strong> Explorer by name, Search by content, or Extend by symbol, with related files ranked from the repository map.</>,
+      <><strong>Add context:</strong> click <strong>+</strong> to add a file to the Prompt Builder.</>,
+      <><strong>Read-only:</strong> lock a file to allow reading and prevent edits.</>,
+    ],
     callout: {
       icon: Network,
       title: 'Optional sources',
-      text: 'Add a token-budgeted repository map, a workspace tree, or static reference files such as AGENTS.md that come with every prompt.',
+      text: <>Include a <strong>repository map</strong> with a token budget, a workspace tree, or reference files such as <code>AGENTS.md</code> in every prompt.</>,
     },
     shot: SCREENSHOTS.context,
   },
   {
     icon: MessageSquareCode,
     color: 'cyan',
-    title: 'Ask, or let it code',
-    body: (
-      <>
-        Choose <b>Ask</b> for questions without edits, or <b>Code</b> for changes. Pick the main or weak model and type your
-        request. Type a few characters to autocomplete file paths and symbols, or <Kbd>`</Kbd> for a longer list.
-        The Prompt Builder shows the estimated tokens and cost before you press <Kbd>Enter</Kbd>.
-      </>
-    ),
+    title: 'Send a request',
+    items: [
+      <><strong>Mode:</strong> Ask answers questions without edits; Code makes changes.</>,
+      <><strong>Model:</strong> choose the main or weak model, then write your request.</>,
+      <><strong>Autocomplete:</strong> type to find paths and symbols; use <Kbd>`</Kbd> for a longer list.</>,
+      <><strong>Estimate:</strong> check tokens and cost in the Prompt Builder before pressing <Kbd>Enter</Kbd>.</>,
+    ],
     callout: {
       icon: Eye,
-      title: 'Nothing hidden',
-      text: 'Preview Prompt shows the exact system, user and assistant messages that will be sent, without calling the model.',
+      title: 'Inspect the prompt',
+      text: <><strong>Preview Prompt</strong> shows the exact system, user and assistant messages before any model call.</>,
     },
     shot: SCREENSHOTS.assistant,
   },
   {
     icon: GitCommit,
     color: 'teal',
-    title: 'Approve, review, undo',
-    body: (
-      <>
-        If the model needs a file you didn't include, it asks, and you <b>Allow</b> or <b>Deny</b>.
-        In Code mode, edits are applied as precise SEARCH/REPLACE blocks and committed to Git.
-        Review them in <b>Git History</b>, stage and commit your own changes there, and use <b>Undo</b> to revert the last assistant commit.
-      </>
-    ),
+    title: 'Review changes',
+    items: [
+      <><strong>File access:</strong> Allow or Deny requests for files outside your selected context.</>,
+      <><strong>Edits:</strong> Code mode applies SEARCH/REPLACE blocks and commits the changes to Git.</>,
+      <><strong>Git History:</strong> inspect diffs, or stage and commit your own changes.</>,
+      <><strong>Undo:</strong> revert the last assistant commit.</>,
+    ],
     callout: {
       icon: Undo2,
-      title: 'Every change is a commit',
-      text: 'No silent rewrites across your repository. Each edit is a Git commit you can inspect, diff, or roll back.',
+      title: 'Changes you can trace',
+      text: <>Assistant changes become <strong>Git commits</strong> you can inspect, diff and roll back.</>,
     },
     shot: SCREENSHOTS.review,
   },
@@ -164,17 +225,26 @@ const LAYOUT = [
   {
     icon: PanelLeft,
     title: 'Left sidebar',
-    items: ['Explorer, Search and Extend to find files', 'Prompt Builder: your context, optional sources, token and cost estimate'],
+    items: [
+      <><strong>Explorer, Search, Extend:</strong> find files.</>,
+      <><strong>Prompt Builder:</strong> context, optional sources, token and cost estimates.</>,
+    ],
   },
   {
     icon: LayoutPanelTop,
     title: 'Main area',
-    items: ['Assistant: chat in Ask or Code mode', 'Web Chatbot, Costs, Code Explore, Files and diffs'],
+    items: [
+      <><strong>Assistant:</strong> Ask or Code mode.</>,
+      <><strong>Views:</strong> Web Chatbot, Costs, Code Explore, files and diffs.</>,
+    ],
   },
   {
     icon: PanelRight,
     title: 'Right sidebar',
-    items: ['Chat History: continue any past session', 'Git History: changes, commit, branch graph'],
+    items: [
+      <><strong>Chat History:</strong> resume sessions.</>,
+      <><strong>Git History:</strong> changes, commits and branch graph.</>,
+    ],
   },
 ];
 
@@ -182,31 +252,43 @@ const EXTRAS = [
   {
     icon: Globe,
     color: 'grape',
-    title: 'Use a chatbot you already pay for',
-    text: 'The Web Chatbot view copies your curated context and a SEARCH/REPLACE prompt for ChatGPT, Claude.ai or any other chatbot. Paste the reply back and click Apply Edits: same edit and commit pipeline as Code mode, no API cost.',
+    title: 'Use a web chatbot',
+    items: [
+      <><strong>Copy:</strong> selected context and a SEARCH/REPLACE prompt from Web Chatbot into ChatGPT, Claude.ai or another chatbot.</>,
+      <><strong>Apply:</strong> paste the reply back and click Apply Edits. Same edit and commit pipeline as Code mode.</>,
+      <><strong>No API cost:</strong> use your existing chatbot plan.</>,
+    ],
     shot: SCREENSHOTS.webChatbot,
   },
   {
     icon: Server,
     color: 'indigo',
-    title: 'Work on remote machines over SSH',
-    text: 'Connect using your existing ~/.ssh/config. Frugäast installs a small offline helper on the host that reads files and performs Git changes there. History, costs and settings stay on your desktop.',
+    title: 'Work over SSH',
+    items: [
+      <><strong>Connect:</strong> use your existing <code>~/.ssh/config</code>.</>,
+      <><strong>Remote helper:</strong> Frugäast installs a small offline helper to read files and perform Git operations on the host.</>,
+      <><strong>Local data:</strong> history, costs and settings stay on your desktop.</>,
+    ],
     shot: SCREENSHOTS.remote,
   },
   {
     icon: BarChart3,
     color: 'orange',
-    title: 'Know exactly what you spend',
-    text: 'The Costs view breaks down spending by model and over time, lists your most expensive sessions, compares response times, and shows the per-million-token price of each model you use.',
+    title: 'Track costs',
+    items: [
+      <><strong>Spending:</strong> totals by model and over time; most expensive sessions.</>,
+      <><strong>Performance:</strong> compare response times.</>,
+      <><strong>Pricing:</strong> cost per million tokens for each model you use.</>,
+    ],
     shot: SCREENSHOTS.costs,
   },
 ];
 
 const SMALL_FEATURES = [
-  { icon: History, title: 'Continue any session', text: 'Chat History groups sessions by day with their cost. Continue one in the Assistant, or re-add the files it used.' },
-  { icon: Binary, title: 'Code Explore', text: 'Browse every symbol definition and reference in the repository map, then jump straight to the line.' },
-  { icon: Search, title: 'Respects your ignores', text: 'File listing and search honour .gitignore and .frugaastignore. .git/ and .frugaast/ are always hidden.' },
-  { icon: Lock, title: 'One task per workspace', text: 'Each workspace runs one operation at a time, so edits never collide. Other tabs keep working in the background.' },
+  { icon: History, title: 'Resume sessions', text: <>Browse <strong>Chat History</strong> by day and cost. Resume a chat or restore its file context.</> },
+  { icon: Binary, title: 'Code Explore', text: <>Browse <strong>symbol definitions and references</strong> in the repository map. Jump to the source line.</> },
+  { icon: Search, title: 'Ignore rules', text: <>Listing and search respect <code>.gitignore</code> and <code>.frugaastignore</code>. <code>.git/</code> and <code>.frugaast/</code> stay hidden.</> },
+  { icon: Lock, title: 'Workspace isolation', text: <><strong>One operation per workspace</strong> prevents edit collisions. Other tabs continue in the background.</> },
 ];
 
 const SHORTCUTS = [
@@ -222,8 +304,17 @@ const SHORTCUTS = [
 ];
 
 export default function HowItWorks() {
+  const [selectedShot, setSelectedShot] = useState(null);
+  const [viewerOpened, setViewerOpened] = useState(false);
+
+  const openScreenshot = (shot) => {
+    setSelectedShot(shot);
+    setViewerOpened(true);
+  };
+
   return (
     <MarketingLayout>
+      <ScreenshotViewer shot={selectedShot} opened={viewerOpened} onClose={() => setViewerOpened(false)} />
 
       {/* 1. HERO SECTION */}
       <section className={sharedClasses.hero}>
@@ -234,19 +325,19 @@ export default function HowItWorks() {
             How it works
           </Badge>
           <Title className={sharedClasses.heroTitle} order={1}>
-            You choose the context. <br />
-            <span className={sharedClasses.textGradient}>The model writes the code.</span>
+            Select context. Generate code. <br />
+            <span className={sharedClasses.textGradient}>Review the diff.</span>
           </Title>
 
           <Text className={sharedClasses.heroSubtitle} size="xl" mt="xl" lh={1.6}>
-            Frugäast is a desktop coding assistant for Git repositories, local or over SSH.
-            Instead of letting an agent roam your codebase, you hand the model exactly the files it needs,
-            see the cost up front, and review every edit as a Git commit.
+            A desktop AI coding assistant for <strong>Git repositories</strong>, local or over SSH.
+            Control the <strong>file context</strong>, check the <strong>cost estimate</strong>,
+            and review changes as <strong>Git commits</strong>.
           </Text>
         </Container>
 
         <Container size="lg" mt={60} className={classes.heroContent}>
-          <Screenshot shot={SCREENSHOTS.overview} className={classes.heroShot} />
+          <Screenshot shot={SCREENSHOTS.overview} onOpen={openScreenshot} className={classes.heroShot} />
         </Container>
       </section>
 
@@ -254,9 +345,9 @@ export default function HowItWorks() {
       <section className={sharedClasses.section}>
         <Container size="lg">
           <Stack align="center" mb={50} ta="center">
-            <Title order={2} className={sharedClasses.sectionTitle}>One window, three columns</Title>
+            <Title order={2} className={sharedClasses.sectionTitle}>One tab per repository. Three panels.</Title>
             <Text size="lg" c="dimmed" maw={680} lh={1.6}>
-              Each open repository is a tab. Inside it, everything sits side by side, so you never lose sight of what the model sees or what it changed.
+              Context, conversation and changes, side by side.
             </Text>
           </Stack>
           <SimpleGrid cols={{ base: 1, md: 3 }} spacing="lg">
@@ -267,7 +358,7 @@ export default function HowItWorks() {
                 </ThemeIcon>
                 <Text fw={800} size="lg" mb="sm" c="dark.9">{title}</Text>
                 <List spacing={6} size="sm" c="dimmed">
-                  {items.map((item) => <List.Item key={item}>{item}</List.Item>)}
+                  {items.map((item, index) => <List.Item key={index}>{item}</List.Item>)}
                 </List>
               </Paper>
             ))}
@@ -280,7 +371,7 @@ export default function HowItWorks() {
         <Container size="lg">
           <Stack align="center" mb={20} ta="center">
             <Badge color="dark" variant="outline" size="lg" radius="sm" fw={700}>The workflow</Badge>
-            <Title order={2} className={sharedClasses.sectionTitle}>From request to commit in five steps</Title>
+            <Title order={2} className={sharedClasses.sectionTitle}>Five steps from setup to commit</Title>
           </Stack>
 
           {STEPS.map((step, i) => {
@@ -301,7 +392,9 @@ export default function HowItWorks() {
                       <Text fw={700} c={`${step.color}.6`} tt="uppercase" size="sm">Step {i + 1}</Text>
                     </Group>
                     <Title order={3} fw={900} mb="md" size="h2" c="dark.9">{step.title}</Title>
-                    <Text size="lg" c="dimmed" lh={1.7} mb="xl">{step.body}</Text>
+                    <List size="lg" c="dimmed" spacing="sm" lh={1.6} mb="xl">
+                      {step.items.map((item, index) => <List.Item key={index}>{item}</List.Item>)}
+                    </List>
                     <Paper radius="lg" p="xl" className={classes.featureAlert} style={{ borderLeftColor: `var(--mantine-color-${step.color}-5)` }}>
                       <Group gap="sm" mb="xs">
                         <CalloutIcon size={20} color={`var(--mantine-color-${step.color}-6)`} />
@@ -311,7 +404,7 @@ export default function HowItWorks() {
                     </Paper>
                   </Grid.Col>
                   <Grid.Col span={{ base: 12, md: 6 }} order={{ base: 1, md: reversed ? 1 : 2 }}>
-                    <Screenshot shot={step.shot} />
+                    <Screenshot shot={step.shot} onOpen={openScreenshot} />
                   </Grid.Col>
                 </Grid>
               </Box>
@@ -326,21 +419,23 @@ export default function HowItWorks() {
           <Stack align="center" mb={60} ta="center">
             <Title order={2} className={sharedClasses.sectionTitle}>More ways to work</Title>
             <Text size="lg" c="dimmed" maw={680} lh={1.6}>
-              The same context and the same Git pipeline, wherever your model and your code live.
+              Web chatbots, remote repositories and cost tracking.
             </Text>
           </Stack>
 
           <SimpleGrid cols={{ base: 1, md: 3 }} spacing="xl">
-            {EXTRAS.map(({ icon: Icon, color, title, text, shot }) => (
+            {EXTRAS.map(({ icon: Icon, color, title, items, shot }) => (
               <Card key={title} radius="xl" p="lg" className={classes.extraCard}>
                 <Card.Section>
-                  <Screenshot shot={shot} aspect="4 / 3" className={classes.cardShot} />
+                  <Screenshot shot={shot} onOpen={openScreenshot} aspect="4 / 3" className={classes.cardShot} />
                 </Card.Section>
                 <Group gap="sm" mt="lg" mb="sm" wrap="nowrap">
                   <ThemeIcon size={36} radius="md" color={color} variant="light"><Icon size={20} /></ThemeIcon>
                   <Text fw={800} size="lg" c="dark.9" lh={1.3}>{title}</Text>
                 </Group>
-                <Text c="dimmed" size="sm" lh={1.6}>{text}</Text>
+                <List c="dimmed" size="sm" spacing="sm" lh={1.6}>
+                  {items.map((item, index) => <List.Item key={index}>{item}</List.Item>)}
+                </List>
               </Card>
             ))}
           </SimpleGrid>
@@ -361,13 +456,13 @@ export default function HowItWorks() {
         </Container>
       </section>
 
-      {/* 5. WHY NOT AN AGENT */}
+      {/* 5. DESIGN TRADEOFFS */}
       <section className={sharedClasses.sectionAlt}>
         <Container size="md">
           <Stack align="center" mb={60} ta="center">
             <Badge color="dark" variant="outline" size="lg" radius="sm" fw={700}>Why it's built this way</Badge>
             <Title order={2} className={sharedClasses.sectionTitle}>
-              Agents are for prototypes. Frugäast is for production.
+              Explicit context. Reviewable changes.
             </Title>
           </Stack>
 
@@ -378,15 +473,16 @@ export default function HowItWorks() {
                   <Center h="100%" p="xl">
                     <Stack align="center">
                       <ShieldAlert size={64} color="var(--mantine-color-red-5)" />
-                      <Title order={4} c="white" fw={800} ta="center">The agentic loop</Title>
+                      <Title order={4} c="white" fw={800} ta="center">Autonomous agents</Title>
                     </Stack>
                   </Center>
                 </Grid.Col>
                 <Grid.Col span={{ base: 12, sm: 8 }} p={40}>
-                  <Text c="dark.7" size="lg" lh={1.6}>
-                    Agents grep your whole repository, flood the context window, and edit autonomously. Without your architectural context,
-                    they reinvent helpers, touch files they shouldn't, and burn through API budget in error-correction loops.
-                  </Text>
+                  <List c="dark.7" size="lg" spacing="sm" lh={1.6}>
+                    <List.Item><strong>Context growth:</strong> repository searches can fill the context window.</List.Item>
+                    <List.Item><strong>Scope drift:</strong> autonomous edits can duplicate helpers or touch unrelated files.</List.Item>
+                    <List.Item><strong>Cost growth:</strong> repeated correction loops consume API budget.</List.Item>
+                  </List>
                 </Grid.Col>
               </Grid>
             </Card>
@@ -397,18 +493,19 @@ export default function HowItWorks() {
                   <Center h="100%" p="xl">
                     <Stack align="center">
                       <Sparkles size={64} color="white" />
-                      <Title order={4} c="white" fw={800} ta="center">The Frugäast way</Title>
+                      <Title order={4} c="white" fw={800} ta="center">Frugäast</Title>
                     </Stack>
                   </Center>
                 </Grid.Col>
                 <Grid.Col span={{ base: 12, sm: 8 }} p={40}>
-                  <Text c="dark.7" size="lg" lh={1.6} mb="md">
-                    You define the boundaries: which files are in, which are read-only, how big the repository map is.
-                    The model can ask for more, but only you can say yes.
-                  </Text>
+                  <List c="dark.7" size="lg" spacing="sm" lh={1.6} mb="md">
+                    <List.Item><strong>Context:</strong> select files, read-only access and the repository map budget.</List.Item>
+                    <List.Item><strong>Access:</strong> approve or deny requests for additional files.</List.Item>
+                    <List.Item><strong>Review:</strong> inspect each assistant commit and its diff.</List.Item>
+                  </List>
                   <Paper bg="teal.0" p="md" radius="md">
                     <Text c="teal.9" size="md" fw={700} lh={1.6}>
-                      A high-signal prompt, a known cost, and a reviewable commit. You keep ownership of the design.
+                      Focused prompts. Estimated cost. <strong>You own the design.</strong>
                     </Text>
                   </Paper>
                 </Grid.Col>
@@ -423,7 +520,7 @@ export default function HowItWorks() {
         <Container size="sm">
           <Stack align="center" mb={40} ta="center">
             <ThemeIcon size={56} radius="md" color="violet" variant="light"><Keyboard size={28} /></ThemeIcon>
-            <Title order={2} className={sharedClasses.sectionTitle}>Keyboard first</Title>
+            <Title order={2} className={sharedClasses.sectionTitle}>Keyboard shortcuts</Title>
           </Stack>
           <Paper radius="xl" p="md" className={classes.layoutCard}>
             <Table verticalSpacing="sm" horizontalSpacing="md">
@@ -442,7 +539,7 @@ export default function HowItWorks() {
             </Table>
           </Paper>
           <Text size="sm" c="dimmed" ta="center" mt="lg">
-            The free version lets you keep up to 3 workspaces open at once. <a href="/pricing" className={classes.inlineLink}>See pricing</a> for Pro.
+            <strong>Free:</strong> up to 3 open workspaces. <a href="/pricing" className={classes.inlineLink}>Compare Free and Pro</a>.
           </Text>
         </Container>
       </section>
@@ -451,10 +548,10 @@ export default function HowItWorks() {
       <section className={sharedClasses.ctaSection}>
         <Container size="md" className={sharedClasses.ctaContainer}>
           <Title order={2} className={sharedClasses.ctaTitle} mb="sm">
-            Ready to take back control of your codebase?
+            Start with your repository.
           </Title>
           <Text size="xl" c="white" maw={700} lh={1.6} mt="xl" mb="xl" opacity={0.9}>
-            You are the senior developer. The AI is an exceptionally fast typist. Give it the right context and explicit instructions, and review what it ships.
+            Choose the files. Describe the change. <strong>Review the commit.</strong>
           </Text>
 
           <Button
@@ -469,7 +566,7 @@ export default function HowItWorks() {
             Download Frugäast
           </Button>
           <Text size="sm" mt="lg" c="violet.2" fw={500} opacity={0.8}>
-            Available for Windows, macOS and Linux. Bring your own API key.
+            Windows, macOS and Linux. Use your own API key or a web chatbot.
           </Text>
         </Container>
 

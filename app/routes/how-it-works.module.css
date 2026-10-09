@@ -75,11 +75,135 @@
 
 /* --- SCREENSHOTS --- */
 .screenshotFrame {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 0;
   border-radius: 1.25rem;
   overflow: hidden;
   border: 1px solid var(--mantine-color-gray-3);
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
   background: white;
+  cursor: zoom-in;
+  font: inherit;
+  text-align: inherit;
+}
+
+.screenshotFrame:focus-visible,
+.viewerImageButton:focus-visible {
+  outline: 3px solid var(--mantine-color-violet-5);
+  outline-offset: 4px;
+}
+
+.screenshotHint {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(20, 20, 25, 0.85);
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 600;
+  pointer-events: none;
+}
+
+@media (hover: hover) {
+  .screenshotHint {
+    opacity: 0;
+    transition: opacity 150ms ease;
+  }
+
+  .screenshotFrame:hover .screenshotHint,
+  .screenshotFrame:focus-visible .screenshotHint {
+    opacity: 1;
+  }
+}
+
+.viewerContent {
+  display: flex;
+  flex-direction: column;
+  height: calc(100dvh - 2rem);
+  background: var(--mantine-color-dark-9);
+  color: white;
+}
+
+.viewerHeader {
+  flex-shrink: 0;
+  gap: 12px;
+  background: var(--mantine-color-dark-9);
+  color: white;
+}
+
+.viewerBody {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 0;
+  gap: 12px;
+}
+
+.viewerViewport {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  overscroll-behavior: contain;
+  border-radius: var(--mantine-radius-md);
+  background: var(--mantine-color-dark-8);
+}
+
+.viewerImageButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: zoom-in;
+}
+
+.viewerImageButton:focus-visible {
+  outline-offset: -4px;
+}
+
+.viewerImage {
+  display: block;
+  flex-shrink: 0;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.viewerActualSize .viewerImageButton {
+  width: max-content;
+  height: max-content;
+  min-width: 100%;
+  min-height: 100%;
+  cursor: zoom-out;
+}
+
+.viewerActualSize .viewerImage {
+  max-width: none;
+  max-height: none;
+}
+
+.viewerCaption {
+  flex-shrink: 0;
+  color: var(--mantine-color-gray-4);
+  text-align: center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .screenshotHint {
+    transition: none;
+  }
 }
 
 .screenshotImg {
