@@ -87,7 +87,7 @@ export function meta({ data }) {
       { name: "description", content: "Read our latest insights on AI-assisted coding." }
     ];
   }
-  
+
   const articleUrl = `https://frugaast.dev/blog/${data.articleId}`;
   // Social crawlers require absolute image URLs
   const imageUrl = data.image && new URL(data.image, "https://frugaast.dev").href;
@@ -149,7 +149,7 @@ export async function loader({ params }) {
         markdownContent = markdownContent.substring(endOfFrontmatter + 3).trim();
       }
     }
-    
+
     // Use the custom renderer when parsing
     const htmlContent = await marked.parse(markdownContent, { renderer });
 
@@ -213,7 +213,7 @@ export default function ArticlePage() {
       </Anchor>
 
       <Paper shadow="xl" radius="lg" className={classes.articleContainer}>
-            
+
         <Title order={1} mb="md" ta="center" className={classes.mainTitle}>{title}</Title>
         <Text size="xl" c="dimmed" mb="xl" ta="center" className={classes.subtitle}>
           {description}
@@ -236,25 +236,25 @@ export default function ArticlePage() {
         />
 
         {/* Frugaast CTA */}
-        <Box mt={80} p="xl" bg="blue.0" className={classes.bottomCta}>
+        {/* <Box mt={80} p="xl" bg="blue.0" className={classes.bottomCta}>
           <Title order={3} size="h3" mb="sm" c="blue.9">
             Build without the bloat.
           </Title>
           <Text c="blue.8" mb="lg" lh={1.7} size="lg">
-            Frugäast is an agentless coding assistant for developers who want to keep their hands on the steering wheel. Get the surgical file selection of a native GUI, zero background polling, and direct Git commits — all without the autonomous AI slop. 
+            Frugäast is an agentless coding assistant for developers who want to keep their hands on the steering wheel. Get the surgical file selection of a native GUI, zero background polling, and direct Git commits — all without the autonomous AI slop.
           </Text>
-          <Button 
-            component="a" 
-            href="/" 
-            variant="filled" 
-            color="blue.7" 
-            size="lg" 
+          <Button
+            component="a"
+            href="/"
+            variant="filled"
+            color="blue.7"
+            size="lg"
             radius="md"
             className={classes.ctaButtonActual}
           >
             Try Frugäast for free &rarr;
           </Button>
-        </Box>
+        </Box>*/}
       </Paper>
     </Container>
   );
