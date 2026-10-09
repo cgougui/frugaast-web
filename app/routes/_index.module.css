@@ -140,11 +140,72 @@
 .dotMin { background-color: #ffbd2e; }
 .dotMax { background-color: #27c93f; }
 
+.heroImageButton {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: zoom-in;
+}
+
+.heroImageButton:focus-visible {
+  outline: 3px solid var(--mantine-color-violet-6);
+  outline-offset: 4px;
+}
+
 .heroImage {
   display: block;
   width: 100%;
   height: auto;
   background-color: transparent;
+}
+
+.heroImageModal {
+  background-color: white;
+}
+
+.heroImageModalBody {
+  height: 100vh;
+  height: 100dvh;
+  padding: 64px 16px 16px;
+  box-sizing: border-box;
+}
+
+.heroImageToolbar {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  right: 16px;
+}
+
+.heroImageClose {
+  color: var(--mantine-color-dark-9);
+  background-color: var(--mantine-color-gray-1);
+}
+
+.heroImageViewport {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+
+.heroImageCanvas {
+  width: 100%;
+  height: 100%;
+}
+
+.heroImageZoomed {
+  width: 200%;
+  height: 200%;
+}
+
+.heroImageFullscreen {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 /* Beautiful nested picture containers for other sections */

@@ -1,9 +1,10 @@
+import { useState } from 'react';
 import { 
-  Container, Title, Text, Button, Group, Stack, Grid, Box, ThemeIcon, List, Flex, Badge
+  Container, Title, Text, Button, Group, Stack, Grid, Box, ThemeIcon, List, Flex, Badge, Modal
 } from '@mantine/core';
 import { 
   CheckCircle2, ChevronRight, ArrowRight, Layers, Zap, 
-  Wallet, Cpu, Terminal, FileCode, Check, Search, Gauge
+  Wallet, Cpu, Terminal, FileCode, Check, Search, Gauge, ZoomIn, ZoomOut
 } from 'lucide-react';
 import { MarketingLayout } from '../components/MarketingLayout';
 
@@ -19,8 +20,50 @@ export const meta = () => {
 };
 
 export default function Index() {
+  const [heroImageOpened, setHeroImageOpened] = useState(false);
+  const [heroImageZoomed, setHeroImageZoomed] = useState(false);
+
   return (
     <MarketingLayout>
+      <Modal.Root
+        opened={heroImageOpened}
+        onClose={() => setHeroImageOpened(false)}
+        fullScreen
+        classNames={{ content: classes.heroImageModal, body: classes.heroImageModalBody }}
+      >
+        <Modal.Overlay />
+        <Modal.Content aria-label="Full-screen screenshot">
+          <Modal.Body>
+            <Group justify="space-between" className={classes.heroImageToolbar}>
+              <Button
+                variant="light"
+                size="sm"
+                leftSection={heroImageZoomed ? <ZoomOut size={18} /> : <ZoomIn size={18} />}
+                onClick={() => setHeroImageZoomed((zoomed) => !zoomed)}
+                aria-label={heroImageZoomed ? 'Fit screenshot to screen' : 'Zoom screenshot to 200%'}
+                aria-pressed={heroImageZoomed}
+              >
+                {heroImageZoomed ? 'Fit to screen' : '200%'}
+              </Button>
+              <Modal.CloseButton
+                aria-label="Close screenshot"
+                data-autofocus
+                size="lg"
+                className={classes.heroImageClose}
+              />
+            </Group>
+            <div className={classes.heroImageViewport} tabIndex={0} role="region" aria-label="Screenshot view">
+              <div className={`${classes.heroImageCanvas} ${heroImageZoomed ? classes.heroImageZoomed : ''}`}>
+                <img
+                  src={copy.hero.image.src}
+                  alt={copy.hero.image.alt}
+                  className={classes.heroImageFullscreen}
+                />
+              </div>
+            </div>
+          </Modal.Body>
+        </Modal.Content>
+      </Modal.Root>
       {/* 1. HERO SECTION */}
       <section className={classes.heroSection}>
         <div className={classes.heroGridPattern} />
@@ -53,11 +96,22 @@ export default function Index() {
           mt={80}
           className={classes.relativeZ}
         >
-          <img 
-            src={copy.hero.image.src} 
-            alt={copy.hero.image.alt} 
-            className={classes.heroImage}
-          />
+          <button
+            type="button"
+            className={classes.heroImageButton}
+            onClick={() => {
+              setHeroImageZoomed(false);
+              setHeroImageOpened(true);
+            }}
+            aria-label={`Enlarge screenshot: ${copy.hero.image.alt}`}
+            aria-haspopup="dialog"
+          >
+            <img
+              src={copy.hero.image.src}
+              alt={copy.hero.image.alt}
+              className={classes.heroImage}
+            />
+          </button>
         </Box>
 
         <Container size="lg" className={classes.relativeZ}>

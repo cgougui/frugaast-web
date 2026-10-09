@@ -224,25 +224,26 @@ const STEPS = [
 const LAYOUT = [
   {
     icon: PanelLeft,
-    title: 'Left sidebar',
+    title: 'Left sidebar: build you context',
     items: [
-      <><strong>Explorer, Search, Extend:</strong> find files.</>,
-      <><strong>Prompt Builder:</strong> context, optional sources, token and cost estimates.</>,
+      <><strong>Find files:</strong> by name, via search, via code exploration.</>,
+      <><strong>Prompt Builder:</strong> control context size and estimate the cost.</>,
     ],
   },
   {
     icon: LayoutPanelTop,
-    title: 'Main area',
+    title: 'Main area: call the LLM',
     items: [
-      <><strong>Assistant:</strong> Ask or Code mode.</>,
-      <><strong>Views:</strong> Web Chatbot, Costs, Code Explore, files and diffs.</>,
+      <><strong>Assistant:</strong> Ask or Code mode via API.</>,
+      <><strong>Web Chatboot:</strong> copy files and apply edits easily.</>,
+      <><strong>Cost:</strong> dashboard analysis of all your costs.</>,
     ],
   },
   {
     icon: PanelRight,
-    title: 'Right sidebar',
+    title: 'Right sidebar: inspect the results',
     items: [
-      <><strong>Chat History:</strong> resume sessions.</>,
+      <><strong>Chat History:</strong> view costs, resume sessions.</>,
       <><strong>Git History:</strong> changes, commits and branch graph.</>,
     ],
   },
